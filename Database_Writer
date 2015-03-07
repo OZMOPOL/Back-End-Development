@@ -1,0 +1,74 @@
+<?php
+// Test Cases
+
+// $json = file_get_contents('posts.json');
+
+$jsoninput = '{"createUser":{"user_id":"12345","firstname":"aaa","secondname":"bbb","password":"xxx","email":"aaa@bbb","bday":"12-12-1990"}}';
+// $jsoninput = '{"createRoom":{"room_id":"12345","room_title":"aaa","room_desc":"bbb"}}';
+// $jsoninput = '{"createPost":{"post_id":"12345","post_title":"aaa","text":"bbb","post_c_time":"NULL","post_e_time":"NULL","fk_post_user_id":"123456","fk_post_room_id":"123456","fk_post_prnt_id":"123456"}};
+
+$command = "";
+$myQuery = "";
+$query = "";
+
+$servername = "localhost";
+$username = "username";
+$password = "password";
+
+// Create connection
+$conn = mysqli_connect ( $servername, $username, $password );
+
+// Check connection
+if (! $conn) {
+	die ( "Connection failed: " . mysqli_connect_error () );
+}
+echo "Connected successfully";
+
+$json_array = json_decode ( $jsoninput, true );
+$command = $json_array [0];
+
+echo $command;
+
+if ($command == "createUser") {
+	$query = createUser ( $json_array );
+	if (mysqli_query ( $conn, $query )) {
+		echo "New record created successfully";
+	} else {
+		echo "Error: " . $query . "<br>" . mysqli_error ( $conn );
+	}
+	mysqli_close ( $conn );
+} else if ($command == "createRoom") {
+	$query = createRoom ( $json_array );
+	if (mysqli_query ( $conn, $query )) {
+		echo "New record created successfully";
+	} else {
+		echo "Error: " . $query . "<br>" . mysqli_error ( $conn );
+	}
+	mysqli_close ( $conn );
+} else if ($command == "createPost") {
+	$query = createPost ( $json_array );
+	if (mysqli_query ( $conn, $query )) {
+		echo "New record created successfully";
+	} else {
+		echo "Error: " . $query . "<br>" . mysqli_error ( $conn );
+	}
+	mysqli_close ( $conn );
+}
+function createUser($array) {
+	$userName = $json_array [4] +" "+ $json_array [6];
+	$myQuery = "INSERT INTO Users VALUES
+   				('$json_array[2]','$userName','$json_array[8]','$json_array[10]','$json_array[12]','$json_array[14]');";
+	return $myQuery;
+}
+function createRoom($array) {
+	$myQuery = "INSERT INTO Rooms VALUES
+   	            ('$json_array[2]','$json_array[4]','$json_array[6]');";
+	return $myQuery;
+}
+function createPost($array) {
+	$myQuery = "INSERT INTO Posts VALUES
+	            ('$json_array[2]','$json_array[4]','$json_array[6]','$json_array[8]','$json_array[10]','$json_array[12]','$json_array[14]','$json_array[16]');";
+	return $myQuery;
+}
+
+?>
