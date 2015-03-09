@@ -1,11 +1,7 @@
 <?php
-// Test Cases
-
-// $json = file_get_contents('posts.json');
 
 $jsoninput = '{"createUser":{"user_id":"12345","firstname":"aaa","secondname":"bbb","password":"xxx","email":"aaa@bbb","bday":"12-12-1990"}}';
-// $jsoninput = '{"createRoom":{"room_id":"12345","room_title":"aaa","room_desc":"bbb"}}';
-// $jsoninput = '{"createPost":{"post_id":"12345","post_title":"aaa","text":"bbb","post_c_time":"NULL","post_e_time":"NULL","fk_post_user_id":"123456","fk_post_room_id":"123456","fk_post_prnt_id":"123456"}};
+me":"NULL","fk_post_user_id":"123456","fk_post_room_id":"123456","fk_post_prnt_id":"123456"}};
 
 $command = "";
 $myQuery = "";
