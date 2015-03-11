@@ -2,6 +2,9 @@
 USE ozmoPol;
 
 /* Day #1: Let there be  Tables */
+DROP TABLE IF EXISTS X_user_flw_user;
+DROP TABLE IF EXISTS X_user_flw_room;
+DROP TABLE IF EXISTS Votes;
 DROP TABLE IF EXISTS Posts;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Rooms;
@@ -47,6 +50,49 @@ FOREIGN KEY (fk_post_room_id) REFERENCES Rooms(pk_room_id),
 FOREIGN KEY (fk_post_prnt_id) REFERENCES Posts(pk_post_id)
 );
 
+/* Let There be Votes */
+CREATE TABLE Votes
+(
+pk_vote_id varchar(32) UNIQUE NOT NULL,
+vote_value bit NOT NULL,
+fk_vote_user_id varchar(32) UNIQUE NOT NULL,
+fk_vote_post_id varchar(32) UNIQUE NOT NULL,
+
+PRIMARY KEY (pk_vote_id),
+
+FOREIGN KEY (fk_vote_user_id) REFERENCES Users(pk_user_id),
+FOREIGN KEY (fk_vote_post_id) REFERENCES Posts(pk_post_id)
+);
+
+/* Let Users Follow Rooms */
+CREATE TABLE X_user_flw_room
+(
+pk_userXroom_id varchar(32) UNIQUE NOT NULL,
+fk_userXroom_user_id varchar(32)  UNIQUE NOT NULL,
+fk_userXroom_room_id varchar(32)  UNIQUE NOT NULL,
+
+PRIMARY KEY (pk_userXroom_id),
+
+FOREIGN KEY (fk_userXroom_user_id) REFERENCES Users(pk_user_id),
+FOREIGN KEY (fk_userXroom_room_id) REFERENCES Rooms(pk_room_id)
+);
+
+/* Let Users Follow Users */
+CREATE TABLE X_user_flw_user
+(
+pk_userXuser_id varchar(32) UNIQUE NOT NULL,
+fk_userXroom_flwr_user_id varchar(32)  UNIQUE NOT NULL,
+fk_userXroom_flwd_user_id varchar(32)  UNIQUE NOT NULL,
+
+PRIMARY KEY (pk_userXuser_id),
+
+FOREIGN KEY (fk_userXroom_flwr_user_id) REFERENCES Users(pk_user_id),
+FOREIGN KEY (fk_userXroom_flwd_user_id) REFERENCES Users(pk_user_id)
+);
+
+
+
+/* When post is edited, post_e_time is updated */
 DELIMITER //
 
 CREATE TRIGGER make_post_c_time 
@@ -59,6 +105,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
 
 /*** And the time came to pass ***/
 
