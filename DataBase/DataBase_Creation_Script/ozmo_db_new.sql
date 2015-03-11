@@ -47,6 +47,46 @@ FOREIGN KEY (fk_post_room_id) REFERENCES Rooms(pk_room_id),
 FOREIGN KEY (fk_post_prnt_id) REFERENCES Posts(pk_post_id)
 );
 
+CREATE TABLE xt_user_room_sub (
+ 
+user_id varchar(32) NOT NULL,
+
+room_id varchar(32) NOT NULL,
+
+sub_date timestamp NOT NULL default CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE xt_user_user_sub (
+
+follower_id varchar(32) NOT NULL,
+
+followee_id varchar(32) NOT NULL,
+
+sub_date timestamp NOT NULL default CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE vote_post (
+
+fk_user_id varchar(32) NOT NULL,
+
+pk_vote_id varchar(32) NOT NULL,
+
+fk_post_id varchar(32) NOT NULL,
+
+vote_type tinyint(4) NOT NULL,
+
+vote_date timestamp NOT NULL default CURRENT_TIMESTAMP,
+
+PRIMARY KEY  (pk_vote_id),
+
+FOREIGN KEY (fk_user_id),
+
+FOREIGN KEY (fk_post_id)
+
+);
+
 DELIMITER //
 
 CREATE TRIGGER make_post_c_time 
