@@ -135,6 +135,8 @@ INSERT INTO Users VALUES
 ('euritolfkjnndjfj', 'christ', 'euritolfkjnndjfjeuritolfkjnndjfjeuritolfkjnndjfjeuritolfkjnndjfj', 'christ@ozu.edu.tr', '1004-02-01');
 
 /* And Posts started to populate Gods Hall. */
+
+
 INSERT INTO Posts VALUES
 ('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
 
@@ -179,9 +181,9 @@ INSERT INTO Posts VALUES
 /* And people started Voting for Posts... and it was all good */
 INSERT INTO Votes VALUES ('ykdrykdrykdrykdr', '1', 'geidgeidgeidgeid', 'krt74yehancleor8');
 INSERT INTO Votes VALUES ('dfeldfeldfeldfel', '-1', 'ffffffffffffffff', 'krt74yehancleor8');
-INSERT INTO Votes VALUES ('vnbnvnbnvnbnvnbn', '1', 'bjkweshgk48y93s4', 'hhegdteuiwoodadr');
-INSERT INTO Votes VALUES ('abcdabcdabcdabcd', '1', 'euritolfkjnndjfj', 'hhegdteuiwoodadr');
-INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'bjksefkhjw49ub43', 'lrncndhrkktnchw0');
+INSERT INTO Votes VALUES ('vnbnvnbnvnbnvnbn', '1', 'bjkweshgk48y93s4', 'krt74yehancleor8');
+INSERT INTO Votes VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yehancleor8');
+INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'bjksefkhjw49ub43', 'owieowieowieowie');
 
 
 
