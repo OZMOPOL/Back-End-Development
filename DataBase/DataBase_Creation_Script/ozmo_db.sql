@@ -54,14 +54,16 @@ FOREIGN KEY (fk_post_prnt_id) REFERENCES Posts(pk_post_id)
 CREATE TABLE Votes
 (
 pk_vote_id varchar(32) UNIQUE NOT NULL,
-vote_value bit NOT NULL,
-fk_vote_user_id varchar(32) UNIQUE NOT NULL,
-fk_vote_post_id varchar(32) UNIQUE NOT NULL,
+vote_value TINYINT(1),
+fk_vote_user_id varchar(32) NOT NULL,
+fk_vote_post_id varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_vote_id),
 
 FOREIGN KEY (fk_vote_user_id) REFERENCES Users(pk_user_id),
-FOREIGN KEY (fk_vote_post_id) REFERENCES Posts(pk_post_id)
+FOREIGN KEY (fk_vote_post_id) REFERENCES Posts(pk_post_id),
+
+UNIQUE KEY user_vote_post (fk_vote_user_id, fk_vote_post_id)
 );
 
 /* Let Users Follow Rooms */
@@ -129,7 +131,7 @@ INSERT INTO Users VALUES
 ('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01'),
 ('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01'),
 ('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01'),
-('urb49ne9bek30mme', 'Mary', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'mary@ozu.edu.tr', '1050-01-01');
+('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01');
 
 /* And Posts started to populate Gods Hall. */
 INSERT INTO Posts VALUES
@@ -172,3 +174,8 @@ DO SLEEP(1);
 
 INSERT INTO Posts VALUES
 ('owieowieowieowie', NULL, 'Hahahaha what the hell is going on!', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'polishnfnfojndkn' );
+
+/* And people started Voting for Posts... and it was all good */
+INSERT INTO Votes VALUES ('ykdrykdrykdrykdr', '1', 'geidgeidgeidgeid', 'krt74yehancleor8');
+INSERT INTO Votes VALUES ('dfeldfeldfeldfel', '-1', 'ffffffffffffffff', 'krt74yehancleor8');
+INSERT INTO Votes VALUES ('tqwltqwltqwltqwl', '1', 'bjkweshgk48y93s4', 'krt74yehancleor8');
