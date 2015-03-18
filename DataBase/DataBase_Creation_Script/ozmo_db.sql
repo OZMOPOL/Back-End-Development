@@ -131,7 +131,8 @@ INSERT INTO Users VALUES
 ('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01'),
 ('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01'),
 ('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01'),
-('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01');
+('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01'),
+('euritolfkjnndjfj', 'christ', 'euritolfkjnndjfjeuritolfkjnndjfjeuritolfkjnndjfjeuritolfkjnndjfj', 'christ@ozu.edu.tr', '1004-02-01');
 
 /* And Posts started to populate Gods Hall. */
 INSERT INTO Posts VALUES
@@ -178,4 +179,12 @@ INSERT INTO Posts VALUES
 /* And people started Voting for Posts... and it was all good */
 INSERT INTO Votes VALUES ('ykdrykdrykdrykdr', '1', 'geidgeidgeidgeid', 'krt74yehancleor8');
 INSERT INTO Votes VALUES ('dfeldfeldfeldfel', '-1', 'ffffffffffffffff', 'krt74yehancleor8');
-INSERT INTO Votes VALUES ('tqwltqwltqwltqwl', '1', 'bjkweshgk48y93s4', 'krt74yehancleor8');
+INSERT INTO Votes VALUES ('vnbnvnbnvnbnvnbn', '1', 'bjkweshgk48y93s4', 'hhegdteuiwoodadr');
+INSERT INTO Votes VALUES ('abcdabcdabcdabcd', '1', 'euritolfkjnndjfj', 'hhegdteuiwoodadr');
+INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'bjksefkhjw49ub43', 'lrncndhrkktnchw0');
+
+
+
+
+
+
