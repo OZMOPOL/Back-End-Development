@@ -128,8 +128,7 @@ INSERT INTO Users VALUES
 ('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01'),
 ('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01'),
 ('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01'),
-('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01'),
-('urb49ne9bek30mme', 'Mary', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'mary@ozu.edu.tr', '1050-01-01');
+('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01');
 
 /* And Posts started to populate Gods Hall. */
 INSERT INTO Posts VALUES
@@ -167,8 +166,3 @@ DO SLEEP(1);
 
 INSERT INTO Posts VALUES
 ('uejd[rotlzbah17f', NULL, 'Hahahaha who else could it be!', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'polishnfnfojndkn' );
-
-DO SLEEP(1);
-
-INSERT INTO Posts VALUES
-('owieowieowieowie', NULL, 'Hahahaha what the hell is going on!', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'polishnfnfojndkn' );
