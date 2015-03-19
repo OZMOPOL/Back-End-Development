@@ -126,6 +126,7 @@ INSERT INTO Rooms VALUES
 ('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!'),
 ('weddweddweddwedd', 'Message from sky', 'I heard something from God');
 
+
 /* So did Users... */
 INSERT INTO Users VALUES
 ('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01'),
@@ -180,6 +181,7 @@ INSERT INTO Posts VALUES
 ('owieowieowieowie', NULL, 'Hahahaha what the hell is going on!', NULL , NULL ,'euritolfkjnndjfj', 'weddweddweddwedd', 'polishnfnfojndkn' );
 
 /* And people started Voting for Posts... and it was all good */
+
 INSERT INTO Votes VALUES ('ykdrykdrykdrykdr', '1', 'geidgeidgeidgeid', 'owieowieowieowie');
 INSERT INTO Votes VALUES ('dfeldfeldfeldfel', '-1', 'ffffffffffffffff', 'krt74yehancleor8');
 INSERT INTO Votes VALUES ('vnbnvnbnvnbnvnbn', '1', 'bjkweshgk48y93s4', 'krt74yehancleor8');
@@ -187,7 +189,9 @@ INSERT INTO Votes VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeh
 INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Votes VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 
+/* So evryone can follow rooms  */
 
+INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
 
 
 
