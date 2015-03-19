@@ -70,6 +70,7 @@ UNIQUE KEY user_vote_post (fk_vote_user_id, fk_vote_post_id)
 CREATE TABLE X_user_flw_room
 (
 pk_userXroom_id varchar(32) UNIQUE NOT NULL,
+/* Users can follow many rooms, why it should be unique? */
 fk_userXroom_user_id varchar(32)  UNIQUE NOT NULL,
 fk_userXroom_room_id varchar(32)  UNIQUE NOT NULL,
 
@@ -189,9 +190,25 @@ INSERT INTO Votes VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeh
 INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Votes VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 
-/* So evryone can follow rooms  */
+/* So everyone can follow Rooms  */
 
 INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
+INSERT INTO X_user_flw_room VALUES
+('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES
+('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
+
+/* And people can follow other people as well, Intresting!! */
+
+INSERT INTO X_user_flw_user VALUES ('iopliopliopliopl', 'bjksefkhjw49ub43', 'geidgeidgeidgeid');
+INSERT INTO X_user_flw_user VALUES ('rthdrthdrthdrthd', 'euritolfkjnndjfj' , 'ffffffffffffffff');
+INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid' , 'bjksefkhjw49ub43');
+INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme' , 'euritolfkjnndjfj');
+
+
+
+
+
 
 
 
