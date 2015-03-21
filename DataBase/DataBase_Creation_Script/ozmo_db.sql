@@ -71,26 +71,30 @@ CREATE TABLE X_user_flw_room
 (
 pk_userXroom_id varchar(32) UNIQUE NOT NULL,
 /* Users can follow many rooms, why it should be unique? */
-fk_userXroom_user_id varchar(32)  UNIQUE NOT NULL,
-fk_userXroom_room_id varchar(32)  UNIQUE NOT NULL,
+fk_userXroom_user_id varchar(32) NOT NULL,
+fk_userXroom_room_id varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_userXroom_id),
 
 FOREIGN KEY (fk_userXroom_user_id) REFERENCES Users(pk_user_id),
-FOREIGN KEY (fk_userXroom_room_id) REFERENCES Rooms(pk_room_id)
+FOREIGN KEY (fk_userXroom_room_id) REFERENCES Rooms(pk_room_id),
+
+UNIQUE KEY user_flw_room (fk_userXroom_user_id,fk_userXroom_room_id)
 );
 
 /* Let Users Follow Users */
 CREATE TABLE X_user_flw_user
 (
 pk_userXuser_id varchar(32) UNIQUE NOT NULL,
-fk_userXroom_flwr_user_id varchar(32)  UNIQUE NOT NULL,
-fk_userXroom_flwd_user_id varchar(32)  UNIQUE NOT NULL,
+fk_userXuser_flwr_user_id varchar(32) NOT NULL,
+fk_userXuser_flwd_user_id varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_userXuser_id),
 
-FOREIGN KEY (fk_userXroom_flwr_user_id) REFERENCES Users(pk_user_id),
-FOREIGN KEY (fk_userXroom_flwd_user_id) REFERENCES Users(pk_user_id)
+FOREIGN KEY (fk_userXuser_flwr_user_id) REFERENCES Users(pk_user_id),
+FOREIGN KEY (fk_userXuser_flwd_user_id) REFERENCES Users(pk_user_id),
+
+UNIQUE KEY user_flw_user (fk_userXuser_flwr_user_id, fk_userXuser_flwd_user_id)
 );
 
 
