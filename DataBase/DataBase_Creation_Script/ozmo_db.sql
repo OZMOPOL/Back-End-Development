@@ -190,13 +190,20 @@ INSERT INTO Votes VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeh
 INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Votes VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 
+/* People also could change her/his opinion.... Don't you think different when you learn something new?? */
+
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='ykdrykdrykdrykdr';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='dfeldfeldfeldfel';
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='vnbnvnbnvnbnvnbn';
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='yuiuyuiuyuiuyuiu';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='tqwftqwftqwftqwf';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
+
 /* So everyone can follow Rooms  */
 
 INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
-INSERT INTO X_user_flw_room VALUES
-('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
-INSERT INTO X_user_flw_room VALUES
-('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 
