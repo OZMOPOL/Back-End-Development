@@ -128,7 +128,8 @@ INSERT INTO Rooms VALUES
 ('ju3hyd2762uytgds', 'Music Events', '... d(~_~)b... '),
 ('rrhysd276185jstf', 'Party Nation', 'This is a serious room'),
 ('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!'),
-('weddweddweddwedd', 'Message from sky', 'I heard something from God');
+('weddweddweddwedd', 'Message from sky', 'I heard something from God'),
+('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!');
 
 
 /* So did Users... */
@@ -154,7 +155,12 @@ INSERT INTO Posts VALUES
 DO SLEEP(1);
 
 INSERT INTO Posts VALUES
-('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL ,'euritolfkjnndjfj', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+
+DO SLEEP(1);
+
+INSERT INTO Posts VALUES
+('h1e322eui322da1r', 'Hey every1!', 'anybody there???! ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
 
 DO SLEEP(1);
 
