@@ -15,7 +15,6 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rooms.findAll", query = "SELECT r FROM Rooms r"),
     @NamedQuery(name = "Rooms.findByPkRoomId", query = "SELECT r FROM Rooms r WHERE r.pkRoomId = :pkRoomId"),
-    @NamedQuery(name = "Rooms.findByRoomTitle", query = "SELECT r FROM Rooms r WHERE r.roomTitle = :roomTitle")})
+    @NamedQuery(name = "Rooms.findByRoomTitle", query = "SELECT r FROM Rooms r WHERE r.roomTitle = :roomTitle"),
+    @NamedQuery(name = "Rooms.findByRoomStatus", query = "SELECT r FROM Rooms r WHERE r.roomStatus = :roomStatus")})
 public class Rooms implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,8 +50,13 @@ public class Rooms implements Serializable {
     @Size(max = 65535)
     @Column(name = "room_desc")
     private String roomDesc;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkuserXroomroomid")
-    private Xuserflwroom xuserflwroom;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 32)
+    @Column(name = "room_status")
+    private String roomStatus;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomroomid")
+    private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostRoomId")
     private Collection<Posts> postsCollection;
 
@@ -62,9 +67,10 @@ public class Rooms implements Serializable {
         this.pkRoomId = pkRoomId;
     }
 
-    public Rooms(String pkRoomId, String roomTitle) {
+    public Rooms(String pkRoomId, String roomTitle, String roomStatus) {
         this.pkRoomId = pkRoomId;
         this.roomTitle = roomTitle;
+        this.roomStatus = roomStatus;
     }
 
     public String getPkRoomId() {
@@ -91,12 +97,21 @@ public class Rooms implements Serializable {
         this.roomDesc = roomDesc;
     }
 
-    public Xuserflwroom getXuserflwroom() {
-        return xuserflwroom;
+    public String getRoomStatus() {
+        return roomStatus;
     }
 
-    public void setXuserflwroom(Xuserflwroom xuserflwroom) {
-        this.xuserflwroom = xuserflwroom;
+    public void setRoomStatus(String roomStatus) {
+        this.roomStatus = roomStatus;
+    }
+
+    @XmlTransient
+    public Collection<Xuserflwroom> getXuserflwroomCollection() {
+        return xuserflwroomCollection;
+    }
+
+    public void setXuserflwroomCollection(Collection<Xuserflwroom> xuserflwroomCollection) {
+        this.xuserflwroomCollection = xuserflwroomCollection;
     }
 
     @XmlTransient

@@ -10,9 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,12 +36,12 @@ public class Xuserflwuser implements Serializable {
     @Size(min = 1, max = 32)
     @Column(name = "pk_userXuser_id")
     private String pkuserXuserid;
-    @JoinColumn(name = "fk_userXroom_flwd_user_id", referencedColumnName = "pk_user_id")
-    @OneToOne(optional = false)
-    private Users fkuserXroomflwduserid;
-    @JoinColumn(name = "fk_userXroom_flwr_user_id", referencedColumnName = "pk_user_id")
-    @OneToOne(optional = false)
-    private Users fkuserXroomflwruserid;
+    @JoinColumn(name = "fk_userXuser_flwd_user_id", referencedColumnName = "pk_user_id")
+    @ManyToOne(optional = false)
+    private Users fkuserXuserflwduserid;
+    @JoinColumn(name = "fk_userXuser_flwr_user_id", referencedColumnName = "pk_user_id")
+    @ManyToOne(optional = false)
+    private Users fkuserXuserflwruserid;
 
     public Xuserflwuser() {
     }
@@ -58,20 +58,20 @@ public class Xuserflwuser implements Serializable {
         this.pkuserXuserid = pkuserXuserid;
     }
 
-    public Users getFkuserXroomflwduserid() {
-        return fkuserXroomflwduserid;
+    public Users getFkuserXuserflwduserid() {
+        return fkuserXuserflwduserid;
     }
 
-    public void setFkuserXroomflwduserid(Users fkuserXroomflwduserid) {
-        this.fkuserXroomflwduserid = fkuserXroomflwduserid;
+    public void setFkuserXuserflwduserid(Users fkuserXuserflwduserid) {
+        this.fkuserXuserflwduserid = fkuserXuserflwduserid;
     }
 
-    public Users getFkuserXroomflwruserid() {
-        return fkuserXroomflwruserid;
+    public Users getFkuserXuserflwruserid() {
+        return fkuserXuserflwruserid;
     }
 
-    public void setFkuserXroomflwruserid(Users fkuserXroomflwruserid) {
-        this.fkuserXroomflwruserid = fkuserXroomflwruserid;
+    public void setFkuserXuserflwruserid(Users fkuserXuserflwruserid) {
+        this.fkuserXuserflwruserid = fkuserXuserflwruserid;
     }
 
     @Override

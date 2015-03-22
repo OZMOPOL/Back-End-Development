@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package srv;
+package service;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,33 +16,33 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import ozmoPol.Rooms;
+import ozmoPol.Xuserflwroom;
 
 /**
  *
  * @author sav
  */
 @Stateless
-@Path("ozmopol.rooms")
-public class RoomsFacadeREST extends AbstractFacade<Rooms> {
+@Path("ozmopol.xuserflwroom")
+public class XuserflwroomFacadeREST extends AbstractFacade<Xuserflwroom> {
     @PersistenceContext(unitName = "ozmoPol_WebSrvPU")
     private EntityManager em;
 
-    public RoomsFacadeREST() {
-        super(Rooms.class);
+    public XuserflwroomFacadeREST() {
+        super(Xuserflwroom.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Rooms entity) {
+    public void create(Xuserflwroom entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void edit(Rooms entity) {
+    public void edit(Xuserflwroom entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class RoomsFacadeREST extends AbstractFacade<Rooms> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Rooms find(@PathParam("id") String id) {
+    public Xuserflwroom find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Rooms> findAll() {
+    public List<Xuserflwroom> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Rooms> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Xuserflwroom> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

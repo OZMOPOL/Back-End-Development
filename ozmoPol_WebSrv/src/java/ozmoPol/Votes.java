@@ -10,9 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,27 +37,20 @@ public class Votes implements Serializable {
     @Size(min = 1, max = 32)
     @Column(name = "pk_vote_id")
     private String pkVoteId;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "vote_value")
-    private boolean voteValue;
+    private Boolean voteValue;
     @JoinColumn(name = "fk_vote_post_id", referencedColumnName = "pk_post_id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Posts fkVotePostId;
     @JoinColumn(name = "fk_vote_user_id", referencedColumnName = "pk_user_id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Users fkVoteUserId;
-//functions for voting for a post or comment by a user
+
     public Votes() {
     }
 
     public Votes(String pkVoteId) {
         this.pkVoteId = pkVoteId;
-    }
-
-    public Votes(String pkVoteId, boolean voteValue) {
-        this.pkVoteId = pkVoteId;
-        this.voteValue = voteValue;
     }
 
     public String getPkVoteId() {
@@ -68,11 +61,11 @@ public class Votes implements Serializable {
         this.pkVoteId = pkVoteId;
     }
 
-    public boolean getVoteValue() {
+    public Boolean getVoteValue() {
         return voteValue;
     }
 
-    public void setVoteValue(boolean voteValue) {
+    public void setVoteValue(Boolean voteValue) {
         this.voteValue = voteValue;
     }
 

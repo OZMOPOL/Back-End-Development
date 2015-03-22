@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName"),
     @NamedQuery(name = "Users.findByUserPass", query = "SELECT u FROM Users u WHERE u.userPass = :userPass"),
     @NamedQuery(name = "Users.findByUserEmail", query = "SELECT u FROM Users u WHERE u.userEmail = :userEmail"),
-    @NamedQuery(name = "Users.findByUserBday", query = "SELECT u FROM Users u WHERE u.userBday = :userBday")})
+    @NamedQuery(name = "Users.findByUserBday", query = "SELECT u FROM Users u WHERE u.userBday = :userBday"),
+    @NamedQuery(name = "Users.findByUserStatus", query = "SELECT u FROM Users u WHERE u.userStatus = :userStatus")})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,17 +64,22 @@ public class Users implements Serializable {
     @Column(name = "user_bday")
     @Temporal(TemporalType.DATE)
     private Date userBday;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkuserXroomuserid")
-    private Xuserflwroom xuserflwroom;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 32)
+    @Column(name = "user_status")
+    private String userStatus;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomuserid")
+    private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostUserId")
     private Collection<Posts> postsCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkVoteUserId")
-    private Votes votes;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkuserXroomflwduserid")
-    private Xuserflwuser xuserflwuser;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkuserXroomflwruserid")
-    private Xuserflwuser xuserflwuser1;
-//functions for users
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVoteUserId")
+    private Collection<Votes> votesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwduserid")
+    private Collection<Xuserflwuser> xuserflwuserCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwruserid")
+    private Collection<Xuserflwuser> xuserflwuserCollection1;
+
     public Users() {
     }
 
@@ -82,11 +87,12 @@ public class Users implements Serializable {
         this.pkUserId = pkUserId;
     }
 
-    public Users(String pkUserId, String userName, String userPass, String userEmail) {
+    public Users(String pkUserId, String userName, String userPass, String userEmail, String userStatus) {
         this.pkUserId = pkUserId;
         this.userName = userName;
         this.userPass = userPass;
         this.userEmail = userEmail;
+        this.userStatus = userStatus;
     }
 
     public String getPkUserId() {
@@ -129,12 +135,21 @@ public class Users implements Serializable {
         this.userBday = userBday;
     }
 
-    public Xuserflwroom getXuserflwroom() {
-        return xuserflwroom;
+    public String getUserStatus() {
+        return userStatus;
     }
 
-    public void setXuserflwroom(Xuserflwroom xuserflwroom) {
-        this.xuserflwroom = xuserflwroom;
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    @XmlTransient
+    public Collection<Xuserflwroom> getXuserflwroomCollection() {
+        return xuserflwroomCollection;
+    }
+
+    public void setXuserflwroomCollection(Collection<Xuserflwroom> xuserflwroomCollection) {
+        this.xuserflwroomCollection = xuserflwroomCollection;
     }
 
     @XmlTransient
@@ -146,28 +161,31 @@ public class Users implements Serializable {
         this.postsCollection = postsCollection;
     }
 
-    public Votes getVotes() {
-        return votes;
+    @XmlTransient
+    public Collection<Votes> getVotesCollection() {
+        return votesCollection;
     }
 
-    public void setVotes(Votes votes) {
-        this.votes = votes;
+    public void setVotesCollection(Collection<Votes> votesCollection) {
+        this.votesCollection = votesCollection;
     }
 
-    public Xuserflwuser getXuserflwuser() {
-        return xuserflwuser;
+    @XmlTransient
+    public Collection<Xuserflwuser> getXuserflwuserCollection() {
+        return xuserflwuserCollection;
     }
 
-    public void setXuserflwuser(Xuserflwuser xuserflwuser) {
-        this.xuserflwuser = xuserflwuser;
+    public void setXuserflwuserCollection(Collection<Xuserflwuser> xuserflwuserCollection) {
+        this.xuserflwuserCollection = xuserflwuserCollection;
     }
 
-    public Xuserflwuser getXuserflwuser1() {
-        return xuserflwuser1;
+    @XmlTransient
+    public Collection<Xuserflwuser> getXuserflwuserCollection1() {
+        return xuserflwuserCollection1;
     }
 
-    public void setXuserflwuser1(Xuserflwuser xuserflwuser1) {
-        this.xuserflwuser1 = xuserflwuser1;
+    public void setXuserflwuserCollection1(Collection<Xuserflwuser> xuserflwuserCollection1) {
+        this.xuserflwuserCollection1 = xuserflwuserCollection1;
     }
 
     @Override

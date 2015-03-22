@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package srv;
+package service;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,33 +16,33 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import ozmoPol.Votes;
+import ozmoPol.Rooms;
 
 /**
  *
  * @author sav
  */
 @Stateless
-@Path("ozmopol.votes")
-public class VotesFacadeREST extends AbstractFacade<Votes> {
+@Path("ozmopol.rooms")
+public class RoomsFacadeREST extends AbstractFacade<Rooms> {
     @PersistenceContext(unitName = "ozmoPol_WebSrvPU")
     private EntityManager em;
 
-    public VotesFacadeREST() {
-        super(Votes.class);
+    public RoomsFacadeREST() {
+        super(Rooms.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Votes entity) {
+    public void create(Rooms entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void edit(Votes entity) {
+    public void edit(Rooms entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class VotesFacadeREST extends AbstractFacade<Votes> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Votes find(@PathParam("id") String id) {
+    public Rooms find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Votes> findAll() {
+    public List<Rooms> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Votes> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Rooms> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

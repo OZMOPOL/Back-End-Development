@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -76,9 +75,9 @@ public class Posts implements Serializable {
     @JoinColumn(name = "fk_post_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
     private Users fkPostUserId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkVotePostId")
-    private Votes votes;
- //functions for user adding a post to a room 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVotePostId")
+    private Collection<Votes> votesCollection;
+
     public Posts() {
     }
 
@@ -165,12 +164,13 @@ public class Posts implements Serializable {
         this.fkPostUserId = fkPostUserId;
     }
 
-    public Votes getVotes() {
-        return votes;
+    @XmlTransient
+    public Collection<Votes> getVotesCollection() {
+        return votesCollection;
     }
 
-    public void setVotes(Votes votes) {
-        this.votes = votes;
+    public void setVotesCollection(Collection<Votes> votesCollection) {
+        this.votesCollection = votesCollection;
     }
 
     @Override
