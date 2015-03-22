@@ -47,7 +47,7 @@ public class Votes implements Serializable {
     @JoinColumn(name = "fk_vote_user_id", referencedColumnName = "pk_user_id")
     @OneToOne(optional = false)
     private Users fkVoteUserId;
-//functions for voting for a post or comment by a user
+
     public Votes() {
     }
 

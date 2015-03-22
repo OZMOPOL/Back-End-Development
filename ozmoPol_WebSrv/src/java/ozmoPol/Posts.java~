@@ -78,7 +78,7 @@ public class Posts implements Serializable {
     private Users fkPostUserId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkVotePostId")
     private Votes votes;
- //functions for user adding a post to a room 
+
     public Posts() {
     }
 

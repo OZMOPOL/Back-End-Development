@@ -70,27 +70,30 @@ UNIQUE KEY user_vote_post (fk_vote_user_id, fk_vote_post_id)
 CREATE TABLE X_user_flw_room
 (
 pk_userXroom_id varchar(32) UNIQUE NOT NULL,
-/* Users can follow many rooms, why it should be unique? */
-fk_userXroom_user_id varchar(32)  UNIQUE NOT NULL,
-fk_userXroom_room_id varchar(32)  UNIQUE NOT NULL,
+fk_userXroom_user_id varchar(32) NOT NULL,
+fk_userXroom_room_id varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_userXroom_id),
 
 FOREIGN KEY (fk_userXroom_user_id) REFERENCES Users(pk_user_id),
-FOREIGN KEY (fk_userXroom_room_id) REFERENCES Rooms(pk_room_id)
+FOREIGN KEY (fk_userXroom_room_id) REFERENCES Rooms(pk_room_id),
+
+UNIQUE KEY user_flw_room (fk_userXroom_user_id,fk_userXroom_room_id)
 );
 
 /* Let Users Follow Users */
 CREATE TABLE X_user_flw_user
 (
 pk_userXuser_id varchar(32) UNIQUE NOT NULL,
-fk_userXroom_flwr_user_id varchar(32)  UNIQUE NOT NULL,
-fk_userXroom_flwd_user_id varchar(32)  UNIQUE NOT NULL,
+fk_userXuser_flwr_user_id varchar(32) NOT NULL,
+fk_userXuser_flwd_user_id varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_userXuser_id),
 
-FOREIGN KEY (fk_userXroom_flwr_user_id) REFERENCES Users(pk_user_id),
-FOREIGN KEY (fk_userXroom_flwd_user_id) REFERENCES Users(pk_user_id)
+FOREIGN KEY (fk_userXuser_flwr_user_id) REFERENCES Users(pk_user_id),
+FOREIGN KEY (fk_userXuser_flwd_user_id) REFERENCES Users(pk_user_id),
+
+UNIQUE KEY user_flw_user (fk_userXuser_flwr_user_id, fk_userXuser_flwd_user_id)
 );
 
 
@@ -125,7 +128,8 @@ INSERT INTO Rooms VALUES
 ('ju3hyd2762uytgds', 'Music Events', '... d(~_~)b... '),
 ('rrhysd276185jstf', 'Party Nation', 'This is a serious room'),
 ('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!'),
-('weddweddweddwedd', 'Message from sky', 'I heard something from God');
+('weddweddweddwedd', 'Message from sky', 'I heard something from God'),
+('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!');
 
 
 /* So did Users... */
@@ -151,7 +155,12 @@ INSERT INTO Posts VALUES
 DO SLEEP(1);
 
 INSERT INTO Posts VALUES
-('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL ,'euritolfkjnndjfj', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+
+DO SLEEP(1);
+
+INSERT INTO Posts VALUES
+('h1e322eui322da1r', 'Hey every1!', 'anybody there???! ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
 
 DO SLEEP(1);
 
@@ -190,13 +199,20 @@ INSERT INTO Votes VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeh
 INSERT INTO Votes VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Votes VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 
+/* People also could change her/his opinion.... Don't you think different when you learn something new?? */
+
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='ykdrykdrykdrykdr';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='dfeldfeldfeldfel';
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='vnbnvnbnvnbnvnbn';
+UPDATE Votes SET vote_value='-1' WHERE pk_vote_id='yuiuyuiuyuiuyuiu';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='tqwftqwftqwftqwf';
+UPDATE Votes SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
+
 /* So everyone can follow Rooms  */
 
 INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
-INSERT INTO X_user_flw_room VALUES
-('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
-INSERT INTO X_user_flw_room VALUES
-('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 
@@ -204,6 +220,7 @@ INSERT INTO X_user_flw_user VALUES ('iopliopliopliopl', 'bjksefkhjw49ub43', 'gei
 INSERT INTO X_user_flw_user VALUES ('rthdrthdrthdrthd', 'euritolfkjnndjfj' , 'ffffffffffffffff');
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid' , 'bjksefkhjw49ub43');
 INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme' , 'euritolfkjnndjfj');
+INSERT INTO X_user_flw_user VALUES ('iopdiopdiopdiopd', 'urb49ne9bek30mme' , 'geidgeidgeidgeid');
 
 
 
