@@ -74,7 +74,7 @@ public class Users implements Serializable {
     private Xuserflwuser xuserflwuser;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "fkuserXroomflwruserid")
     private Xuserflwuser xuserflwuser1;
-//functions for users
+
     public Users() {
     }
 
