@@ -70,7 +70,6 @@ UNIQUE KEY user_vote_post (fk_vote_user_id, fk_vote_post_id)
 CREATE TABLE X_user_flw_room
 (
 pk_userXroom_id varchar(32) UNIQUE NOT NULL,
-/* Users can follow many rooms, why it should be unique? */
 fk_userXroom_user_id varchar(32) NOT NULL,
 fk_userXroom_room_id varchar(32) NOT NULL,
 
