@@ -10,16 +10,19 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Rooms;
 
 /* # Let there be Rooms */
+/* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
 CREATE TABLE Rooms
 (
 pk_room_id varchar(32) UNIQUE NOT NULL,
 room_title varchar(64) NOT NULL UNIQUE,
 room_desc text,
+room_status varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_room_id)
 );
 
 /* Let there be Users */
+/* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
 CREATE TABLE Users
 (
 pk_user_id varchar(32)  UNIQUE NOT NULL,
@@ -27,6 +30,7 @@ user_name varchar(32) NOT NULL UNIQUE,
 user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
+user_status varchar(32) NOT NULL,
 
 PRIMARY KEY (pk_user_id)
 );
@@ -122,24 +126,24 @@ DELIMITER ;
 
 /* Then Rooms had tuples... */
 INSERT INTO Rooms VALUES
-('ffffffffffffffff', 'HALL', 'HALL'),
-('3uh2gkejasdy9243', 'Dining Hall', 'Wahz cookin doc?'),
-('uiybewg4jh3g4gbs', 'Shuttle Hour Updates', 'Shuttles come, Shuttles go, eat a tomato'),
-('ju3hyd2762uytgds', 'Music Events', '... d(~_~)b... '),
-('rrhysd276185jstf', 'Party Nation', 'This is a serious room'),
-('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!'),
-('weddweddweddwedd', 'Message from sky', 'I heard something from God'),
-('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!');
+('ffffffffffffffff', 'HALL', 'HALL','1'),
+('3uh2gkejasdy9243', 'Dining Hall', 'Wahz cookin doc?','1'),
+('uiybewg4jh3g4gbs', 'Shuttle Hour Updates', 'Shuttles come, Shuttles go, eat a tomato','1'),
+('ju3hyd2762uytgds', 'Music Events', '... d(~_~)b... ','1'),
+('rrhysd276185jstf', 'Party Nation', 'This is a serious room','1'),
+('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!','1'),
+('weddweddweddwedd', 'Message from sky', 'I heard something from God','1'),
+('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!','1');
 
 
 /* So did Users... */
 INSERT INTO Users VALUES
-('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01'),
-('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01'),
-('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01'),
-('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01'),
-('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01'),
-('euritolfkjnndjfj', 'Mohamad', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Mohamad@ozu.edu.tr', '1004-01-01');
+('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01','1'),
+('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01','1'),
+('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01','1'),
+('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01','1'),
+('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01','1'),
+('euritolfkjnndjfj', 'Mohamad', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Mohamad@ozu.edu.tr', '1004-01-01','1');
 
 /* And Posts started to populate Gods Hall. */
 
