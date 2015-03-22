@@ -1,5 +1,5 @@
 /*** LET THERE BE DATABASE ***/
-USE ozmoPol;
+/* USE ozmoPol; */
 
 /* Day #1: Let there be  Tables */
 DROP TABLE IF EXISTS X_user_flw_user;
