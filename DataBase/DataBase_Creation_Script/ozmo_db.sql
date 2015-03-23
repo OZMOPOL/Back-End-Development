@@ -149,6 +149,8 @@ INSERT INTO User VALUES
 
 /* And Posts started to populate Gods Hall. */
 
+INSERT INTO Posts VALUES ('pplkpplkpplkpplk' , 'Emergency!!' , 'I lost my ID card :( where I might ask for lost stuff?' , NULL, NULL, 'geidgeidgeidgeid' , 'weddwe11222dwedd' , NULL);
+
 
 INSERT INTO Post VALUES
 ('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
