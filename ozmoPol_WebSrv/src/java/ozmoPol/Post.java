@@ -31,15 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sav
  */
 @Entity
-@Table(name = "Posts")
+@Table(name = "Post")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Posts.findAll", query = "SELECT p FROM Posts p"),
-    @NamedQuery(name = "Posts.findByPkPostId", query = "SELECT p FROM Posts p WHERE p.pkPostId = :pkPostId"),
-    @NamedQuery(name = "Posts.findByPostTitle", query = "SELECT p FROM Posts p WHERE p.postTitle = :postTitle"),
-    @NamedQuery(name = "Posts.findByPostCDate", query = "SELECT p FROM Posts p WHERE p.postCDate = :postCDate"),
-    @NamedQuery(name = "Posts.findByPostEDate", query = "SELECT p FROM Posts p WHERE p.postEDate = :postEDate")})
-public class Posts implements Serializable {
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
+    @NamedQuery(name = "Post.findByPkPostId", query = "SELECT p FROM Post p WHERE p.pkPostId = :pkPostId"),
+    @NamedQuery(name = "Post.findByPostTitle", query = "SELECT p FROM Post p WHERE p.postTitle = :postTitle"),
+    @NamedQuery(name = "Post.findByPostCDate", query = "SELECT p FROM Post p WHERE p.postCDate = :postCDate"),
+    @NamedQuery(name = "Post.findByPostEDate", query = "SELECT p FROM Post p WHERE p.postEDate = :postEDate")})
+public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -65,27 +65,27 @@ public class Posts implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date postEDate;
     @OneToMany(mappedBy = "fkPostPrntId")
-    private Collection<Posts> postsCollection;
+    private Collection<Post> postCollection;
     @JoinColumn(name = "fk_post_prnt_id", referencedColumnName = "pk_post_id")
     @ManyToOne
-    private Posts fkPostPrntId;
+    private Post fkPostPrntId;
     @JoinColumn(name = "fk_post_room_id", referencedColumnName = "pk_room_id")
     @ManyToOne(optional = false)
-    private Rooms fkPostRoomId;
+    private Room fkPostRoomId;
     @JoinColumn(name = "fk_post_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
-    private Users fkPostUserId;
+    private User fkPostUserId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVotePostId")
-    private Collection<Votes> votesCollection;
+    private Collection<Vote> voteCollection;
 
-    public Posts() {
+    public Post() {
     }
 
-    public Posts(String pkPostId) {
+    public Post(String pkPostId) {
         this.pkPostId = pkPostId;
     }
 
-    public Posts(String pkPostId, String postContent, Date postEDate) {
+    public Post(String pkPostId, String postContent, Date postEDate) {
         this.pkPostId = pkPostId;
         this.postContent = postContent;
         this.postEDate = postEDate;
@@ -132,45 +132,45 @@ public class Posts implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Posts> getPostsCollection() {
-        return postsCollection;
+    public Collection<Post> getPostCollection() {
+        return postCollection;
     }
 
-    public void setPostsCollection(Collection<Posts> postsCollection) {
-        this.postsCollection = postsCollection;
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
     }
 
-    public Posts getFkPostPrntId() {
+    public Post getFkPostPrntId() {
         return fkPostPrntId;
     }
 
-    public void setFkPostPrntId(Posts fkPostPrntId) {
+    public void setFkPostPrntId(Post fkPostPrntId) {
         this.fkPostPrntId = fkPostPrntId;
     }
 
-    public Rooms getFkPostRoomId() {
+    public Room getFkPostRoomId() {
         return fkPostRoomId;
     }
 
-    public void setFkPostRoomId(Rooms fkPostRoomId) {
+    public void setFkPostRoomId(Room fkPostRoomId) {
         this.fkPostRoomId = fkPostRoomId;
     }
 
-    public Users getFkPostUserId() {
+    public User getFkPostUserId() {
         return fkPostUserId;
     }
 
-    public void setFkPostUserId(Users fkPostUserId) {
+    public void setFkPostUserId(User fkPostUserId) {
         this.fkPostUserId = fkPostUserId;
     }
 
     @XmlTransient
-    public Collection<Votes> getVotesCollection() {
-        return votesCollection;
+    public Collection<Vote> getVoteCollection() {
+        return voteCollection;
     }
 
-    public void setVotesCollection(Collection<Votes> votesCollection) {
-        this.votesCollection = votesCollection;
+    public void setVoteCollection(Collection<Vote> voteCollection) {
+        this.voteCollection = voteCollection;
     }
 
     @Override
@@ -183,10 +183,10 @@ public class Posts implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Posts)) {
+        if (!(object instanceof Post)) {
             return false;
         }
-        Posts other = (Posts) object;
+        Post other = (Post) object;
         if ((this.pkPostId == null && other.pkPostId != null) || (this.pkPostId != null && !this.pkPostId.equals(other.pkPostId))) {
             return false;
         }
@@ -195,7 +195,7 @@ public class Posts implements Serializable {
 
     @Override
     public String toString() {
-        return "ozmoPol.Posts[ pkPostId=" + pkPostId + " ]";
+        return "ozmoPol.Post[ pkPostId=" + pkPostId + " ]";
     }
     
 }

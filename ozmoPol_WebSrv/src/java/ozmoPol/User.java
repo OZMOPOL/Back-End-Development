@@ -28,17 +28,17 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sav
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "User")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByPkUserId", query = "SELECT u FROM Users u WHERE u.pkUserId = :pkUserId"),
-    @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName"),
-    @NamedQuery(name = "Users.findByUserPass", query = "SELECT u FROM Users u WHERE u.userPass = :userPass"),
-    @NamedQuery(name = "Users.findByUserEmail", query = "SELECT u FROM Users u WHERE u.userEmail = :userEmail"),
-    @NamedQuery(name = "Users.findByUserBday", query = "SELECT u FROM Users u WHERE u.userBday = :userBday"),
-    @NamedQuery(name = "Users.findByUserStatus", query = "SELECT u FROM Users u WHERE u.userStatus = :userStatus")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByPkUserId", query = "SELECT u FROM User u WHERE u.pkUserId = :pkUserId"),
+    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
+    @NamedQuery(name = "User.findByUserPass", query = "SELECT u FROM User u WHERE u.userPass = :userPass"),
+    @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail"),
+    @NamedQuery(name = "User.findByUserBday", query = "SELECT u FROM User u WHERE u.userBday = :userBday"),
+    @NamedQuery(name = "User.findByUserStatus", query = "SELECT u FROM User u WHERE u.userStatus = :userStatus")})
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -72,22 +72,22 @@ public class Users implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomuserid")
     private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostUserId")
-    private Collection<Posts> postsCollection;
+    private Collection<Post> postCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVoteUserId")
-    private Collection<Votes> votesCollection;
+    private Collection<Vote> voteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwduserid")
     private Collection<Xuserflwuser> xuserflwuserCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwruserid")
     private Collection<Xuserflwuser> xuserflwuserCollection1;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String pkUserId) {
+    public User(String pkUserId) {
         this.pkUserId = pkUserId;
     }
 
-    public Users(String pkUserId, String userName, String userPass, String userEmail, String userStatus) {
+    public User(String pkUserId, String userName, String userPass, String userEmail, String userStatus) {
         this.pkUserId = pkUserId;
         this.userName = userName;
         this.userPass = userPass;
@@ -153,21 +153,21 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Posts> getPostsCollection() {
-        return postsCollection;
+    public Collection<Post> getPostCollection() {
+        return postCollection;
     }
 
-    public void setPostsCollection(Collection<Posts> postsCollection) {
-        this.postsCollection = postsCollection;
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
     }
 
     @XmlTransient
-    public Collection<Votes> getVotesCollection() {
-        return votesCollection;
+    public Collection<Vote> getVoteCollection() {
+        return voteCollection;
     }
 
-    public void setVotesCollection(Collection<Votes> votesCollection) {
-        this.votesCollection = votesCollection;
+    public void setVoteCollection(Collection<Vote> voteCollection) {
+        this.voteCollection = voteCollection;
     }
 
     @XmlTransient
@@ -198,10 +198,10 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         if ((this.pkUserId == null && other.pkUserId != null) || (this.pkUserId != null && !this.pkUserId.equals(other.pkUserId))) {
             return false;
         }
@@ -210,7 +210,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "ozmoPol.Users[ pkUserId=" + pkUserId + " ]";
+        return "ozmoPol.User[ pkUserId=" + pkUserId + " ]";
     }
     
 }

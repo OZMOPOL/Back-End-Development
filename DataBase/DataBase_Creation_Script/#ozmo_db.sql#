@@ -2,18 +2,16 @@
 /* USE ozmoPol; */
 
 /* Day #1: Let there be  Tables */
-
-DROP TABLE IF EXISTS X_user_flw_user;
-DROP TABLE IF EXISTS X_user_flw_room;
-DROP TABLE IF EXISTS Vote;
-DROP TABLE IF EXISTS Post;
-DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS Room;
-DROP TRIGGER IF EXISTS make_post_c_time;
+DROP TABLE IF EXISTS 'X_user_flw_user';
+DROP TABLE IF EXISTS 'X_user_flw_room';
+DROP TABLE IF EXISTS 'Vote';
+DROP TABLE IF EXISTS 'Post';
+DROP TABLE IF EXISTS 'User';
+DROP TABLE IF EXISTS 'Room';
 
 /* # Let there be Rooms */
 /* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
-CREATE TABLE Room
+CREATE TABLE 'Room'
 (
 pk_room_id varchar(32) UNIQUE NOT NULL,
 room_title varchar(64) NOT NULL UNIQUE,
@@ -25,7 +23,7 @@ PRIMARY KEY (pk_room_id)
 
 /* Let there be Users */
 /* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
-CREATE TABLE User
+CREATE TABLE 'User'
 (
 pk_user_id varchar(32)  UNIQUE NOT NULL,
 user_name varchar(32) NOT NULL UNIQUE,
@@ -38,7 +36,7 @@ PRIMARY KEY (pk_user_id)
 );
 
 /* Let there be Posts */
-CREATE TABLE Post
+CREATE TABLE 'Post'
 (
 pk_post_id varchar(32) UNIQUE NOT NULL,
 post_title varchar(256),
@@ -228,3 +226,10 @@ INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid' , 'bj
 INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme' , 'euritolfkjnndjfj');
 INSERT INTO X_user_flw_user VALUES ('iopdiopdiopdiopd', 'urb49ne9bek30mme' , 'geidgeidgeidgeid');
 INSERT INTO X_user_flw_user VALUES ('dfrtdfrtdfrtdfrt', 'ffffffffffffffff' , 'euritolfkjnndjfj');
+
+
+
+
+
+
+

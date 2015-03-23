@@ -26,14 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sav
  */
 @Entity
-@Table(name = "Rooms")
+@Table(name = "Room")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rooms.findAll", query = "SELECT r FROM Rooms r"),
-    @NamedQuery(name = "Rooms.findByPkRoomId", query = "SELECT r FROM Rooms r WHERE r.pkRoomId = :pkRoomId"),
-    @NamedQuery(name = "Rooms.findByRoomTitle", query = "SELECT r FROM Rooms r WHERE r.roomTitle = :roomTitle"),
-    @NamedQuery(name = "Rooms.findByRoomStatus", query = "SELECT r FROM Rooms r WHERE r.roomStatus = :roomStatus")})
-public class Rooms implements Serializable {
+    @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
+    @NamedQuery(name = "Room.findByPkRoomId", query = "SELECT r FROM Room r WHERE r.pkRoomId = :pkRoomId"),
+    @NamedQuery(name = "Room.findByRoomTitle", query = "SELECT r FROM Room r WHERE r.roomTitle = :roomTitle"),
+    @NamedQuery(name = "Room.findByRoomStatus", query = "SELECT r FROM Room r WHERE r.roomStatus = :roomStatus")})
+public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -58,16 +58,16 @@ public class Rooms implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomroomid")
     private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostRoomId")
-    private Collection<Posts> postsCollection;
+    private Collection<Post> postCollection;
 
-    public Rooms() {
+    public Room() {
     }
 
-    public Rooms(String pkRoomId) {
+    public Room(String pkRoomId) {
         this.pkRoomId = pkRoomId;
     }
 
-    public Rooms(String pkRoomId, String roomTitle, String roomStatus) {
+    public Room(String pkRoomId, String roomTitle, String roomStatus) {
         this.pkRoomId = pkRoomId;
         this.roomTitle = roomTitle;
         this.roomStatus = roomStatus;
@@ -115,12 +115,12 @@ public class Rooms implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Posts> getPostsCollection() {
-        return postsCollection;
+    public Collection<Post> getPostCollection() {
+        return postCollection;
     }
 
-    public void setPostsCollection(Collection<Posts> postsCollection) {
-        this.postsCollection = postsCollection;
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
     }
 
     @Override
@@ -133,10 +133,10 @@ public class Rooms implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rooms)) {
+        if (!(object instanceof Room)) {
             return false;
         }
-        Rooms other = (Rooms) object;
+        Room other = (Room) object;
         if ((this.pkRoomId == null && other.pkRoomId != null) || (this.pkRoomId != null && !this.pkRoomId.equals(other.pkRoomId))) {
             return false;
         }
@@ -145,7 +145,7 @@ public class Rooms implements Serializable {
 
     @Override
     public String toString() {
-        return "ozmoPol.Rooms[ pkRoomId=" + pkRoomId + " ]";
+        return "ozmoPol.Room[ pkRoomId=" + pkRoomId + " ]";
     }
     
 }

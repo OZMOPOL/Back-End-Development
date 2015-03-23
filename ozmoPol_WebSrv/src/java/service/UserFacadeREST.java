@@ -16,33 +16,33 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import ozmoPol.Posts;
+import ozmoPol.User;
 
 /**
  *
  * @author sav
  */
 @Stateless
-@Path("ozmopol.posts")
-public class PostsFacadeREST extends AbstractFacade<Posts> {
+@Path("ozmopol.user")
+public class UserFacadeREST extends AbstractFacade<User> {
     @PersistenceContext(unitName = "ozmoPol_WebSrvPU")
     private EntityManager em;
 
-    public PostsFacadeREST() {
-        super(Posts.class);
+    public UserFacadeREST() {
+        super(User.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Posts entity) {
+    public void create(User entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void edit(Posts entity) {
+    public void edit(User entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class PostsFacadeREST extends AbstractFacade<Posts> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Posts find(@PathParam("id") String id) {
+    public User find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Posts> findAll() {
+    public List<User> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Posts> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

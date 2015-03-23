@@ -38,10 +38,10 @@ public class Xuserflwuser implements Serializable {
     private String pkuserXuserid;
     @JoinColumn(name = "fk_userXuser_flwd_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
-    private Users fkuserXuserflwduserid;
+    private User fkuserXuserflwduserid;
     @JoinColumn(name = "fk_userXuser_flwr_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
-    private Users fkuserXuserflwruserid;
+    private User fkuserXuserflwruserid;
 
     public Xuserflwuser() {
     }
@@ -58,19 +58,19 @@ public class Xuserflwuser implements Serializable {
         this.pkuserXuserid = pkuserXuserid;
     }
 
-    public Users getFkuserXuserflwduserid() {
+    public User getFkuserXuserflwduserid() {
         return fkuserXuserflwduserid;
     }
 
-    public void setFkuserXuserflwduserid(Users fkuserXuserflwduserid) {
+    public void setFkuserXuserflwduserid(User fkuserXuserflwduserid) {
         this.fkuserXuserflwduserid = fkuserXuserflwduserid;
     }
 
-    public Users getFkuserXuserflwruserid() {
+    public User getFkuserXuserflwruserid() {
         return fkuserXuserflwruserid;
     }
 
-    public void setFkuserXuserflwruserid(Users fkuserXuserflwruserid) {
+    public void setFkuserXuserflwruserid(User fkuserXuserflwruserid) {
         this.fkuserXuserflwruserid = fkuserXuserflwruserid;
     }
 

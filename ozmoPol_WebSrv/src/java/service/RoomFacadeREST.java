@@ -16,33 +16,33 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import ozmoPol.Rooms;
+import ozmoPol.Room;
 
 /**
  *
  * @author sav
  */
 @Stateless
-@Path("ozmopol.rooms")
-public class RoomsFacadeREST extends AbstractFacade<Rooms> {
+@Path("ozmopol.room")
+public class RoomFacadeREST extends AbstractFacade<Room> {
     @PersistenceContext(unitName = "ozmoPol_WebSrvPU")
     private EntityManager em;
 
-    public RoomsFacadeREST() {
-        super(Rooms.class);
+    public RoomFacadeREST() {
+        super(Room.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Rooms entity) {
+    public void create(Room entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void edit(Rooms entity) {
+    public void edit(Room entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class RoomsFacadeREST extends AbstractFacade<Rooms> {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Rooms find(@PathParam("id") String id) {
+    public Room find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<Rooms> findAll() {
+    public List<Room> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Rooms> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Room> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
