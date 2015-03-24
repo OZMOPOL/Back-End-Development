@@ -221,6 +221,7 @@ UPDATE Vote SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
 INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
 INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
 INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
