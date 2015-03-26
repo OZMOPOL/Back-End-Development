@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS Room;
 DROP TRIGGER IF EXISTS make_post_c_time;
 
 /* # Let there be Rooms */
-/* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
+/* Status will be shown as 1 for "ACTIVE" and 0 for "INACTIVE"  */
 CREATE TABLE Room
 (
 pk_room_id varchar(32) UNIQUE NOT NULL,
@@ -88,6 +88,7 @@ UNIQUE KEY user_flw_room (fk_userXroom_user_id,fk_userXroom_room_id)
 );
 
 /* Let Users Follow Users */
+
 CREATE TABLE X_user_flw_user
 (
 pk_userXuser_id varchar(32) UNIQUE NOT NULL,
