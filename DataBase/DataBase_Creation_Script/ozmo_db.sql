@@ -13,6 +13,7 @@ DROP TRIGGER IF EXISTS make_post_c_time;
 
 /* # Let there be Rooms */
 /* Status will be shown as 1 for "ACTIVE" and 0 for "INACTIVE"  */
+
 CREATE TABLE Room
 (
 pk_room_id varchar(32) UNIQUE NOT NULL,
@@ -24,7 +25,8 @@ PRIMARY KEY (pk_room_id)
 );
 
 /* Let there be Users */
-/* Status will be shown as "1" for "ACTIVE" and "0" for "INACTIVE"  */
+/* Status will be shown as 1 for "ACTIVE" and 0 for "INACTIVE"  */
+
 CREATE TABLE User
 (
 pk_user_id varchar(32)  UNIQUE NOT NULL,
@@ -38,6 +40,7 @@ PRIMARY KEY (pk_user_id)
 );
 
 /* Let there be Posts */
+
 CREATE TABLE Post
 (
 pk_post_id varchar(32) UNIQUE NOT NULL,
@@ -57,6 +60,7 @@ FOREIGN KEY (fk_post_prnt_id) REFERENCES Post(pk_post_id)
 );
 
 /* Let There be Votes */
+
 CREATE TABLE Vote
 (
 pk_vote_id varchar(32) UNIQUE NOT NULL,
@@ -73,6 +77,7 @@ UNIQUE KEY user_vote_post (fk_vote_user_id, fk_vote_post_id)
 );
 
 /* Let Users Follow Rooms */
+
 CREATE TABLE X_user_flw_room
 (
 pk_userXroom_id varchar(32) UNIQUE NOT NULL,
@@ -106,6 +111,7 @@ UNIQUE KEY user_flw_user (fk_userXuser_flwr_user_id, fk_userXuser_flwd_user_id)
 
 
 /* When post is edited, post_e_time is updated */
+
 DELIMITER //
 
 CREATE TRIGGER make_post_c_time 
@@ -119,15 +125,12 @@ END //
 
 DELIMITER ;
 
-
-
 /*** And the time came to pass ***/
-
-/*...*/
 
 /*** Day #2: LET THERE BE TUPLES IN TABLES ACCORDINGLY ***/
 
 /* Then Rooms had tuples... */
+
 INSERT INTO Room VALUES
 ('ffffffffffffffff', 'HALL', 'HALL','1'),
 ('3uh2gkejasdy9243', 'Dining Hall', 'Wahz cookin doc?','1'),
@@ -140,6 +143,7 @@ INSERT INTO Room VALUES
 
 
 /* So did Users... */
+
 INSERT INTO User VALUES
 ('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01','1'),
 ('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01','1'),
@@ -209,6 +213,7 @@ INSERT INTO Vote VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeha
 INSERT INTO Vote VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Vote VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 INSERT INTO Vote VALUES ('41234rgtfrg33rgt', '-1', 'ffffffffffffffff', 'polishnfnfojndkn');
+
 /* People also could change her/his opinion.... Don't you think different when you learn something new?? */
 
 UPDATE Vote SET vote_value='-1' WHERE pk_vote_id='ykdrykdrykdrykdr';
@@ -226,6 +231,7 @@ INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiy
 INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
+
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
 INSERT INTO X_user_flw_user VALUES ('iopliopliopliopl', 'bjksefkhjw49ub43', 'geidgeidgeidgeid');
 INSERT INTO X_user_flw_user VALUES ('rthdrthdrthdrthd', 'euritolfkjnndjfj' , 'ffffffffffffffff');
