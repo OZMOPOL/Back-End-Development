@@ -230,17 +230,17 @@ UPDATE Vote SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
 
 /* So everyone can follow Rooms  */
 
-INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
-INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
-INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
-INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg', 'euritolfkjnndjfj','3uh2gkejasdy9243');
+INSERT INTO X_user_flw_room VALUES('reteretereterete', 'geidgeidgeidgeid', 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4', 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff', 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
 INSERT INTO X_user_flw_user VALUES ('iopliopliopliopl', 'bjksefkhjw49ub43', 'geidgeidgeidgeid');
-INSERT INTO X_user_flw_user VALUES ('rthdrthdrthdrthd', 'euritolfkjnndjfj' , 'ffffffffffffffff');
-INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid' , 'bjksefkhjw49ub43');
-INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme' , 'euritolfkjnndjfj');
-INSERT INTO X_user_flw_user VALUES ('iopdiopdiopdiopd', 'urb49ne9bek30mme' , 'geidgeidgeidgeid');
-INSERT INTO X_user_flw_user VALUES ('dfrtdfrtdfrtdfrt', 'ffffffffffffffff' , 'euritolfkjnndjfj');
+INSERT INTO X_user_flw_user VALUES ('rthdrthdrthdrthd', 'euritolfkjnndjfj', 'ffffffffffffffff');
+INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid', 'bjksefkhjw49ub43');
+INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme', 'euritolfkjnndjfj');
+INSERT INTO X_user_flw_user VALUES ('iopdiopdiopdiopd', 'urb49ne9bek30mme', 'geidgeidgeidgeid');
+INSERT INTO X_user_flw_user VALUES ('dfrtdfrtdfrtdfrt', 'ffffffffffffffff', 'euritolfkjnndjfj');
