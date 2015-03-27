@@ -19,7 +19,7 @@ CREATE TABLE Room
 pk_room_id varchar(32) UNIQUE NOT NULL,
 room_title varchar(64) NOT NULL UNIQUE,
 room_desc text,
-room_status varchar(32) NOT NULL,
+room_status bit NOT NULL DEFAULT 1,
 
 PRIMARY KEY (pk_room_id)
 );
@@ -34,7 +34,7 @@ user_name varchar(32) NOT NULL UNIQUE,
 user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
-user_status varchar(32) NOT NULL,
+user_status bit NOT NULL DEFAULT 0,
 
 PRIMARY KEY (pk_user_id)
 );
@@ -48,6 +48,8 @@ post_title varchar(256),
 post_content text NOT NULL,
 post_c_date DATETIME ,
 post_e_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+post_status  bit NOT NULL DEFAULT 1,
+
 fk_post_user_id varchar(32) NOT NULL,
 fk_post_room_id varchar(32) NOT NULL,
 fk_post_prnt_id varchar(32),
