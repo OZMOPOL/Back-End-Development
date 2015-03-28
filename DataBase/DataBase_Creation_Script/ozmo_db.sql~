@@ -212,6 +212,12 @@ INSERT INTO Vote VALUES ('yuiuyuiuyuiuyuiu', '1', 'euritolfkjnndjfj', 'krt74yeha
 INSERT INTO Vote VALUES ('tqwftqwftqwftqwf', '-1', 'urb49ne9bek30mme', 'owieowieowieowie');
 INSERT INTO Vote VALUES ('frgtfrgtfrgtfrgt', '-1', 'euritolfkjnndjfj', 'owieowieowieowie');
 INSERT INTO Vote VALUES ('41234rgtfrg33rgt', '-1', 'ffffffffffffffff', 'polishnfnfojndkn');
+INSERT INTO Vote VALUES ('lkmmlkmmlkmmlkmm', '1', 'geidgeidgeidgeid', 'krt74yehancleor8');
+INSERT INTO Vote VALUES ('cchhcchhcchhcchh', '1', 'bssdbssdbssdbssd', 'bvnmbvnmbvnmbvnm');
+INSERT INTO Vote VALUES ('mmnnmmnnmmnnmmnn', '1', 'bssdbssdbssdbssd', 'owieowieowieowie');
+
+
+
 /* People also could change her/his opinion.... Don't you think different when you learn something new?? */
 
 UPDATE Vote SET vote_value='-1' WHERE pk_vote_id='ykdrykdrykdrykdr';
