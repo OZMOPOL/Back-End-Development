@@ -145,11 +145,15 @@ INSERT INTO User VALUES
 ('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01','1'),
 ('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01','1'),
 ('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01','1'),
-('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1');
+('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1'),
+('bssdbssdbssdbssd', 'noho', 'bssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssd', 'noho@ozu.edu.tr', '1001-01-04','1'),
+('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1') ;
 
 /* And Posts started to populate Gods Hall. */
 
 INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card where I might ask for lost stuff?' , NULL, NULL, 'urb49ne9bek30mme' , 'weddwe11222dwedd' , NULL);
+
+INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);
 
 DO SLEEP(1);
 
