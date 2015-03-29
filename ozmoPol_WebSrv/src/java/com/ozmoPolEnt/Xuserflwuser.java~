@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Xuserflwuser.findAll", query = "SELECT x FROM Xuserflwuser x"),
     @NamedQuery(name = "Xuserflwuser.findByPkuserXuserid", query = "SELECT x FROM Xuserflwuser x WHERE x.pkuserXuserid = :pkuserXuserid")})
 public class Xuserflwuser implements Serializable {
-//define webservice for users to fllow other users
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

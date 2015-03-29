@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Room.findByRoomTitle", query = "SELECT r FROM Room r WHERE r.roomTitle = :roomTitle"),
     @NamedQuery(name = "Room.findByRoomStatus", query = "SELECT r FROM Room r WHERE r.roomStatus = :roomStatus")})
 public class Room implements Serializable {
-//define webservice for room inorder to retrive the data
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

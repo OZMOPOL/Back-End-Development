@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUserBday", query = "SELECT u FROM User u WHERE u.userBday = :userBday"),
     @NamedQuery(name = "User.findByUserStatus", query = "SELECT u FROM User u WHERE u.userStatus = :userStatus")})
 public class User implements Serializable {
-//define webservice for user inorder to retrive the data
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vote.findByPkVoteId", query = "SELECT v FROM Vote v WHERE v.pkVoteId = :pkVoteId"),
     @NamedQuery(name = "Vote.findByVoteValue", query = "SELECT v FROM Vote v WHERE v.voteValue = :voteValue")})
 public class Vote implements Serializable {
-//define webservice for voting for users can vote for posts and comments
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

@@ -40,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Post.findByPostCDate", query = "SELECT p FROM Post p WHERE p.postCDate = :postCDate"),
     @NamedQuery(name = "Post.findByPostEDate", query = "SELECT p FROM Post p WHERE p.postEDate = :postEDate")})
 public class Post implements Serializable {
-//define webservice for post page inorder to retrive the data
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
