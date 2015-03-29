@@ -135,6 +135,8 @@ INSERT INTO Room VALUES
 ('rrhysd276185jstf', 'Party Nation', 'This is a serious room','1'),
 ('rakhsd2775632g4s', 'Lets Study', 'Seriously?! who the fu... Mom! Get of the internet!','1'),
 ('weddweddweddwedd', 'Message from sky', 'I heard something from God','1'),
+('zxcvzxcvzxcvzxcv' , 'Programming' , 'We need some contribution for startup company', '1'),
+('nmmmnmmmnmmmnmmm',  'piknik' , 'Ozu family we are planning to have a piknik, anyone ready', '1'),
 ('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!','1');
 
 
@@ -147,7 +149,8 @@ INSERT INTO User VALUES
 ('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01','1'),
 ('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1'),
 ('bssdbssdbssdbssd', 'noho', 'bssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssd', 'noho@ozu.edu.tr', '1001-01-04','1'),
-('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1') ;
+('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1'),
+('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25','1') ;
 
 /* And Posts started to populate Gods Hall. */
 
@@ -233,6 +236,10 @@ INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gk
 INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
 INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('sbnmsbnmsbnmsbnm', 'ffffffffffffffff' , 'weddwe11222dwedd');
+INSERT INTO X_user_flw_room VALUES('mklsmklsmklsmkls', 'ffffffffffffffff' , 'nmmmnmmmnmmmnmmm');
+INSERT INTO X_user_flw_room VALUES('asdfasdfasdfasdf', 'qqwwqqwwqqwwqqww' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('opopopopopopopop', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
