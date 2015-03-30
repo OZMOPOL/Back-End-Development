@@ -1,6 +1,6 @@
 /*** LET THERE BE DATABASE ***/
 /* USE ozmoPol; */
-
+/*PRELIMINARY SECURITY FOR DATABASE, I.e. injection protection */
 /* Day #1: Let there be  Tables */
 
 DROP TABLE IF EXISTS X_user_flw_user;
