@@ -6,7 +6,6 @@
 package ozmo;
 
 /**
- *
  * @author Frt
  */
 public class ozmoMain {
