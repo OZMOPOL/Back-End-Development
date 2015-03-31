@@ -154,6 +154,14 @@ INSERT INTO User VALUES
 
 /* And Posts started to populate Gods Hall. */
 
+INSERT INTO Post VALUES ('mmlkmmlkmmlkmmlk' , 'Conference deadline!' , 'The IEEE conference deadline is extented for 1 wee' , NULL, NULL, 'alcnalcnalcnalcn' , 'zxcvzxcvzxcvzxcv' , NULL);
+
+INSERT INTO Post VALUES ('ppaappaappaappaa' , 'Free chai latte' , 'You may come to student services to get a free card as a gift for drinking cafe latte in Nero, CHeeerS!' , NULL, NULL, 'bssdbssdbssdbssd' , 'nmmmnmmmnmmmnmmm' , NULL);
+
+INSERT INTO Post VALUES ('portportportport' , 'Shuttle android app' , 'Do you have any idea about why the app is not working anymore, I dont have access to hours?' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+
+INSERT INTO Post VALUES ('avnmavnmavnmavnm' , 'Food Quality!' , 'The dishes in dining hall is not edible what is going on? I can not anything there anymore!' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+
 INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card where I might ask for lost stuff?' , NULL, NULL, 'urb49ne9bek30mme' , 'weddwe11222dwedd' , NULL);
 
 INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);

@@ -1,6 +1,6 @@
 /*** LET THERE BE DATABASE ***/
 /* USE ozmoPol; */
-
+/*PRELIMINARY SECURITY FOR DATABASE, I.e. injection protection */
 /* Day #1: Let there be  Tables */
 
 DROP TABLE IF EXISTS X_user_flw_user;
@@ -239,7 +239,7 @@ INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiy
 INSERT INTO X_user_flw_room VALUES('sbnmsbnmsbnmsbnm', 'ffffffffffffffff' , 'weddwe11222dwedd');
 INSERT INTO X_user_flw_room VALUES('mklsmklsmklsmkls', 'ffffffffffffffff' , 'nmmmnmmmnmmmnmmm');
 INSERT INTO X_user_flw_room VALUES('asdfasdfasdfasdf', 'qqwwqqwwqqwwqqww' , 'uiybewg4jh3g4gbs');
-INSERT INTO X_user_flw_room VALUES('opopopopopopopop', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('opopopopopopopop', 'alcnalcnalcnalcn' , 'uiybewg4jh3g4gbs');
 
 /* And people can follow other people as well, Intresting!! */
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
