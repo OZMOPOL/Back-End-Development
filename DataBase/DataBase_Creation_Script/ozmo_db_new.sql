@@ -24,6 +24,7 @@ user_name varchar(32) NOT NULL UNIQUE,
 user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
+register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 PRIMARY KEY (pk_user_id)
 );
