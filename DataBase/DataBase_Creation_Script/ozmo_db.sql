@@ -154,6 +154,8 @@ INSERT INTO User VALUES
 
 /* And Posts started to populate Gods Hall. */
 
+
+
 INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card where I might ask for lost stuff?' , NULL, NULL, 'urb49ne9bek30mme' , 'weddwe11222dwedd' , NULL);
 
 INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);
@@ -163,7 +165,19 @@ DO SLEEP(1);
 INSERT INTO Post VALUES
 ('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
 
+INSERT INTO Post VALUES ('mmlkmmlkmmlkmmlk' , 'Conference deadline!' , 'The IEEE conference deadline is extented for 1 wee' , NULL, NULL, 'alcnalcnalcnalcn' , 'zxcvzxcvzxcvzxcv' , NULL);
+
+INSERT INTO Post VALUES ('ppaappaappaappaa' , 'Free chai latte' , 'You may come to student services to get a free card as a gift for drinking cafe latte in Nero, CHeeerS!' , NULL, NULL, 'bssdbssdbssdbssd' , 'nmmmnmmmnmmmnmmm' , NULL);
+
+INSERT INTO Post VALUES ('portportportport' , 'Shuttle android app' , 'Do you have any idea about why the app is not working anymore, I dont have access to hours?' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+
+INSERT INTO Post VALUES ('avnmavnmavnmavnm' , 'Food Quality!' , 'The dishes in dining hall is not edible what is going on? I can not anything there anymore!' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+
 DO SLEEP(2);
+
+INSERT INTO Post VALUES ('plsdplsdplsdplsd' , 'Opeth Concert' , 'Is there anyone to join us for the concert? Ther are in Istanbul YaaaY!' , NULL, NULL, 'alcnalcnalcnalcn' , 'ju3hyd2762uytgds' , NULL);
+
+INSERT INTO Post VALUES ('ponoponoponopono' , 'Lana Del Ray ' , 'I would be happy if anyone share a high quality full album of hers with me ))' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'ju3hyd2762uytgds' , NULL);
 
 INSERT INTO Post VALUES
 ('lrncndhrkktnchw0', NULL, 'what time is the parteeey? ', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'jdu5oxnwmoylyedr' );
