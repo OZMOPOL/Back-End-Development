@@ -150,7 +150,10 @@ INSERT INTO User VALUES
 ('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1'),
 ('bssdbssdbssdbssd', 'noho', 'bssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssd', 'noho@ozu.edu.tr', '1001-01-04','1'),
 ('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1'),
-('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25','1') ;
+('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25','1'),
+('fgfufgfufgfufgfu', 'arya', 'fgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfu', 'arya@ozu.edu.tr', '1245-04-07', '1'),
+('hwhshwhshwhshwhs', 'cersi','hwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhs', 'cersi@ozu.edu.tr', '1235-10-12','1' )
+ ;
 
 /* And Posts started to populate Gods Hall. */
 
@@ -167,6 +170,9 @@ INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card
 INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);
 
 DO SLEEP(1);
+INSERT INTO Post VALUES ('plsdplsdplsdplsd' , 'Opeth Concert' , 'Is there anyone to join us for the concert? Ther are in Istanbul YaaaY!' , NULL, NULL, 'alcnalcnalcnalcn' , 'ju3hyd2762uytgds' , NULL);
+
+INSERT INTO Post VALUES ('ponoponoponopono' , 'Lana Del Ray ' , 'I would be happy if anyone share a high quality full album of hers with me ))' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'ju3hyd2762uytgds' , NULL);
 
 INSERT INTO Post VALUES
 ('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
@@ -241,7 +247,7 @@ UPDATE Vote SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
 /* So everyone can follow Rooms  */
 
 INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
-INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid', 'rakhsd2775632g4s');
 INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('sbnmsbnmsbnmsbnm', 'ffffffffffffffff' , 'weddwe11222dwedd');
