@@ -2,8 +2,7 @@
 CREATE DATABASE IF NOT EXISTS ozmoPol;
 
 /*... and let a Jedi control it*/
-CREATE USER IF NOT EXISTS 'ozmoJedi'@'localhost' IDENTIFIED BY 'ozmoPolJedi';
-GRANT ALL ON ozmoPol.* TO 'ozmoJedi'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON ozmoPol.* TO 'ozmoJedi'@'localhost' IDENTIFIED BY 'ozmoPolJedi' WITH GRANT OPTION;
 
 /* Day #1: Let there be  Tables */
 USE ozmoPol;
