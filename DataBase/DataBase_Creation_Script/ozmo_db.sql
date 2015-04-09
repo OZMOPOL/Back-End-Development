@@ -1,5 +1,6 @@
 /*** LET THERE BE DATABASE ***/
-/* USE ozmoPol; */
+CREATE DATABASE IF NOT EXISTS ozmoPol;
+USE ozmoPol;
 /*PRELIMINARY SECURITY FOR DATABASE, I.e. injection protection */
 /* Day #1: Let there be  Tables */
 
