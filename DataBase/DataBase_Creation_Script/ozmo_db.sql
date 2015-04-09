@@ -1,8 +1,12 @@
 /*** LET THERE BE DATABASE ***/
 CREATE DATABASE IF NOT EXISTS ozmoPol;
-USE ozmoPol;
-/*PRELIMINARY SECURITY FOR DATABASE, I.e. injection protection */
+
+/*... and let a Jedi control it*/
+CREATE USER IF NOT EXISTS 'ozmoJedi'@'localhost' IDENTIFIED BY 'ozmoPolJedi';
+GRANT ALL ON ozmoPol.* TO 'ozmoJedi'@'localhost' WITH GRANT OPTION;
+
 /* Day #1: Let there be  Tables */
+USE ozmoPol;
 
 DROP TABLE IF EXISTS X_user_flw_user;
 DROP TABLE IF EXISTS X_user_flw_room;
