@@ -4,6 +4,7 @@
  */
 package service;
 
+import OzClass.OzResult;
 import com.ozmo.ent.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -34,14 +35,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @POST
     @Override
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({"application/json"})
     public void create(User entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({"application/json"})
     public void edit(User entity) {
         super.edit(entity);
     }
@@ -54,21 +55,21 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public User find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<User> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -83,6 +84,62 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @java.lang.Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    
+    ////////////////////
+    // CUSTOM METHODS //
+    ////////////////////
+    
+        @GET
+    @Path("checkLogin/{user}:{pass}")
+    @Produces({"application/json"})
+    
+    public OzResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
+        
+        List<User> users= em.createNamedQuery("User.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
+        OzResult res=new OzResult();
+
+        
+        try {
+        if (users.isEmpty()) { //NO USER FOUND
+            res.title="NOK";
+            res.message="Username-Password combination returned no result";
+                
+        }
+        else{
+            
+            if(users.size()==1){ //USER FOUND
+                
+                if (users.get(0).getUserStatus() == "0"){ //USER NOT ACTIVATED YET 
+                    res.title="NOK";
+                    res.message="User account not active";
+                }
+                else if(users.get(0).getUserStatus() == "1"){ //BINGO!
+                    res.title="OK";
+                    res.message="Active User Found";
+                    res.matchedUser = users.get(0);
+                    
+                } else {
+                    res.title="NOK";
+                    res.message="Inconsistent Database, User Status flag corrupted";
+                }
+                }
+            
+            else{
+            res.title="NOK";
+            res.message="Inconsistent Database, More than 1 users found. Check Database Enteries";
+            }
+            
+        }
+        
+        } catch (Exception e) {
+            res.title = "NOK";
+            res.message=e.getMessage();
+        }
+        return res;
+        
+
     }
     
 }

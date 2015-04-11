@@ -1,4 +1,4 @@
-/*** LET THERE BE DATABASE ***/
+﻿/*** LET THERE BE DATABASE ***/
 CREATE DATABASE IF NOT EXISTS ozmoPol;
 
 /*... and let a Jedi control it*/
@@ -22,7 +22,7 @@ CREATE TABLE Room
 pk_room_id varchar(32) UNIQUE NOT NULL,
 room_title varchar(64) NOT NULL UNIQUE,
 room_desc text,
-room_status varchar(32) NOT NULL,
+room_status bit NOT NULL DEFAULT 1,
 
 PRIMARY KEY (pk_room_id)
 );
@@ -36,7 +36,7 @@ user_name varchar(32) NOT NULL UNIQUE,
 user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
-user_status varchar(32) NOT NULL,
+user_status bit NOT NULL DEFAULT 0,
 
 PRIMARY KEY (pk_user_id)
 );
@@ -49,9 +49,11 @@ post_title varchar(256),
 post_content text NOT NULL,
 post_c_date DATETIME ,
 post_e_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+post_status bit NOT NULL DEFAULT 1,
 fk_post_user_id varchar(32) NOT NULL,
 fk_post_room_id varchar(32) NOT NULL,
 fk_post_prnt_id varchar(32),
+
 
 PRIMARY KEY (pk_post_id),
 
@@ -161,68 +163,68 @@ INSERT INTO User VALUES
 
 /* And Posts started to populate Gods Hall. */
 
-INSERT INTO Post VALUES ('mmlkmmlkmmlkmmlk' , 'Conference deadline!' , 'The IEEE conference deadline is extented for 1 wee' , NULL, NULL, 'alcnalcnalcnalcn' , 'zxcvzxcvzxcvzxcv' , NULL);
+INSERT INTO Post VALUES ('mmlkmmlkmmlkmmlk' , 'Conference deadline!' , 'The IEEE conference deadline is extented for 1 wee' , NULL, NULL, NULL, 'alcnalcnalcnalcn' , 'zxcvzxcvzxcvzxcv' , NULL);
 
-INSERT INTO Post VALUES ('ppaappaappaappaa' , 'Free chai latte' , 'You may come to student services to get a free card as a gift for drinking cafe latte in Nero, CHeeerS!' , NULL, NULL, 'bssdbssdbssdbssd' , 'nmmmnmmmnmmmnmmm' , NULL);
+INSERT INTO Post VALUES ('ppaappaappaappaa' , 'Free chai latte' , 'You may come to student services to get a free card as a gift for drinking cafe latte in Nero, CHeeerS!' , NULL, NULL, NULL, 'bssdbssdbssdbssd' , 'nmmmnmmmnmmmnmmm' , NULL);
 
-INSERT INTO Post VALUES ('portportportport' , 'Shuttle android app' , 'Do you have any idea about why the app is not working anymore, I dont have access to hours?' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+INSERT INTO Post VALUES ('portportportport' , 'Shuttle android app' , 'Do you have any idea about why the app is not working anymore, I dont have access to hours?' , NULL, NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
 
-INSERT INTO Post VALUES ('avnmavnmavnmavnm' , 'Food Quality!' , 'The dishes in dining hall is not edible what is going on? I can not anything there anymore!' , NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
+INSERT INTO Post VALUES ('avnmavnmavnmavnm' , 'Food Quality!' , 'The dishes in dining hall is not edible what is going on? I can not anything there anymore!' , NULL, NULL, NULL, 'bssdbssdbssdbssd' , 'weddwe11222dwedd' , NULL);
 
-INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card where I might ask for lost stuff?' , NULL, NULL, 'urb49ne9bek30mme' , 'weddwe11222dwedd' , NULL);
+INSERT INTO Post VALUES ('vllovllovllovllo' , 'Emergency!!' , 'I lost my ID card where I might ask for lost stuff?' , NULL, NULL, NULL,  'urb49ne9bek30mme' , 'weddwe11222dwedd' , NULL);
 
-INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);
+INSERT INTO Post VALUES ('bvnmbvnmbvnmbvnm' , 'Free Pizza party!' , 'There is gathering of machine learning researchers, is there anyone know about details and the Pizza!' , NULL, NULL, NULL, 'qqwwqqwwqqwwqqww' , 'weddwe11222dwedd' , NULL);
 
 DO SLEEP(1);
-INSERT INTO Post VALUES ('plsdplsdplsdplsd' , 'Opeth Concert' , 'Is there anyone to join us for the concert? Ther are in Istanbul YaaaY!' , NULL, NULL, 'alcnalcnalcnalcn' , 'ju3hyd2762uytgds' , NULL);
+INSERT INTO Post VALUES ('plsdplsdplsdplsd' , 'Opeth Concert' , 'Is there anyone to join us for the concert? Ther are in Istanbul YaaaY!' , NULL, NULL, NULL,  'alcnalcnalcnalcn' , 'ju3hyd2762uytgds' , NULL);
 
-INSERT INTO Post VALUES ('ponoponoponopono' , 'Lana Del Ray ' , 'I would be happy if anyone share a high quality full album of hers with me ))' , NULL, NULL, 'qqwwqqwwqqwwqqww' , 'ju3hyd2762uytgds' , NULL);
+INSERT INTO Post VALUES ('ponoponoponopono' , 'Lana Del Ray ' , 'I would be happy if anyone share a high quality full album of hers with me ))' , NULL, NULL, NULL,  'qqwwqqwwqqwwqqww' , 'ju3hyd2762uytgds' , NULL);
 
 INSERT INTO Post VALUES
-('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
+('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL NULL,  ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
 
 DO SLEEP(2);
 
 INSERT INTO Post VALUES
-('lrncndhrkktnchw0', NULL, 'what time is the parteeey? ', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'jdu5oxnwmoylyedr' );
+('lrncndhrkktnchw0', NULL, 'what time is the parteeey? ', NULL , NULL, NULL, 'bjkweshgk48y93s4', 'rrhysd276185jstf', 'jdu5oxnwmoylyedr' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL ,'euritolfkjnndjfj', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+('hhegdteuiwoodadr', NULL, 'anytime after 8 is fine... before 6 in the next morning ofcourse (6_6) ', NULL , NULL , NULL, 'euritolfkjnndjfj', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('h1e322eui322da1r', 'Hey every1!', 'anybody there???! ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
+('h1e322eui322da1r', 'Hey every1!', 'anybody there???! ', NULL , NULL , NULL, 'urb49ne9bek30mme', 'rrhysd276185jstf', 'lrncndhrkktnchw0' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('krt74yehancleor8', NULL, 'awesome! count me in xoxo ', NULL , NULL ,'bjksefkhjw49ub43', 'rrhysd276185jstf', 'jdu5oxnwmoylyedr' );
+('krt74yehancleor8', NULL, 'awesome! count me in xoxo ', NULL , NULL , NULL, 'bjksefkhjw49ub43', 'rrhysd276185jstf', 'jdu5oxnwmoylyedr' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('63yehcldr24qy3er', NULL, 'woohoo... guess whos da DJ :D ', NULL , NULL ,'urb49ne9bek30mme', 'rrhysd276185jstf', 'krt74yehancleor8' );
+('63yehcldr24qy3er', NULL, 'woohoo... guess whos da DJ :D ', NULL , NULL , NULL, 'urb49ne9bek30mme', 'rrhysd276185jstf', 'krt74yehancleor8' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('blablabla8i3teh6', NULL, 'Probably maybe definitely ADAM hahahaaa', NULL , NULL ,'bjksefkhjw49ub43', 'rrhysd276185jstf', '63yehcldr24qy3er' );
+('blablabla8i3teh6', NULL, 'Probably maybe definitely ADAM hahahaaa', NULL , NULL , NULL, 'bjksefkhjw49ub43', 'rrhysd276185jstf', '63yehcldr24qy3er' );
 
 INSERT INTO Post VALUES
-('polishnfnfojndkn', NULL, '...is it Adam?!!', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', '63yehcldr24qy3er' );
+('polishnfnfojndkn', NULL, '...is it Adam?!!', NULL , NULL , NULL, 'bjkweshgk48y93s4', 'rrhysd276185jstf', '63yehcldr24qy3er' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('uejd[rotlzbah17f', NULL, 'Hahahaha who else could it be!', NULL , NULL ,'bjkweshgk48y93s4', 'rrhysd276185jstf', 'polishnfnfojndkn' );
+('uejd[rotlzbah17f', NULL, 'Hahahaha who else could it be!', NULL , NULL , NULL, 'bjkweshgk48y93s4', 'rrhysd276185jstf', 'polishnfnfojndkn' );
 
 DO SLEEP(1);
 
 INSERT INTO Post VALUES
-('owieowieowieowie', NULL, 'Hahahaha what the hell is going on!', NULL , NULL ,'euritolfkjnndjfj', 'weddweddweddwedd', 'polishnfnfojndkn' );
+('owieowieowieowie', NULL, 'Hahahaha what the hell is going on!', NULL , NULL , NULL, 'euritolfkjnndjfj', 'weddweddweddwedd', 'polishnfnfojndkn' );
 
 /* And people started Voting for Posts... and it was all good */
 

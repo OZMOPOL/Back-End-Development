@@ -9,9 +9,12 @@ package OzClass;
  *
  * @author amind
  */
+
+import com.ozmo.ent.User;
 public class OzResult {
    
     public String title;
-    public String details;
+    public String message;
+    public User matchedUser = new User();
     
 }
