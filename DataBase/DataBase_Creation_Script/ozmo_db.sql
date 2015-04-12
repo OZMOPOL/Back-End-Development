@@ -22,7 +22,7 @@ CREATE TABLE Room
 pk_room_id varchar(32) UNIQUE NOT NULL,
 room_title varchar(64) NOT NULL UNIQUE,
 room_desc text,
-room_status bit NOT NULL DEFAULT 1,
+room_status bit DEFAULT 1,
 
 PRIMARY KEY (pk_room_id)
 );
@@ -36,7 +36,7 @@ user_name varchar(32) NOT NULL UNIQUE,
 user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
-user_status bit NOT NULL DEFAULT 0,
+user_status bit DEFAULT 0,
 
 PRIMARY KEY (pk_user_id)
 );
@@ -49,7 +49,7 @@ post_title varchar(256),
 post_content text NOT NULL,
 post_c_date DATETIME ,
 post_e_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-post_status bit NOT NULL DEFAULT 1,
+post_status bit DEFAULT 1,
 fk_post_user_id varchar(32) NOT NULL,
 fk_post_room_id varchar(32) NOT NULL,
 fk_post_prnt_id varchar(32),
@@ -181,7 +181,7 @@ INSERT INTO Post VALUES ('plsdplsdplsdplsd' , 'Opeth Concert' , 'Is there anyone
 INSERT INTO Post VALUES ('ponoponoponopono' , 'Lana Del Ray ' , 'I would be happy if anyone share a high quality full album of hers with me ))' , NULL, NULL, NULL,  'qqwwqqwwqqwwqqww' , 'ju3hyd2762uytgds' , NULL);
 
 INSERT INTO Post VALUES
-('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL NULL,  ,'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
+('jdu5oxnwmoylyedr', 'Party at ma haus :D everyone invited... woop woop!!!', 'if you have nothin to do and passing by kadikoy, jus knock n join us. its 24 falan st. no 29. BYOB!!!', NULL , NULL , NULL, 'urb49ne9bek30mme', 'rrhysd276185jstf', NULL );
 
 DO SLEEP(2);
 
