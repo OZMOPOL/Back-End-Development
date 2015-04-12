@@ -62,21 +62,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return super.find(id);
     }
     
-     @GET
-    @Path("getUserByUserName/{userName}")
-    @Produces({  "application/json"})
-    public User getUserByUserName(@PathParam("userName") String userName) {
-        User user=(User) em.createNamedQuery("User.findByUserName").setParameter("userName", userName).getSingleResult();
-        return user;
-    }
 
     @GET
     @Path("checkLogin/{user}/pass/{pass}")
-    @Produces({  "application/json"})
+    @Produces({"application/json"})
     
     public OzResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
         
-        List<User> users= em.createNamedQuery("checkLogin").setParameter("userName", user).setParameter("userPass", pass).getResultList();
+        List<User> users= em.createNamedQuery("OzUser.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
         OzResult res=new OzResult();
         if (users.size()==0) {
             res.title="NOK";
