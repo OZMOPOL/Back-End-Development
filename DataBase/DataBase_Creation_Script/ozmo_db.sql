@@ -37,6 +37,7 @@ user_pass char(64) NOT NULL,
 user_email varchar(32) NOT NULL UNIQUE,
 user_bday date,
 user_status bit DEFAULT 0,
+user_actHash char(128) NOT NULL,
 
 PRIMARY KEY (pk_user_id)
 );
@@ -148,17 +149,17 @@ INSERT INTO Room VALUES
 
 /* So did Users... */
 INSERT INTO User VALUES
-('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01','1'),
-('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01','1'),
-('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01','1'),
-('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01','1'),
-('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01','1'),
-('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1'),
-('bssdbssdbssdbssd', 'noho', 'bssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssd', 'noho@ozu.edu.tr', '1001-01-04','1'),
-('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1'),
-('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25','1'),
-('fgfufgfufgfufgfu', 'arya', 'fgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfu', 'arya@ozu.edu.tr', '1245-04-07', '1'),
-('hwhshwhshwhshwhs', 'cersi','hwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhs', 'cersi@ozu.edu.tr', '1235-10-12','1' )
+('ffffffffffffffff', 'GOD', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'god@ozu.edu.tr', '1000-01-01','1', 'hash'),
+('bjkweshgk48y93s4', 'Mosey', 'bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4bjkweshgk48y93s4', 'mosey@ozu.edu.tr', '1100-01-01','1', 'hash'),
+('urb49ne9bek30mme', 'Abey', 'urb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mmeurb49ne9bek30mme', 'abey@ozu.edu.tr', '1000-01-01','1', 'hash'),
+('bjksefkhjw49ub43', 'Jesey', 'bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43', 'jesey@ozu.edu.tr', '1200-01-01','1', 'hash'),
+('geidgeidgeidgeid', 'Mary', 'geidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeidgeid', 'mary@ozu.edu.tr', '1150-01-01','1', 'hash'),
+('euritolfkjnndjfj', 'Momo', 'iuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsosiuryfhnvjmsklsos', 'Momo@ozu.edu.tr', '1004-01-01','1', 'hash'),
+('bssdbssdbssdbssd', 'noho', 'bssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssdbssd', 'noho@ozu.edu.tr', '1001-01-04','1', 'hash'),
+('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09','1', 'hash'),
+('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25','1', 'hash'),
+('fgfufgfufgfufgfu', 'arya', 'fgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfu', 'arya@ozu.edu.tr', '1245-04-07', '1', 'hash'),
+('hwhshwhshwhshwhs', 'cersi','hwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhs', 'cersi@ozu.edu.tr', '1235-10-12','1' , 'hash')
  ;
 
 /* And Posts started to populate Gods Hall. */
