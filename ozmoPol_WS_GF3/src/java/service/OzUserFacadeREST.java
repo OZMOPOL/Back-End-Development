@@ -8,7 +8,7 @@ import java.util.UUID;
 import UIClass.GoogleMail;
 import UIClass.UIResult;
 import com.ozmo.ent.OzUser;
-import java.util.List;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import java.util.List;
 
 /**
  *
@@ -92,6 +93,64 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     // CUSTOM METHODS //
     ////////////////////
     
+    private UIResult userExists(String property, String value){
+        UIResult res=new UIResult();
+        List<OzUser> users = new ArrayList<OzUser>();
+        
+        
+        if (property=="UserName" || property=="User Name" || property=="user name" || property=="username") {
+            users= em.createNamedQuery("OzUser.findByUserName").setParameter("userName", value).getResultList();
+        } else 
+            if(property=="UserEmail" || property=="Email" || property=="email" || property=="userEmail"){
+            users= em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", value).getResultList();
+        } else 
+            if(property=="UserID" || property=="Userid" || property=="UserId" || property=="id" || property=="ID"){
+            users= em.createNamedQuery("OzUser.findByPkUserId").setParameter("pkUserId", value).getResultList();
+        } else {
+                res.title="NOK";
+                res.message="Wrong property requested. Use either UserName, UserEmail or UserID property names.";
+            
+            }
+        
+        try {
+        if (users.isEmpty()) { //NO USER FOUND
+            res.title="NOK";
+            res.message="No users found to have the indicated property value";
+                
+        }
+        else{
+            
+            if(users.size()==1){ //USER FOUND
+                
+                if (users.get(0).getUserStatus() == false){ //USER NOT ACTIVATED YET 
+                    res.title="NOK";
+                    res.message="User account not active";
+                }
+                else if(users.get(0).getUserStatus() == true){ //BINGO!
+                    res.title="OK";
+                    res.message="Active User Found!";
+                                        
+                } else {
+                    res.title="NOK";
+                    res.message="Inconsistent Database, User Status flag corrupted";
+                }
+                }
+            
+            else{
+            res.title="NOK";
+            res.message="Inconsistent Database, More than 1 users found. Check Database Enteries";
+            }
+            
+        }
+        
+        } catch (Exception e) {
+            res.title = "NOK";
+            res.message=e.getMessage();
+        }
+        
+        return res;
+    }
+    
     
     @GET
     @Path("checkLogin/{user}/{pass}")
@@ -141,53 +200,53 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         
     }
     
-    @POST
-    @Path("signUp")
-    @Produces({"application/json"})
-    @Consumes({"application/json"})
-    public UIResult signUp(OzUser entity) {
-        UIResult res=new UIResult();
-
-        // WE SHOULD THINK ABOUT THIS A BIT  MORE FELLAS... WHO AM I TALKING TO ANYWAYS!
-            
-            List<OzUser> exUname= em.createNamedQuery("OzUser.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
-            List<OzUser> exEmail= em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", entity.getUserEmail()).getResultList();
-            
-            if (exUname.isEmpty() && exEmail.isEmpty()){
-            try {
-                String actHash = UUID.randomUUID().toString();
-                entity.setUseractHash(actHash);
-                super.create(entity);
-                GoogleMail gmail = new GoogleMail();
-                gmail.Send(entity.getUserEmail().toString(), actHash);
-                
-                res.title="OK";
-            }
-            catch (Exception e) {
-            res.title="NOK";
-            res.message=e.toString();
-            }
-            
-            }
-            else{
-                if (exEmail.size() == 1){
-                    res.title="NOK";
-                    res.message="Email address already exists";               
-                }else if (exUname.size() == 1){
-                    res.title="NOK";
-                    res.message="Username already exists";               
-                }else if (exUname.size() == 1 || exEmail.size() == 1){
-                    res.title="NOK";
-                    res.message="This Username-Email combination is already registered";
-                }else {
-                    res.title="NOK";
-                    res.message="Database Corrupted, More than one users already exist with this username-email";                
-                }
-            }
-            
-       
-        return res;
-    }
+//    @POST
+//    @Path("signUp")
+//    @Produces({"application/json"})
+//    @Consumes({"application/json"})
+//    public UIResult signUp(OzUser entity) {
+//        UIResult res=new UIResult();
+//
+//        // WE SHOULD THINK ABOUT THIS A BIT  MORE FELLAS... WHO AM I TALKING TO ANYWAYS!
+//            
+//            List<OzUser> exUname= em.createNamedQuery("OzUser.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
+//            List<OzUser> exEmail= em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", entity.getUserEmail()).getResultList();
+//            
+//            if (exUname.isEmpty() && exEmail.isEmpty()){
+//            try {
+//                String actHash = UUID.randomUUID().toString();
+//                entity.setUseractHash(actHash);
+//                super.create(entity);
+//                GoogleMail gmail = new GoogleMail();
+//                gmail.Send(entity.getUserEmail().toString(), actHash);
+//                
+//                res.title="OK";
+//            }
+//            catch (Exception e) {
+//            res.title="NOK";
+//            res.message=e.toString();
+//            }
+//            
+//            }
+//            else{
+//                if (exEmail.size() == 1){
+//                    res.title="NOK";
+//                    res.message="Email address already exists";               
+//                }else if (exUname.size() == 1){
+//                    res.title="NOK";
+//                    res.message="Username already exists";               
+//                }else if (exUname.size() == 1 || exEmail.size() == 1){
+//                    res.title="NOK";
+//                    res.message="This Username-Email combination is already registered";
+//                }else {
+//                    res.title="NOK";
+//                    res.message="Database Corrupted, More than one users already exist with this username-email";                
+//                }
+//            }
+//            
+//       
+//        return res;
+//    }
     
     
     @GET
@@ -239,9 +298,35 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                     res.message="Database Corrupted, More than one users already exist with this username-email";                
                 }
             }
-            
        
         return res;
     }
+    
+    @POST
+    @Path("uprofile")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public UIResult getOtherUserProfile(OzUser user) {
+        UIResult res=new UIResult();
+        
+        res = userExists("UserID",user.getPkUserId());
+        
+        if (res.title.equals("OK")){
+            
+            try {
+                // construct user profile from UIUser class
+                //return UIUser profile json object
+
+            }
+            catch (Exception e) {
+            res.title="NOK";
+            res.message=e.toString();
+            }
+            
+        }
+        return res;
+        
+        }
+
         
 }
