@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package OzClass;
+package UIClass;
 
-import com.ozmo.ent.Room;
+import com.ozmo.ent.OzUser;
 
 /**
  *
  * @author amind
  */
-public class OzRoom extends Room{
+public class UIUser extends OzUser{
     
 }

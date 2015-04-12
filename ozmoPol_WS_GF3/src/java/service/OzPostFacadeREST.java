@@ -4,7 +4,7 @@
  */
 package service;
 
-import com.ozmo.ent.Post;
+import com.ozmo.ent.OzPost;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,26 +23,26 @@ import javax.ws.rs.Produces;
  * @author sav
  */
 @Stateless
-@Path("com.ozmo.ent.post")
-public class PostFacadeREST extends AbstractFacade<Post> {
+@Path("com.ozmo.ent.ozpost")
+public class OzPostFacadeREST extends AbstractFacade<OzPost> {
     @PersistenceContext(unitName = "ozmoPol_WS_GF3PU")
     private EntityManager em;
 
-    public PostFacadeREST() {
-        super(Post.class);
+    public OzPostFacadeREST() {
+        super(OzPost.class);
     }
 
     @POST
     @Override
     @Consumes({"application/json"})
-    public void create(Post entity) {
+    public void create(OzPost entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/json"})
-    public void edit(Post entity) {
+    public void edit(OzPost entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class PostFacadeREST extends AbstractFacade<Post> {
     @GET
     @Path("{id}")
     @Produces({"application/json"})
-    public Post find(@PathParam("id") String id) {
+    public OzPost find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/json"})
-    public List<Post> findAll() {
+    public List<OzPost> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/json"})
-    public List<Post> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<OzPost> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

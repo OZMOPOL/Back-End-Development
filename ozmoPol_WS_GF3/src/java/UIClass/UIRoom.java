@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package OzClass;
+package UIClass;
+
+import com.ozmo.ent.OzRoom;
 
 /**
  *
  * @author amind
  */
-
-import com.ozmo.ent.User;
-public class OzResult {
-   
-    public String title;
-    public String message;
-    public User matchedUser = new User();
+public class UIRoom extends OzRoom{
     
 }

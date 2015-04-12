@@ -28,18 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sav
  */
 @Entity
-@Table(name = "User")
+@Table(name = "ozUser")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByPkUserId", query = "SELECT u FROM User u WHERE u.pkUserId = :pkUserId"),
-    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
-    @NamedQuery(name = "User.findByUserPass", query = "SELECT u FROM User u WHERE u.userPass = :userPass"),
-    @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail"),
-    @NamedQuery(name = "User.findByUserBday", query = "SELECT u FROM User u WHERE u.userBday = :userBday"),
-    @NamedQuery(name = "User.checkAuthStatus", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.userPass = :userPass"),
-    @NamedQuery(name = "User.findByUserStatus", query = "SELECT u FROM User u WHERE u.userStatus = :userStatus")})
-public class User implements Serializable {
+    @NamedQuery(name = "OzUser.findAll", query = "SELECT o FROM OzUser o"),
+    @NamedQuery(name = "OzUser.findByPkUserId", query = "SELECT o FROM OzUser o WHERE o.pkUserId = :pkUserId"),
+    @NamedQuery(name = "OzUser.findByUserName", query = "SELECT o FROM OzUser o WHERE o.userName = :userName"),
+    @NamedQuery(name = "OzUser.findByUserPass", query = "SELECT o FROM OzUser o WHERE o.userPass = :userPass"),
+    @NamedQuery(name = "OzUser.findByUserEmail", query = "SELECT o FROM OzUser o WHERE o.userEmail = :userEmail"),
+    @NamedQuery(name = "OzUser.findByUserBday", query = "SELECT o FROM OzUser o WHERE o.userBday = :userBday"),
+    @NamedQuery(name = "OzUser.findByUserStatus", query = "SELECT o FROM OzUser o WHERE o.userStatus = :userStatus"),
+    @NamedQuery(name = "OzUser.findByUseractHash", query = "SELECT o FROM OzUser o WHERE o.useractHash = :useractHash"),
+    @NamedQuery(name = "User.checkAuthStatus", query = "SELECT u FROM OzUser u WHERE u.userName = :userName AND u.userPass = :userPass")    
+})
+public class OzUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -65,35 +67,37 @@ public class User implements Serializable {
     @Column(name = "user_bday")
     @Temporal(TemporalType.DATE)
     private Date userBday;
+    @Column(name = "user_status")
+    private Boolean userStatus;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
-    @Column(name = "user_status")
-    private String userStatus;
+    @Size(min = 1, max = 128)
+    @Column(name = "user_actHash")
+    private String useractHash;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomuserid")
     private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostUserId")
-    private Collection<Post> postCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVoteUserId")
-    private Collection<Vote> voteCollection;
+    private Collection<OzPost> ozPostCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwduserid")
     private Collection<Xuserflwuser> xuserflwuserCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXuserflwruserid")
     private Collection<Xuserflwuser> xuserflwuserCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkVoteUserId")
+    private Collection<OzVote> ozVoteCollection;
 
-    public User() {
+    public OzUser() {
     }
 
-    public User(String pkUserId) {
+    public OzUser(String pkUserId) {
         this.pkUserId = pkUserId;
     }
 
-    public User(String pkUserId, String userName, String userPass, String userEmail, String userStatus) {
+    public OzUser(String pkUserId, String userName, String userPass, String userEmail, String useractHash) {
         this.pkUserId = pkUserId;
         this.userName = userName;
         this.userPass = userPass;
         this.userEmail = userEmail;
-        this.userStatus = userStatus;
+        this.useractHash = useractHash;
     }
 
     public String getPkUserId() {
@@ -136,12 +140,20 @@ public class User implements Serializable {
         this.userBday = userBday;
     }
 
-    public String getUserStatus() {
+    public Boolean getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(String userStatus) {
+    public void setUserStatus(Boolean userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getUseractHash() {
+        return useractHash;
+    }
+
+    public void setUseractHash(String useractHash) {
+        this.useractHash = useractHash;
     }
 
     @XmlTransient
@@ -154,21 +166,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Collection<OzPost> getOzPostCollection() {
+        return ozPostCollection;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
-    }
-
-    @XmlTransient
-    public Collection<Vote> getVoteCollection() {
-        return voteCollection;
-    }
-
-    public void setVoteCollection(Collection<Vote> voteCollection) {
-        this.voteCollection = voteCollection;
+    public void setOzPostCollection(Collection<OzPost> ozPostCollection) {
+        this.ozPostCollection = ozPostCollection;
     }
 
     @XmlTransient
@@ -189,6 +192,15 @@ public class User implements Serializable {
         this.xuserflwuserCollection1 = xuserflwuserCollection1;
     }
 
+    @XmlTransient
+    public Collection<OzVote> getOzVoteCollection() {
+        return ozVoteCollection;
+    }
+
+    public void setOzVoteCollection(Collection<OzVote> ozVoteCollection) {
+        this.ozVoteCollection = ozVoteCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -199,10 +211,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof OzUser)) {
             return false;
         }
-        User other = (User) object;
+        OzUser other = (OzUser) object;
         if ((this.pkUserId == null && other.pkUserId != null) || (this.pkUserId != null && !this.pkUserId.equals(other.pkUserId))) {
             return false;
         }
@@ -211,7 +223,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ozmo.ent.User[ pkUserId=" + pkUserId + " ]";
+        return "com.ozmo.ent.OzUser[ pkUserId=" + pkUserId + " ]";
     }
     
 }

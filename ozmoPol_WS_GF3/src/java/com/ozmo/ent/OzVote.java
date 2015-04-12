@@ -23,13 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sav
  */
 @Entity
-@Table(name = "Vote")
+@Table(name = "ozVote")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Vote.findAll", query = "SELECT v FROM Vote v"),
-    @NamedQuery(name = "Vote.findByPkVoteId", query = "SELECT v FROM Vote v WHERE v.pkVoteId = :pkVoteId"),
-    @NamedQuery(name = "Vote.findByVoteValue", query = "SELECT v FROM Vote v WHERE v.voteValue = :voteValue")})
-public class Vote implements Serializable {
+    @NamedQuery(name = "OzVote.findAll", query = "SELECT o FROM OzVote o"),
+    @NamedQuery(name = "OzVote.findByPkVoteId", query = "SELECT o FROM OzVote o WHERE o.pkVoteId = :pkVoteId"),
+    @NamedQuery(name = "OzVote.findByVoteValue", query = "SELECT o FROM OzVote o WHERE o.voteValue = :voteValue")})
+public class OzVote implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,15 +41,15 @@ public class Vote implements Serializable {
     private Boolean voteValue;
     @JoinColumn(name = "fk_vote_post_id", referencedColumnName = "pk_post_id")
     @ManyToOne(optional = false)
-    private Post fkVotePostId;
+    private OzPost fkVotePostId;
     @JoinColumn(name = "fk_vote_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
-    private User fkVoteUserId;
+    private OzUser fkVoteUserId;
 
-    public Vote() {
+    public OzVote() {
     }
 
-    public Vote(String pkVoteId) {
+    public OzVote(String pkVoteId) {
         this.pkVoteId = pkVoteId;
     }
 
@@ -69,19 +69,19 @@ public class Vote implements Serializable {
         this.voteValue = voteValue;
     }
 
-    public Post getFkVotePostId() {
+    public OzPost getFkVotePostId() {
         return fkVotePostId;
     }
 
-    public void setFkVotePostId(Post fkVotePostId) {
+    public void setFkVotePostId(OzPost fkVotePostId) {
         this.fkVotePostId = fkVotePostId;
     }
 
-    public User getFkVoteUserId() {
+    public OzUser getFkVoteUserId() {
         return fkVoteUserId;
     }
 
-    public void setFkVoteUserId(User fkVoteUserId) {
+    public void setFkVoteUserId(OzUser fkVoteUserId) {
         this.fkVoteUserId = fkVoteUserId;
     }
 
@@ -95,10 +95,10 @@ public class Vote implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vote)) {
+        if (!(object instanceof OzVote)) {
             return false;
         }
-        Vote other = (Vote) object;
+        OzVote other = (OzVote) object;
         if ((this.pkVoteId == null && other.pkVoteId != null) || (this.pkVoteId != null && !this.pkVoteId.equals(other.pkVoteId))) {
             return false;
         }
@@ -107,7 +107,7 @@ public class Vote implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ozmo.ent.Vote[ pkVoteId=" + pkVoteId + " ]";
+        return "com.ozmo.ent.OzVote[ pkVoteId=" + pkVoteId + " ]";
     }
     
 }

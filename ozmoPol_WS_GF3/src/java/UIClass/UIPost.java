@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package OzClass;
+package UIClass;
 
-import com.ozmo.ent.Post;
-import com.ozmo.ent.Vote;
+import com.ozmo.ent.OzPost;
+import com.ozmo.ent.OzVote;
 import java.util.List;
 
 /**
  *
  * @author amind
  */
-public class OzPost extends Post{
-    private List<OzPost> comments;
+public class UIPost extends OzPost{
+    private List<UIPost> comments;
     private  int voteCount;
-    public Vote vote;
+    public OzVote vote;
     
-    public List<OzPost> getComments(){
+    public List<UIPost> getComments(){
         return this.comments;
     }
     
-    public void setComments(List<OzPost> comments){
+    public void setComments(List<UIPost> comments){
         this.comments=comments;
     }
     
@@ -33,11 +33,17 @@ public class OzPost extends Post{
         this.voteCount=voteCount;
     }
     
-    public Vote getVote(){
+    public OzVote getVote(){
         return this.vote;
     }
-    public void setVote(Vote vote){
+    public void setVote(OzVote vote){
         this.vote=vote;
     }
+    
+    
    
+    
+    
+     
+    
 }

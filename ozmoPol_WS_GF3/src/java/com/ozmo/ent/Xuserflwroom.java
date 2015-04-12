@@ -38,10 +38,10 @@ public class Xuserflwroom implements Serializable {
     private String pkuserXroomid;
     @JoinColumn(name = "fk_userXroom_room_id", referencedColumnName = "pk_room_id")
     @ManyToOne(optional = false)
-    private Room fkuserXroomroomid;
+    private OzRoom fkuserXroomroomid;
     @JoinColumn(name = "fk_userXroom_user_id", referencedColumnName = "pk_user_id")
     @ManyToOne(optional = false)
-    private User fkuserXroomuserid;
+    private OzUser fkuserXroomuserid;
 
     public Xuserflwroom() {
     }
@@ -58,19 +58,19 @@ public class Xuserflwroom implements Serializable {
         this.pkuserXroomid = pkuserXroomid;
     }
 
-    public Room getFkuserXroomroomid() {
+    public OzRoom getFkuserXroomroomid() {
         return fkuserXroomroomid;
     }
 
-    public void setFkuserXroomroomid(Room fkuserXroomroomid) {
+    public void setFkuserXroomroomid(OzRoom fkuserXroomroomid) {
         this.fkuserXroomroomid = fkuserXroomroomid;
     }
 
-    public User getFkuserXroomuserid() {
+    public OzUser getFkuserXroomuserid() {
         return fkuserXroomuserid;
     }
 
-    public void setFkuserXroomuserid(User fkuserXroomuserid) {
+    public void setFkuserXroomuserid(OzUser fkuserXroomuserid) {
         this.fkuserXroomuserid = fkuserXroomuserid;
     }
 

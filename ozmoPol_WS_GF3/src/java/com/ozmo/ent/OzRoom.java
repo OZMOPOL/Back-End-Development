@@ -26,14 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sav
  */
 @Entity
-@Table(name = "Room")
+@Table(name = "ozRoom")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
-    @NamedQuery(name = "Room.findByPkRoomId", query = "SELECT r FROM Room r WHERE r.pkRoomId = :pkRoomId"),
-    @NamedQuery(name = "Room.findByRoomTitle", query = "SELECT r FROM Room r WHERE r.roomTitle = :roomTitle"),
-    @NamedQuery(name = "Room.findByRoomStatus", query = "SELECT r FROM Room r WHERE r.roomStatus = :roomStatus")})
-public class Room implements Serializable {
+    @NamedQuery(name = "OzRoom.findAll", query = "SELECT o FROM OzRoom o"),
+    @NamedQuery(name = "OzRoom.findByPkRoomId", query = "SELECT o FROM OzRoom o WHERE o.pkRoomId = :pkRoomId"),
+    @NamedQuery(name = "OzRoom.findByRoomTitle", query = "SELECT o FROM OzRoom o WHERE o.roomTitle = :roomTitle"),
+    @NamedQuery(name = "OzRoom.findByRoomStatus", query = "SELECT o FROM OzRoom o WHERE o.roomStatus = :roomStatus")})
+public class OzRoom implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,27 +50,23 @@ public class Room implements Serializable {
     @Size(max = 65535)
     @Column(name = "room_desc")
     private String roomDesc;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 32)
     @Column(name = "room_status")
-    private String roomStatus;
+    private Boolean roomStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkuserXroomroomid")
     private Collection<Xuserflwroom> xuserflwroomCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPostRoomId")
-    private Collection<Post> postCollection;
+    private Collection<OzPost> ozPostCollection;
 
-    public Room() {
+    public OzRoom() {
     }
 
-    public Room(String pkRoomId) {
+    public OzRoom(String pkRoomId) {
         this.pkRoomId = pkRoomId;
     }
 
-    public Room(String pkRoomId, String roomTitle, String roomStatus) {
+    public OzRoom(String pkRoomId, String roomTitle) {
         this.pkRoomId = pkRoomId;
         this.roomTitle = roomTitle;
-        this.roomStatus = roomStatus;
     }
 
     public String getPkRoomId() {
@@ -97,11 +93,11 @@ public class Room implements Serializable {
         this.roomDesc = roomDesc;
     }
 
-    public String getRoomStatus() {
+    public Boolean getRoomStatus() {
         return roomStatus;
     }
 
-    public void setRoomStatus(String roomStatus) {
+    public void setRoomStatus(Boolean roomStatus) {
         this.roomStatus = roomStatus;
     }
 
@@ -115,12 +111,12 @@ public class Room implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Collection<OzPost> getOzPostCollection() {
+        return ozPostCollection;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
+    public void setOzPostCollection(Collection<OzPost> ozPostCollection) {
+        this.ozPostCollection = ozPostCollection;
     }
 
     @Override
@@ -133,10 +129,10 @@ public class Room implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Room)) {
+        if (!(object instanceof OzRoom)) {
             return false;
         }
-        Room other = (Room) object;
+        OzRoom other = (OzRoom) object;
         if ((this.pkRoomId == null && other.pkRoomId != null) || (this.pkRoomId != null && !this.pkRoomId.equals(other.pkRoomId))) {
             return false;
         }
@@ -145,7 +141,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ozmo.ent.Room[ pkRoomId=" + pkRoomId + " ]";
+        return "com.ozmo.ent.OzRoom[ pkRoomId=" + pkRoomId + " ]";
     }
     
 }

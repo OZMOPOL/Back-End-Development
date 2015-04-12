@@ -4,7 +4,7 @@
  */
 package service;
 
-import com.ozmo.ent.Vote;
+import com.ozmo.ent.OzVote;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,26 +23,26 @@ import javax.ws.rs.Produces;
  * @author sav
  */
 @Stateless
-@Path("com.ozmo.ent.vote")
-public class VoteFacadeREST extends AbstractFacade<Vote> {
+@Path("com.ozmo.ent.ozvote")
+public class OzVoteFacadeREST extends AbstractFacade<OzVote> {
     @PersistenceContext(unitName = "ozmoPol_WS_GF3PU")
     private EntityManager em;
 
-    public VoteFacadeREST() {
-        super(Vote.class);
+    public OzVoteFacadeREST() {
+        super(OzVote.class);
     }
 
     @POST
     @Override
     @Consumes({"application/json"})
-    public void create(Vote entity) {
+    public void create(OzVote entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/json"})
-    public void edit(Vote entity) {
+    public void edit(OzVote entity) {
         super.edit(entity);
     }
 
@@ -55,21 +55,21 @@ public class VoteFacadeREST extends AbstractFacade<Vote> {
     @GET
     @Path("{id}")
     @Produces({"application/json"})
-    public Vote find(@PathParam("id") String id) {
+    public OzVote find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/json"})
-    public List<Vote> findAll() {
+    public List<OzVote> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/json"})
-    public List<Vote> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<OzVote> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

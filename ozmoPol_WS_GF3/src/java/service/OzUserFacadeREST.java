@@ -4,8 +4,8 @@
  */
 package service;
 
-import OzClass.OzResult;
-import com.ozmo.ent.User;
+import UIClass.UIResult;
+import com.ozmo.ent.OzUser;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,26 +24,26 @@ import javax.ws.rs.Produces;
  * @author sav
  */
 @Stateless
-@Path("com.ozmo.ent.user")
-public class UserFacadeREST extends AbstractFacade<User> {
+@Path("com.ozmo.ent.ozuser")
+public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @PersistenceContext(unitName = "ozmoPol_WS_GF3PU")
     private EntityManager em;
 
-    public UserFacadeREST() {
-        super(User.class);
+    public OzUserFacadeREST() {
+        super(OzUser.class);
     }
 
     @POST
     @Override
     @Consumes({"application/json"})
-    public void create(User entity) {
+    public void create(OzUser entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/json"})
-    public void edit(User entity) {
+    public void edit(OzUser entity) {
         super.edit(entity);
     }
 
@@ -56,21 +56,21 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @GET
     @Path("{id}")
     @Produces({"application/json"})
-    public User find(@PathParam("id") String id) {
+    public OzUser find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/json"})
-    public List<User> findAll() {
+    public List<OzUser> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/json"})
-    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<OzUser> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -86,19 +86,18 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return em;
     }
     
-    
     ////////////////////
     // CUSTOM METHODS //
     ////////////////////
     
-        @GET
-    @Path("checkLogin/{user}:{pass}")
+    @GET
+    @Path("checkLogin/{user}/{pass}")
     @Produces({"application/json"})
     
-    public OzResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
+    public UIResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
         
-        List<User> users= em.createNamedQuery("User.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
-        OzResult res=new OzResult();
+        List<OzUser> users= em.createNamedQuery("User.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
+        UIResult res=new UIResult();
 
         
         try {
@@ -111,15 +110,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
             
             if(users.size()==1){ //USER FOUND
                 
-                if (users.get(0).getUserStatus() == "0"){ //USER NOT ACTIVATED YET 
+                if (users.get(0).getUserStatus() == false){ //USER NOT ACTIVATED YET 
                     res.title="NOK";
                     res.message="User account not active";
                 }
-                else if(users.get(0).getUserStatus() == "1"){ //BINGO!
+                else if(users.get(0).getUserStatus() == true){ //BINGO!
                     res.title="OK";
                     res.message="Active User Found";
-                    res.matchedUser = users.get(0);
-                    
+                                        
                 } else {
                     res.title="NOK";
                     res.message="Inconsistent Database, User Status flag corrupted";
@@ -141,5 +139,4 @@ public class UserFacadeREST extends AbstractFacade<User> {
         
 
     }
-    
 }
