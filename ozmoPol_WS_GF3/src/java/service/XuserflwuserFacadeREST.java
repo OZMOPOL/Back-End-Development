@@ -4,7 +4,9 @@
  */
 package service;
 
+import java.util.UUID;
 import com.ozmo.ent.Xuserflwuser;
+import com.ozmo.ent.OzUser;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,6 +40,27 @@ public class XuserflwuserFacadeREST extends AbstractFacade<Xuserflwuser> {
     public void create(Xuserflwuser entity) {
         super.create(entity);
     }
+    
+//    @GET
+//    @Path("{userId}/{roomId}")
+//    @Consumes({"application/json"})
+//    public void userFollowRoom(String flwrId, String flwdId) {
+//        Xuserflwuser entity = new Xuserflwuser();
+//        
+//        List<OzUser> flwrList = em.createNamedQuery("OzUser.findByPkUserId").setParameter("flwrId", flwrId).getResultList();
+//        List<OzUser> flwdList = em.createNamedQuery("OzUser.findByPkUserId").setParameter("flwdId", flwdId).getResultList();
+//        
+//        OzUser theFlwr = flwrList.get(0);
+//        OzUser theFlwd = flwdList.get(0);
+//        
+//        String randID = UUID.randomUUID().toString();
+//        
+//        entity.setFkuserXuserflwruserid(theFlwr);
+//        entity.setFkuserXuserflwduserid(theFlwd);
+//        entity.setPkuserXuserid(randID);
+//        
+//        super.create(entity);
+//    }
 
     @PUT
     @Override

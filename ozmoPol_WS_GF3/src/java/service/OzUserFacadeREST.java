@@ -98,7 +98,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @Produces({"application/json"})
     public UIResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
         
-        List<OzUser> users= em.createNamedQuery("User.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
+        List<OzUser> users= em.createNamedQuery("OzUser.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
         UIResult res=new UIResult();
 
         
@@ -148,7 +148,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public UIResult signUp(OzUser entity) {
         UIResult res=new UIResult();
 
-        
+        // WE SHOULD THINK ABOUT THIS A BIT  MORE FELLAS... WHO AM I TALKING TO ANYWAYS!
             
             List<OzUser> exUname= em.createNamedQuery("User.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
             List<OzUser> exEmail= em.createNamedQuery("User.findByUserEmail").setParameter("userEmail", entity.getUserName()).getResultList();
