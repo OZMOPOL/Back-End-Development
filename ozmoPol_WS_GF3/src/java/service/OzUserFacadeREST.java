@@ -150,8 +150,8 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
 
         // WE SHOULD THINK ABOUT THIS A BIT  MORE FELLAS... WHO AM I TALKING TO ANYWAYS!
             
-            List<OzUser> exUname= em.createNamedQuery("User.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
-            List<OzUser> exEmail= em.createNamedQuery("User.findByUserEmail").setParameter("userEmail", entity.getUserName()).getResultList();
+            List<OzUser> exUname= em.createNamedQuery("OzUser.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
+            List<OzUser> exEmail= em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", entity.getUserEmail()).getResultList();
             
             if (exUname.isEmpty() && exEmail.isEmpty()){
             try {
@@ -160,6 +160,61 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 super.create(entity);
                 GoogleMail gmail = new GoogleMail();
                 gmail.Send(entity.getUserEmail().toString(), actHash);
+                
+                res.title="OK";
+            }
+            catch (Exception e) {
+            res.title="NOK";
+            res.message=e.toString();
+            }
+            
+            }
+            else{
+                if (exEmail.size() == 1){
+                    res.title="NOK";
+                    res.message="Email address already exists";               
+                }else if (exUname.size() == 1){
+                    res.title="NOK";
+                    res.message="Username already exists";               
+                }else if (exUname.size() == 1 || exEmail.size() == 1){
+                    res.title="NOK";
+                    res.message="This Username-Email combination is already registered";
+                }else {
+                    res.title="NOK";
+                    res.message="Database Corrupted, More than one users already exist with this username-email";                
+                }
+            }
+            
+       
+        return res;
+    }
+    
+    
+    @GET
+    @Path("signUpVal/{user}/{email}")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public UIResult signUpVal(@PathParam("user") String user,@PathParam("email") String email) {
+        UIResult res=new UIResult();
+            
+            List<OzUser> exUname= em.createNamedQuery("OzUser.findByUserName").setParameter("userName", user).getResultList();
+            List<OzUser> exEmail= em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", email).getResultList();
+            
+            if (exUname.isEmpty() && exEmail.isEmpty()){
+            try {
+                //create an ozmoPolitan
+                OzUser newUser = new OzUser();
+                String actHash = UUID.randomUUID().toString();
+                String randID = UUID.randomUUID().toString();
+                newUser.setUseractHash(actHash);
+                newUser.setUserName(user);
+                newUser.setUserEmail(email);
+                newUser.setPkUserId(randID);
+                newUser.setUserPass(actHash);
+                
+                super.create(newUser);
+                
+                GoogleMail.Send(newUser.getUserEmail().toString(), actHash);
                 
                 res.title="OK";
             }
