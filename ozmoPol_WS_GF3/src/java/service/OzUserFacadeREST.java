@@ -4,6 +4,8 @@
  */
 package service;
 
+import java.util.UUID;
+import UIClass.GoogleMail;
 import UIClass.UIResult;
 import com.ozmo.ent.OzUser;
 import java.util.List;
@@ -90,10 +92,10 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     // CUSTOM METHODS //
     ////////////////////
     
+    
     @GET
     @Path("checkLogin/{user}/{pass}")
     @Produces({"application/json"})
-    
     public UIResult checkLogin(@PathParam("user") String user,@PathParam("pass") String pass) {
         
         List<OzUser> users= em.createNamedQuery("User.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
@@ -137,6 +139,54 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         }
         return res;
         
-
     }
+    
+    @POST
+    @Path("signUp")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public UIResult signUp(OzUser entity) {
+        UIResult res=new UIResult();
+
+        
+            
+            List<OzUser> exUname= em.createNamedQuery("User.findByUserName").setParameter("userName", entity.getUserName()).getResultList();
+            List<OzUser> exEmail= em.createNamedQuery("User.findByUserEmail").setParameter("userEmail", entity.getUserName()).getResultList();
+            
+            if (exUname.isEmpty() && exEmail.isEmpty()){
+            try {
+                String actHash = UUID.randomUUID().toString();
+                entity.setUseractHash(actHash);
+                super.create(entity);
+                GoogleMail gmail = new GoogleMail();
+                gmail.Send(entity.getUserEmail().toString(), actHash);
+                
+                res.title="OK";
+            }
+            catch (Exception e) {
+            res.title="NOK";
+            res.message=e.toString();
+            }
+            
+            }
+            else{
+                if (exEmail.size() == 1){
+                    res.title="NOK";
+                    res.message="Email address already exists";               
+                }else if (exUname.size() == 1){
+                    res.title="NOK";
+                    res.message="Username already exists";               
+                }else if (exUname.size() == 1 || exEmail.size() == 1){
+                    res.title="NOK";
+                    res.message="This Username-Email combination is already registered";
+                }else {
+                    res.title="NOK";
+                    res.message="Database Corrupted, More than one users already exist with this username-email";                
+                }
+            }
+            
+       
+        return res;
+    }
+        
 }
