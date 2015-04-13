@@ -145,6 +145,7 @@ INSERT INTO ozRoom VALUES
 ('weddweddweddwedd', 'Message from sky', 'I heard something from God', 1),
 ('zxcvzxcvzxcvzxcv' , 'Programming' , 'We need some contribution for startup company', 1),
 ('nmmmnmmmnmmmnmmm',  'piknik' , 'Ozu family we are planning to have a piknik, anyone ready', 1),
+('mxxcmxxcmxxcmxxc' , 'Deadline for project' , 'what do you think we can add to Agile course project?' ,1),
 ('weddwe11222dwedd', 'Ozumopoling', 'The best app ive seen!!!', 1);
 
 
@@ -160,10 +161,14 @@ INSERT INTO ozUser VALUES
 ('qqwwqqwwqqwwqqww' , 'tyron', 'qqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqwwqqww', 'tyron@ozu.edu.tr','1200-05-09', 1, 'hash'),
 ('alcnalcnalcnalcn' , 'snow' , 'alcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcnalcn' , 'snow@ozu.edu.tr' , '1230-09-25', 1, 'hash'),
 ('fgfufgfufgfufgfu', 'arya', 'fgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfufgfu', 'arya@ozu.edu.tr', '1245-04-07', 1, 'hash'),
-('hwhshwhshwhshwhs', 'cersi','hwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhs', 'cersi@ozu.edu.tr', '1235-10-12', 1 , 'hash')
+('hwhshwhshwhshwhs', 'cersi','hwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhshwhs', 'cersi@ozu.edu.tr', '1235-10-12', 1 , 'hash'),
+('syttsyttsyttsytt', 'little','syttsyttsyttsyttsyttsyttsyttsyttsyttsyttsyttsyttsyttsyttsyttsytt', 'little@ozu.edu.tr', '1235-10-02', 1 , 'hash'),
+('uuiiuuiiuuiiuuii', 'sansa','uuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuiiuuii', 'sansa@ozu.edu.tr', '1245-10-02', 1 , 'hash')
  ;
 
 /* And ozPosts started to populate Gods Hall. */
+
+INSERT INTO ozPost VALUES ('kklokklokklokklo' , 'Smilies' , 'if we can add some small images to explain emotion it would be great, isnt it?' , NULL, NULL, NULL, 'uuiiuuiiuuiiuuii' , 'mxxcmxxcmxxcmxxc' , NULL);
 
 INSERT INTO ozPost VALUES ('mmlkmmlkmmlkmmlk' , 'Conference deadline!' , 'The IEEE conference deadline is extented for 1 wee' , NULL, NULL, NULL, 'alcnalcnalcnalcn' , 'zxcvzxcvzxcvzxcv' , NULL);
 
@@ -254,14 +259,18 @@ UPDATE ozVote SET vote_value='1' WHERE pk_vote_id='frgtfrgtfrgtfrgt';
 
 /* So everyone can follow ozRooms  */
 
-INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg','euritolfkjnndjfj','3uh2gkejasdy9243');
-INSERT INTO X_user_flw_room VALUES('reteretereterete' , 'geidgeidgeidgeid', 'rakhsd2775632g4s');
+INSERT INTO X_user_flw_room VALUES('trtgtrtgtrtgtrtg', 'euritolfkjnndjfj' , '3uh2gkejasdy9243');
+INSERT INTO X_user_flw_room VALUES('reteretereterete', 'geidgeidgeidgeid' , 'rakhsd2775632g4s');
 INSERT INTO X_user_flw_room VALUES('retyretyretyrety', 'bjkweshgk48y93s4' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('efrtefrtefrtefrt', 'ffffffffffffffff' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('sbnmsbnmsbnmsbnm', 'ffffffffffffffff' , 'weddwe11222dwedd');
 INSERT INTO X_user_flw_room VALUES('mklsmklsmklsmkls', 'ffffffffffffffff' , 'nmmmnmmmnmmmnmmm');
 INSERT INTO X_user_flw_room VALUES('asdfasdfasdfasdf', 'qqwwqqwwqqwwqqww' , 'uiybewg4jh3g4gbs');
 INSERT INTO X_user_flw_room VALUES('opopopopopopopop', 'alcnalcnalcnalcn' , 'uiybewg4jh3g4gbs');
+INSERT INTO X_user_flw_room VALUES('ioppioppioppiopp', 'syttsyttsyttsytt' , 'mxxcmxxcmxxcmxxc');
+INSERT INTO X_user_flw_room VALUES('kmnbkmnbkmnbkmnb', 'uuiiuuiiuuiiuuii' , '3uh2gkejasdy9243');
+INSERT INTO X_user_flw_room VALUES('ploiploiploiploi', 'uuiiuuiiuuiiuuii' , 'mxxcmxxcmxxcmxxc');
+
 
 /* And people can follow other people as well, Intresting!! */
 INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnv33nvb', 'urb49ne9bek30mme', 'bjksefkhjw49ub43');
@@ -271,3 +280,9 @@ INSERT INTO X_user_flw_user VALUES ('gnvbgnvbgnvbgnvb', 'geidgeidgeidgeid' , 'bj
 INSERT INTO X_user_flw_user VALUES ('jnmvjnmvjnmvjnmv', 'urb49ne9bek30mme' , 'euritolfkjnndjfj');
 INSERT INTO X_user_flw_user VALUES ('iopdiopdiopdiopd', 'urb49ne9bek30mme' , 'geidgeidgeidgeid');
 INSERT INTO X_user_flw_user VALUES ('dfrtdfrtdfrtdfrt', 'ffffffffffffffff' , 'euritolfkjnndjfj');
+INSERT INTO X_user_flw_user VALUES ('aqwsaqwsaqwsaqws', 'hwhshwhshwhshwhs' , 'fgfufgfufgfufgfu');
+INSERT INTO X_user_flw_user VALUES ('mzlamzlamzlamzla', 'uuiiuuiiuuiiuuii' , 'alcnalcnalcnalcn');
+INSERT INTO X_user_flw_user VALUES ('qwedqwedqwedqwed', 'ffffffffffffffff' , 'uuiiuuiiuuiiuuii');
+INSERT INTO X_user_flw_user VALUES ('rewqrewqrewqrewq', 'syttsyttsyttsytt' , 'euritolfkjnndjfj');
+INSERT INTO X_user_flw_user VALUES ('qancqancqancqanc', 'fgfufgfufgfufgfu' , 'alcnalcnalcnalcn');
+
