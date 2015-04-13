@@ -6,6 +6,7 @@ package service;
 
 import java.util.UUID;
 import UIClass.GoogleMail;
+import UIClass.RandomString;
 import UIClass.UIResult;
 import com.ozmo.ent.OzUser;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.util.List;
+import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -263,23 +265,28 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
             try {
                 //create an ozmoPolitan
                 OzUser newUser = new OzUser();
-                String actHash = UUID.randomUUID().toString();
-                String randID = UUID.randomUUID().toString();
+                RandomString ranString=new RandomString(32);
+                String actHash = ranString.nextString();
+                String randID =  ranString.nextString();
                 newUser.setUseractHash(actHash);
                 newUser.setUserName(user);
                 newUser.setUserEmail(email);
                 newUser.setPkUserId(randID);
                 newUser.setUserPass(actHash);
                 
-                super.create(newUser);
-                
                 GoogleMail.Send(newUser.getUserEmail().toString(), actHash);
+                
+                super.create(newUser);
                 
                 res.title="OK";
             }
-            catch (Exception e) {
+            catch (ConstraintViolationException e) {
             res.title="NOK";
-            res.message=e.toString();
+            res.message=e.getConstraintViolations().toString();
+            }
+            catch(Exception e){
+                 res.title="NOK";
+                res.message=e.toString();
             }
             
             }
