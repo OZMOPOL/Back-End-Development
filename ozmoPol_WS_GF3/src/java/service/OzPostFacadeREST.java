@@ -5,7 +5,12 @@
 package service;
 
 import com.ozmo.ent.OzPost;
+import com.ozmo.ent.OzUser;
+import com.ozmo.ent.OzVote;
+import UIClass.UIPost;
+import UIClass.UIResult;
 import java.util.List;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +30,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.ozmo.ent.ozpost")
 public class OzPostFacadeREST extends AbstractFacade<OzPost> {
+
     @PersistenceContext(unitName = "ozmoPol_WS_GF3PU")
     private EntityManager em;
 
@@ -84,5 +90,58 @@ public class OzPostFacadeREST extends AbstractFacade<OzPost> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    //////////////////////
+    /// Custom Methods ///
+    //////////////////////
+    UIPost convertToOzPost(OzPost post) {
+        UIPost tmp = new UIPost();
+        tmp.setPkPostId(post.getPkPostId());
+        tmp.setFkPostPrntId(post.getFkPostPrntId());
+        tmp.setFkPostRoomId(post.getFkPostRoomId());
+        tmp.setFkPostUserId(post.getFkPostUserId());
+        tmp.setPostCDate(post.getPostCDate());
+        tmp.setPostContent(post.getPostContent());
+        tmp.setPostEDate(post.getPostEDate());
+        tmp.setPostTitle(post.getPostTitle());
+        return tmp;
+    }
+
+    @POST
+    @Path("getFrontPage")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public UIResult getFrontPage(OzUser entity) {
+
+        UIResult res = new UIResult();
+
+        try {
+
+            List<UIPost> ozposts = new ArrayList<UIPost>();
+            List<OzPost> posts = em.createQuery("SELECT p FROM OzPost p WHERE p.postTitle IS NOT NULL").getResultList();
+            for (OzPost post : posts) {
+                UIPost uiPost = convertToOzPost(post);
+                List<OzVote> votes = em.createNamedQuery("getVotesByPostId").setParameter("postId", post.getPkPostId()).getResultList();
+                for (OzVote vote : votes) {
+                    if (vote.getFkVoteUserId().getPkUserId().equalsIgnoreCase(entity.getPkUserId())) {
+                        uiPost.setVote(vote);
+                    }
+                }
+
+                uiPost.setVoteCount(votes.size());
+                ozposts.add(uiPost);
+
+            }
+            
+            res.title = "OK";
+            res.body = ozposts;
+                
+        } catch (Exception e) {
+            
+            res.title = "NOK";
+            res.message = e.getLocalizedMessage();
+        }
+
+        return res;
+    }
 }

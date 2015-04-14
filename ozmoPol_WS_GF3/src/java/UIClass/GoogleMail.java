@@ -36,7 +36,7 @@ public class GoogleMail {
 //}
 
 public static void Send(String recipientEmail, String message) throws AddressException, MessagingException {
-GoogleMail.Sender("ozmopolo", "ozmoPolJedi", recipientEmail, "", "Activation Code", message);
+GoogleMail.Sender("ozmopolo", "ozmoPolJedi", recipientEmail, "", "Activation Code", "Please enter this code into the activation screen:  "+message);
 }
 
 /**

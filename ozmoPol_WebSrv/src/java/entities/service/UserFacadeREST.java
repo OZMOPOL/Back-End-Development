@@ -71,7 +71,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
         
         List<User> users= em.createNamedQuery("OzUser.checkAuthStatus").setParameter("userName", user).setParameter("userPass", pass).getResultList();
         OzResult res=new OzResult();
-        if (users.size()==0) {
+        if (users.isEmpty()) {
             res.title="NOK";
                 
         }else{
@@ -85,6 +85,8 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces({"application/json"})
     @Consumes({  "application/json"})
     public OzResult signUp(User entity) {
+        
+            
         OzResult res=new OzResult();
         try {
              super.create(entity);

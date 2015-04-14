@@ -13,5 +13,6 @@ public class UIResult {
    
     public String title;
     public String message;
+    public Object body;
     
 }

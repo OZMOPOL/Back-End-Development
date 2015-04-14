@@ -28,8 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "OzVote.findAll", query = "SELECT o FROM OzVote o"),
     @NamedQuery(name = "OzVote.findByPkVoteId", query = "SELECT o FROM OzVote o WHERE o.pkVoteId = :pkVoteId"),
-    @NamedQuery(name = "OzVote.findByVoteValue", query = "SELECT o FROM OzVote o WHERE o.voteValue = :voteValue")})
+    @NamedQuery(name = "OzVote.findByVoteValue", query = "SELECT o FROM OzVote o WHERE o.voteValue = :voteValue"),
+    @NamedQuery(name = "getVotesByPostId", query = "SELECT v FROM OzVote v WHERE v.fkVotePostId.pkPostId = :postId"),
+    @NamedQuery(name = "getVoteByUserId", query = "SELECT p FROM OzPost p WHERE p.postTitle IS NOT NULL")
+})
 public class OzVote implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -109,5 +113,4 @@ public class OzVote implements Serializable {
     public String toString() {
         return "com.ozmo.ent.OzVote[ pkVoteId=" + pkVoteId + " ]";
     }
-    
 }
