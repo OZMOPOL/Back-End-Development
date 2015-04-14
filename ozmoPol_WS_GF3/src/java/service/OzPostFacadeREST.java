@@ -123,7 +123,7 @@ public class OzPostFacadeREST extends AbstractFacade<OzPost> {
                 UIPost uiPost = convertToOzPost(post);
                 List<OzVote> votes = em.createNamedQuery("getVotesByPostId").setParameter("postId", post.getPkPostId()).getResultList();
                 for (OzVote vote : votes) {
-                    if (vote.getFkVoteUserId().getPkUserId().equalsIgnoreCase(entity.getPkUserId())) {
+                    if (vote.getFkVoteUserId().getPkUserId().equals(entity.getPkUserId())) {
                         uiPost.setVote(vote);
                     }
                 }

@@ -12,14 +12,19 @@ import java.util.List;
  *
  * @author amind
  */
-public class UIUser extends OzUser{
-    
-    private List<UIPost> posts; // includes comments. an String type argument to the setter/getter functions should be enough to differentiate.
+public class UIUser extends OzUser {
+
+    private List<UIPost> posts;
+    private List<UIPost> comments; // includes comments. an String type argument to the setter/getter functions should be enough to differentiate.
     private List<UIPost> voted; // includes upvotes and downvotes on both comments and posts
     private int karma;
-    private List<UIUser> flwUser; 
+    private List<UIUser> flwUser;
     private List<UIRoom> flwRoom;
     private List<UIUser> followedBy;
+
+    public List<UIPost> getComments() {
+        return comments;
+    }
 
     public List<UIRoom> getFlwRoom(UIUser user) {
         return flwRoom;
@@ -68,6 +73,10 @@ public class UIUser extends OzUser{
     public void setVoted(List<UIPost> voted) {
         this.voted = voted;
     }
-    
-    
+
+    public void setComments(List<UIPost> comments) {
+        this.comments = comments;
+    }
+
+
 }

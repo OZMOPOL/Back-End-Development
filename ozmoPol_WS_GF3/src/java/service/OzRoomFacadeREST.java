@@ -4,6 +4,7 @@
  */
 package service;
 
+import UIClass.UIResult;
 import com.ozmo.ent.OzRoom;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,6 +26,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.ozmo.ent.ozroom")
 public class OzRoomFacadeREST extends AbstractFacade<OzRoom> {
+
     @PersistenceContext(unitName = "ozmoPol_WS_GF3PU")
     private EntityManager em;
 
@@ -33,10 +35,23 @@ public class OzRoomFacadeREST extends AbstractFacade<OzRoom> {
     }
 
     @POST
-    @Override
+    @Path("createRoom")
     @Consumes({"application/json"})
-    public void create(OzRoom entity) {
-        super.create(entity);
+    @Produces({"application/json"})
+    public UIResult createRoomByTitle(OzRoom entity) {
+        UIResult res = new UIResult();
+
+        try {
+            super.create(entity);
+            res.title = "OK";
+            res.message = "Room Created!";
+        } catch (Exception e) {
+            res.title = "OK";
+            res.message = e.getLocalizedMessage();
+        }
+
+
+        return res;
     }
 
     @PUT
@@ -84,5 +99,4 @@ public class OzRoomFacadeREST extends AbstractFacade<OzRoom> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

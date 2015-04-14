@@ -15,8 +15,19 @@ import java.util.List;
  */
 public class UIPost extends OzPost{
     private List<UIPost> comments;
+    private List<UIPost> parents;
     private  int voteCount;
     public OzVote vote;
+
+    public List<UIPost> getParents() {
+        return parents;
+    }
+
+    public void setParents(List<UIPost> parents) {
+        this.parents = parents;
+    }
+    
+    
     
     public List<UIPost> getComments(){
         return this.comments;

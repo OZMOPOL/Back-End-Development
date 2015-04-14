@@ -7,7 +7,11 @@ package service;
 import UIClass.GoogleMail;
 import UIClass.RandomString;
 import UIClass.UIResult;
+import UIClass.UIRoom;
+import UIClass.UIUser;
+import com.ozmo.ent.OzRoom;
 import com.ozmo.ent.OzUser;
+import com.ozmo.ent.Xuserflwroom;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -156,7 +160,8 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
             } else {
 
                 if (users.size() == 1) { //USER FOUND
-
+                    res.body=users.get(0);
+                    
                     if (users.get(0).getUserStatus() == false) { //USER NOT ACTIVATED YET 
                         res.title = "NOK";
                         res.message = "User account not active";
@@ -212,8 +217,6 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 res = listEval(users);
             }
 
-
-
         } catch (Exception e) {
             res.title = "NOK";
             res.message = e.getLocalizedMessage();
@@ -224,7 +227,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     }
 
     @POST
-    @Path("signUpVal/newUser")
+    @Path("signUpVal")
     @Produces({"application/json"})
     @Consumes({"application/json"})
     public UIResult signUpVal(OzUser newUser) {
@@ -246,15 +249,15 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 newUser.setPkUserId(randID);
                 newUser.setUserPass(newUser.getUserPass());
                 newUser.setUserStatus(Boolean.FALSE);
-                GoogleMail.Send(newUser.getUserEmail().toString(), actHash);
+                sendActCode(newUser);
 
                 super.create(newUser);
 
                 res.title = "OK";
                 res.message = "User created, please check the registered email for activation code.";
-            } catch (ConstraintViolationException e) {
-                res.title = "NOK";
-                res.message = e.getConstraintViolations().toString();
+//            } catch (ConstraintViolationException e) {
+//                res.title = "NOK";
+//                res.message = e.getConstraintViolations().toString();
             } catch (Exception e) {
                 res.title = "NOK";
                 res.message = e.toString();
@@ -275,6 +278,27 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 res.message = "Database Corrupted, More than one users already exist with this username-email";
             }
         }
+
+        return res;
+    }
+
+    @POST
+    @Path("sendActCode")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public UIResult sendActCode(OzUser user) {
+        UIResult res = new UIResult();
+
+        try {
+            GoogleMail.Send(user.getUserEmail().toString(), user.getUseractHash());
+            res.title = "OK";
+            res.message = "Verification Email Sent!";
+        } catch (Exception e) {
+
+            res.title = "NOK";
+            res.message = e.getLocalizedMessage();
+        }
+
 
         return res;
     }
@@ -324,17 +348,33 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     }
 
     @POST
-    @Path("uprofile")
+    @Path("uProfile")
     @Produces({"application/json"})
     @Consumes({"application/json"})
     public UIResult getOtherUserProfile(OzUser user) {
-        UIResult res = new UIResult();
+        UIResult res = userExists("UserName", user.getUserName());
 
-        res = userExists("UserID", user.getPkUserId());
-
-        if (res.title.equals("OK")) {
-
+        if (res.body!=null) {
+            UIUser stranger = (UIUser) res.body;
             try {
+                stranger.setPkUserId(user.getPkUserId());
+                stranger.setUserName(user.getUserName());
+                stranger.setUserBday(user.getUserBday());
+                stranger.setUserEmail(user.getUserEmail());
+                stranger.setUserStatus(user.getUserStatus());
+                //iterate
+                List<UIRoom> flwRoom = em.createNamedQuery("Xuserflwroom.findFlwdRoomsByUserId").setParameter("userId", stranger.getPkUserId()).getResultList();
+                List<UIUser> flwUser = em.createNamedQuery("Xuserflwuser.findFlwdUsersByUserId").setParameter("userId", stranger.getPkUserId()).getResultList();
+
+
+                stranger.setFlwRoom(flwRoom);
+                stranger.setFlwUser(flwUser);
+                stranger.setKarma(0);
+                stranger.setPosts(null);
+                stranger.setVoted(null);
+                stranger.setComments(null);
+
+
                 // construct user profile from UIUser class
                 //return UIUser profile json object
             } catch (Exception e) {
@@ -345,5 +385,13 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         }
         return res;
 
+    }
+
+    @GET
+    @Path("getUserByUserName/{userName}")
+    @Produces({"application/json"})
+    public OzUser getUserByUserName(@PathParam("userName") String userName) {
+        OzUser user = (OzUser) em.createNamedQuery("OzUser.findByUserName").setParameter("userName", userName).getSingleResult();
+        return user;
     }
 }
