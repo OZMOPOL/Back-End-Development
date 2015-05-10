@@ -5,6 +5,8 @@
  */
 package com.ozmoPol;
 
+import com.ozmoPol.custom.CstPost;
+import com.ozmoPol.custom.CstRoom;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -145,4 +147,16 @@ public class OzRoom implements Serializable {
         return "com.ozmoPol.OzRoom[ pkRoomId=" + pkRoomId + " ]";
     }
     
+    
+    public CstRoom cstConverter(){
+        
+        CstRoom tmp = new CstRoom();
+    
+        tmp.setPkRoomId(this.getPkRoomId());
+        tmp.setRoomTitle(this.getRoomTitle());
+        tmp.setRoomDesc(this.getRoomDesc());
+        tmp.setRoomStatus(this.getRoomStatus());
+        
+        return tmp;
+    }
 }

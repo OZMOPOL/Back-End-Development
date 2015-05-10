@@ -5,6 +5,7 @@
  */
 package com.ozmoPol;
 
+import com.ozmoPol.custom.CstPost;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -40,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OzPost.findByPkPostId", query = "SELECT o FROM OzPost o WHERE o.pkPostId = :pkPostId"),
     @NamedQuery(name = "OzPost.findByPostTitle", query = "SELECT o FROM OzPost o WHERE o.postTitle = :postTitle"),
     @NamedQuery(name = "OzPost.findByPostCDate", query = "SELECT o FROM OzPost o WHERE o.postCDate = :postCDate"),
+    @NamedQuery(name = "OzPost.findByRoomId", query = "SELECT o FROM OzPost o WHERE o.fkPostRoomId.pkRoomId = :fkPostRoomId"),
     @NamedQuery(name = "OzPost.findByPostEDate", query = "SELECT o FROM OzPost o WHERE o.postEDate = :postEDate"),
     @NamedQuery(name = "OzPost.findByPostStatus", query = "SELECT o FROM OzPost o WHERE o.postStatus = :postStatus")})
 public class OzPost implements Serializable {
@@ -212,9 +214,9 @@ public class OzPost implements Serializable {
         return "com.ozmoPol.OzPost[ pkPostId=" + pkPostId + " ]";
     }
 
-    public OzPost cstConverter() {
+    public CstPost cstConverter() {
 
-        OzPost tmp = new OzPost();
+        CstPost tmp = new CstPost();
         
         tmp.setPkPostId(this.getPkPostId());
         tmp.setFkPostPrntId(this.getFkPostPrntId());

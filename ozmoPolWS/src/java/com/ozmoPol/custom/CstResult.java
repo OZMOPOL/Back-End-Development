@@ -18,9 +18,9 @@ import java.util.List;
 public class CstResult {
     private String title;
     private String message;
-    private List<OzUser> users;
-    private List<OzPost> posts;
-    private List<OzRoom> rooms;
+    private List<CstUser> users;
+    private List<CstPost> posts;
+    private List<CstRoom> rooms;
 
     public void setTitle(String title) {
         this.title = title;
@@ -30,15 +30,15 @@ public class CstResult {
         this.message = message;
     }
 
-    public void setUsers(List<OzUser> users) {
+    public void setUsers(List<CstUser> users) {
         this.users = users;
     }
 
-    public void setPosts(List<OzPost> posts) {
+    public void setPosts(List<CstPost> posts) {
         this.posts = posts;
     }
 
-    public void setRooms(List<OzRoom> rooms) {
+    public void setRooms(List<CstRoom> rooms) {
         this.rooms = rooms;
     }
 
@@ -50,15 +50,15 @@ public class CstResult {
         return message;
     }
 
-    public List<OzUser> getUsers() {
+    public List<CstUser> getUsers() {
         return users;
     }
 
-    public List<OzPost> getPosts() {
+    public List<CstPost> getPosts() {
         return posts;
     }
 
-    public List<OzRoom> getRooms() {
+    public List<CstRoom> getRooms() {
         return rooms;
     }
     

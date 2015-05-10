@@ -13,14 +13,23 @@ import java.util.List;
  */
 public class CstRoom extends com.ozmoPol.OzRoom{
     
-    private List<OzPost> posts;
+    private List<CstPost> posts;
+    private Boolean follows;
 
-    public void setPosts(List<OzPost> posts) {
+    public void setPosts(List<CstPost> posts) {
         this.posts = posts;
     }
 
-    public List<OzPost> getPosts() {
+    public List<CstPost> getPosts() {
         return posts;
+    }
+
+    public void setFollows(Boolean follows) {
+        this.follows = follows;
+    }
+
+    public Boolean getFollows() {
+        return follows;
     }
     
 }
