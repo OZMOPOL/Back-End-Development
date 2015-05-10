@@ -7,7 +7,6 @@ package com.ozmoPol.custom;
 
 import com.ozmoPol.OzPost;
 import com.ozmoPol.OzRoom;
-import com.ozmoPol.OzUser;
 import com.ozmoPol.OzVote;
 import java.util.List;
 
@@ -15,12 +14,12 @@ import java.util.List;
  *
  * @author sav
  */
-public class CstUser extends OzUser{
+public class CstUser extends com.ozmoPol.OzUser{
     
     private List<OzPost> posts;
     private List<OzPost> comments;
     private List<OzVote> votes;
-    private List<OzUser> flwdUsers;
+    private List<com.ozmoPol.OzUser> flwdUsers;
     private List<OzRoom> flwdRooms;
 
     public void setPosts(List<OzPost> posts) {
@@ -35,7 +34,7 @@ public class CstUser extends OzUser{
         this.votes = votes;
     }
 
-    public void setFlwdUsers(List<OzUser> flwdUsers) {
+    public void setFlwdUsers(List<com.ozmoPol.OzUser> flwdUsers) {
         this.flwdUsers = flwdUsers;
     }
 
@@ -55,7 +54,7 @@ public class CstUser extends OzUser{
         return votes;
     }
 
-    public List<OzUser> getFlwdUsers() {
+    public List<com.ozmoPol.OzUser> getFlwdUsers() {
         return flwdUsers;
     }
 

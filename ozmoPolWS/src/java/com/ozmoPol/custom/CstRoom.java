@@ -5,14 +5,13 @@
  */
 package com.ozmoPol.custom;
 import com.ozmoPol.OzPost;
-import com.ozmoPol.OzRoom;
 import java.util.List;
 
 /**
  *
  * @author sav
  */
-public class CstRoom extends OzRoom{
+public class CstRoom extends com.ozmoPol.OzRoom{
     
     private List<OzPost> posts;
 

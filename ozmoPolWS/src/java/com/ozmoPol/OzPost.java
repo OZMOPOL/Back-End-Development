@@ -36,12 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OzPost.findAll", query = "SELECT o FROM OzPost o"),
+    @NamedQuery(name = "OzPost.findAllPosts", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId IS NULL"),
     @NamedQuery(name = "OzPost.findByPkPostId", query = "SELECT o FROM OzPost o WHERE o.pkPostId = :pkPostId"),
     @NamedQuery(name = "OzPost.findByPostTitle", query = "SELECT o FROM OzPost o WHERE o.postTitle = :postTitle"),
     @NamedQuery(name = "OzPost.findByPostCDate", query = "SELECT o FROM OzPost o WHERE o.postCDate = :postCDate"),
     @NamedQuery(name = "OzPost.findByPostEDate", query = "SELECT o FROM OzPost o WHERE o.postEDate = :postEDate"),
     @NamedQuery(name = "OzPost.findByPostStatus", query = "SELECT o FROM OzPost o WHERE o.postStatus = :postStatus")})
 public class OzPost implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -209,5 +211,21 @@ public class OzPost implements Serializable {
     public String toString() {
         return "com.ozmoPol.OzPost[ pkPostId=" + pkPostId + " ]";
     }
-    
+
+    public OzPost cstConverter() {
+
+        OzPost tmp = new OzPost();
+        
+        tmp.setPkPostId(this.getPkPostId());
+        tmp.setFkPostPrntId(this.getFkPostPrntId());
+        tmp.setFkPostRoomId(this.getFkPostRoomId());
+        tmp.setFkPostUserId(this.getFkPostUserId());
+        tmp.setPostCDate(this.getPostCDate());
+        tmp.setPostContent(this.getPostContent());
+        tmp.setPostEDate(this.getPostEDate());
+        tmp.setPostTitle(this.getPostTitle());
+        
+        return tmp;
+    }
+
 }

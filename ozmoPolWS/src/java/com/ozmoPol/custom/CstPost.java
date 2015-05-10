@@ -5,7 +5,6 @@
  */
 package com.ozmoPol.custom;
 
-import com.ozmoPol.OzPost;
 import com.ozmoPol.OzVote;
 import java.util.List;
 
@@ -13,25 +12,35 @@ import java.util.List;
  *
  * @author sav
  */
-public class CstPost extends OzPost {
+public class CstPost extends com.ozmoPol.OzPost {
 
-    private List<OzPost> comments;
-    private List<OzVote> vote;
+    private List<com.ozmoPol.OzPost> comments;
+    private OzVote vote;
+    private int voteCount;
 
-    public void setComments(List<OzPost> comments) {
+    public void setComments(List<com.ozmoPol.OzPost> comments) {
         this.comments = comments;
     }
 
-    public void setVote(List<OzVote> vote) {
+    public void setVote(OzVote vote) {
         this.vote = vote;
     }
 
-    public List<OzPost> getComments() {
+    public List<com.ozmoPol.OzPost> getComments() {
         return comments;
     }
 
-    public List<OzVote> getVote() {
+    public OzVote getVote() {
         return vote;
     }
 
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    
 }

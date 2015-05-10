@@ -5,8 +5,11 @@
  */
 package com.ozmoPol.service;
 
+import com.ozmoPol.OzPost;
 import com.ozmoPol.OzUser;
+import com.ozmoPol.OzVote;
 import com.ozmoPol.custom.ActivationEmail;
+import com.ozmoPol.custom.CstPost;
 import com.ozmoPol.custom.CstResult;
 import com.ozmoPol.custom.CstSession;
 import com.ozmoPol.custom.RandomString;
@@ -201,14 +204,14 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstSession logIn(OzUser user) {
         CstSession res = new CstSession();
         CstResult loginRes = new CstResult();
-        
+
         try {
             loginRes = evalUser(user);
             if (loginRes.getMessage().equalsIgnoreCase("Authentic Active User Found!")) {
                 res.setTitle("OK");
                 res.setMessage("User \'" + user.getUserName() + "\' Logged In Successfully!");
                 res.setUser(loginRes.getUsers().get(0));
-                
+
             } else {
                 res.setTitle("NOK");
                 res.setMessage("Login Unsuccessful! Reason: " + evalUser(user).getMessage());
@@ -228,27 +231,26 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @Consumes({"application/json"})
     public CstResult sendActCode(OzUser user) {
         CstResult res = new CstResult();
-        
-        if (evalUser(user).getMessage().equals("Existing Inactive User Found!") || evalUser(user).getMessage().equals("Authentic Inactive User Found!")) {
-            try {
-                ActivationEmail.sendEmail(user.getUserEmail(), user.getUseractHash());
+        CstResult evalRes = new CstResult();
+
+        try {
+            evalRes = evalUser(user);
+            if (evalRes.getMessage().equals("Existing Inactive User Found!") || evalRes.getMessage().equals("Authentic Inactive User Found!")) {
+                ActivationEmail.sendEmail(evalRes.getUsers().get(0).getUserEmail(), evalRes.getUsers().get(0).getUseractHash());
                 res.setTitle("OK");
                 res.setMessage("Verification Email Sent!");
-            } catch (Exception e) {
-
+            } else {
                 res.setTitle("NOK");
-                res.setMessage(e.getLocalizedMessage());
-
+                res.setMessage("User non-existent or already active!");
             }
 
-        } else {
+        } catch (Exception e) {
             res.setTitle("NOK");
-            res.setMessage("User non-existent or already active!");
+            res.setMessage(e.getLocalizedMessage());
         }
 
         return res;
     }
-//
 
 //    // Send Activation Code For New Users
     private CstResult sendNewActCode(OzUser user) {
@@ -308,4 +310,125 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         return res;
 
     }
+
+// ACTIVATE EXISTING INACTIVE USERS
+    @POST
+    @Path("activateUser")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult activateUser(OzUser user) {
+        CstResult res = new CstResult();
+        CstResult evalRes = new CstResult();
+
+        try {
+            evalRes = evalUser(user);
+            if (evalRes.getMessage().equals("Existing Inactive User Found!") || evalRes.getMessage().equals("Authentic Inactive User Found!")) {
+                if (user.getUseractHash().equals(evalRes.getUsers().get(0).getUseractHash())) {
+                    evalRes.getUsers().get(0).setUserStatus(Boolean.TRUE);
+                    res.setTitle("OK");
+                    res.setMessage("User Account Activated!");
+                    res.setUsers(evalRes.getUsers());
+                } else {
+                    res.setTitle("NOK");
+                    res.setMessage("Activation code incorrect!");
+                }
+
+            } else {
+                res.setTitle("NOK");
+                res.setMessage("User non-existent or already active!");
+            }
+
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    // DEACTIVATE EXISTING USER
+    @POST
+    @Path("deactivateUser")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult deactivateUser(OzUser user) {
+        CstResult res = new CstResult();
+        CstResult evalRes = new CstResult();
+
+        try {
+            evalRes = evalUser(user);
+            if (evalRes.getMessage().equals("Existing Active User Found!") || evalRes.getMessage().equals("Authentic Active User Found!")) {
+                evalRes.getUsers().get(0).setUserStatus(Boolean.FALSE);
+                res.setTitle("OK");
+                res.setMessage("User Account Deactivated!");
+                res.setUsers(evalRes.getUsers());
+
+            } else {
+                res.setTitle("NOK");
+                res.setMessage("User non-existent or already deactive!");
+            }
+
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    // GET FRONTPAGE FOR A USER
+//    @POST
+//    @Path("getFrontPage")
+//    @Produces({"application/json"})
+//    @Consumes({"application/json"})
+//    public CstResult getFrontPage(OzUser user) {
+//        CstResult res = new CstResult();
+//        List<OzPost> cstPosts = new ArrayList<>();
+//
+//        try {
+//            
+//        List<OzPost> posts = em.createNamedQuery("OzPost.findAllPosts").getResultList();
+//            for (OzPost post : posts) {
+//                OzPost cstPost = post.cstConverter();
+//                List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId").setParameter("pkPostId", post.getPkPostId()).getResultList();
+//                for (OzVote vote : votes) {
+//                    if (vote.getFkVoteUserId().getPkUserId().equals(user.getPkUserId())) {
+//                        cstPost.setVote(vote);
+//                    }
+//                }
+//
+//                cstPost.setVoteCount(votes.size());
+//                cstPosts.add(cstPost);
+//
+//            }
+//            
+//            res.setTitle("OK");
+//            res.setPosts(cstPosts);
+//                
+//        } catch (Exception e) {
+//            
+//            res.title = "NOK";
+//            res.message = e.getLocalizedMessage();
+//        }
+//
+//        return res;
+
+//        try {
+//            evalRes = evalUser(user);
+//            if (evalRes.getMessage().equals("Existing Active User Found!") /* && session is open and active*/) {
+//                res.setTitle("OK");
+//                res.setMessage("Front Page Populated.");
+//                res.setUsers(evalRes.getUsers());
+//                res.setPosts(em.createNamedQuery("OzPost.findAllPosts").getResultList());
+//            } else {
+//            }
+//
+//        } catch (Exception e) {
+//            res.setTitle("NOK");
+//            res.setMessage(e.getLocalizedMessage());
+//        }
+//
+//        return res;
+//    }
+
 }
