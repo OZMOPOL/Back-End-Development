@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "OzPost.findAll", query = "SELECT o FROM OzPost o"),
     @NamedQuery(name = "OzPost.findAllPosts", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId IS NULL"),
+    @NamedQuery(name = "OzPost.findAllPostsByRoomId", query = "SELECT o FROM OzPost o WHERE (o.fkPostPrntId IS NULL) AND o.fkPostRoomId.pkRoomId = :fkPostRoomId"),
     @NamedQuery(name = "OzPost.findByPkPostId", query = "SELECT o FROM OzPost o WHERE o.pkPostId = :pkPostId"),
     @NamedQuery(name = "OzPost.findByPostTitle", query = "SELECT o FROM OzPost o WHERE o.postTitle = :postTitle"),
     @NamedQuery(name = "OzPost.findByPostCDate", query = "SELECT o FROM OzPost o WHERE o.postCDate = :postCDate"),
@@ -226,6 +227,7 @@ public class OzPost implements Serializable {
         tmp.setPostContent(this.getPostContent());
         tmp.setPostEDate(this.getPostEDate());
         tmp.setPostTitle(this.getPostTitle());
+        tmp.setPostStatus(this.getPostStatus());
         
         return tmp;
     }

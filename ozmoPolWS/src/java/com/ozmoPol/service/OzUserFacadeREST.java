@@ -119,6 +119,11 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         List<CstUser> exUname = new ArrayList<>();
         List<CstUser> exUmail = new ArrayList<>();
 
+        List<OzUser> authUserList = new ArrayList<>();
+        List<OzUser> exUserList = new ArrayList<>();
+        List<OzUser> exUnameList = new ArrayList<>();
+        List<OzUser> exUmailList = new ArrayList<>();
+
         if (user.getUserName() != null) {
             if (user.getUserName().equalsIgnoreCase("")) {
                 res.setTitle("NOK");
@@ -146,10 +151,11 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         try {
 
             if ((user.getUserName() != null) && (user.getUserPass() != null)) {
-                authUser = em.createNamedQuery("OzUser.findByUserName&userPass").setParameter("userName", user.getUserName()).setParameter("userPass", user.getUserPass()).getResultList();
+                authUserList = em.createNamedQuery("OzUser.findByUserName&userPass").setParameter("userName", user.getUserName()).setParameter("userPass", user.getUserPass()).getResultList();
+
             }
             if ((user.getUserName() != null) && (user.getUserEmail() != null)) {
-                exUser = em.createNamedQuery("OzUser.findByUserName&userEmail").setParameter("userName", user.getUserName()).setParameter("userEmail", user.getUserEmail()).getResultList();
+                exUserList = em.createNamedQuery("OzUser.findByUserName&userEmail").setParameter("userName", user.getUserName()).setParameter("userEmail", user.getUserEmail()).getResultList();
             }
             if (user.getUserName() != null) {
                 exUname = em.createNamedQuery("OzUser.findByUserName").setParameter("userName", user.getUserName()).getResultList();
@@ -158,7 +164,8 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 exUmail = em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", user.getUserEmail()).getResultList();
             }
 
-            if (authUser.size() == 1) {
+            if (authUserList.size() == 1) {
+                authUser.add(authUserList.get(0).cstConverter());
                 if (authUser.get(0).getUserStatus() == true) {
                     res.setTitle("OK");
                     res.setMessage("Authentic Active User Found!");
@@ -168,7 +175,8 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 }
                 res.setUsers(authUser);
 
-            } else if (exUser.size() == 1) {
+            } else if (exUserList.size() == 1) {
+                exUser.add(exUserList.get(0).cstConverter());
                 if (exUser.get(0).getUserStatus() == true) {
                     res.setTitle("OK");
                     res.setMessage("Existing Active User Found!");
@@ -178,13 +186,17 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 }
                 res.setUsers(exUser);
 
-            } else if (exUmail.size() == 1) {
+            } else if (exUmailList.size() == 1) {
+                exUmail.add(exUmailList.get(0).cstConverter());
                 res.setTitle("OK");
                 res.setMessage("Existing Email Found!");
+                res.setUsers(exUmail);
 
-            } else if (exUname.size() == 1) {
+            } else if (exUnameList.size() == 1) {
+                exUname.add(exUnameList.get(0).cstConverter());
                 res.setTitle("OK");
                 res.setMessage("Existing UserName Found!");
+                res.setUsers(exUname);
 
             } else {
                 res.setTitle("OK");
@@ -431,7 +443,6 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
 //            res.setTitle("NOK");
 //            res.setMessage(e.getLocalizedMessage());
 //        }
-        
     }
 
     // GET ROOM LIST FOR A USER
@@ -458,7 +469,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 } else {
                     cstRoom.setFollows(Boolean.FALSE);
                 }
-                
+
                 cstRooms.add(cstRoom);
 
             }
@@ -475,8 +486,89 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
 
         return res;
     }
-    
-    
-    
 
+    // GET ROOM Detail FOR A USER
+    @POST
+    @Path("getRoomDetails")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult getRoomDetails(CstResult req) {
+        CstResult res = new CstResult();
+        CstRoom room = req.getRooms().get(0);
+        CstUser user = req.getUsers().get(0);
+        List<CstPost> cstPosts = new ArrayList<>();
+
+        try {
+
+            List<OzPost> posts = em.createNamedQuery("OzPost.findAllPostsByRoomId").setParameter("fkPostRoomId", room.getPkRoomId()).getResultList();
+            for (OzPost post : posts) {
+                CstPost cstPost = post.cstConverter();
+                List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId").setParameter("pkPostId", post.getPkPostId()).getResultList();
+                for (OzVote vote : votes) {
+                    if (vote.getFkVoteUserId().getPkUserId().equals(user.getPkUserId())) {
+                        cstPost.setVote(vote);
+                    }
+                }
+
+                cstPost.setVoteCount(votes.size());
+                cstPosts.add(cstPost);
+
+            }
+
+            res.setTitle("OK");
+            res.setMessage("Room Page Populated.");
+            res.setPosts(cstPosts);
+
+        } catch (Exception e) {
+
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    
+    // GET POST Detail FOR A USER
+    @POST
+    @Path("getPostDetails")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult getPostDetails(CstResult req) {
+        CstResult res = new CstResult();
+        CstRoom room = req.getRooms().get(0);
+        CstUser user = req.getUsers().get(0);
+        List<CstPost> cstPosts = new ArrayList<>();
+
+        try {
+
+            List<OzPost> posts = em.createNamedQuery("OzPost.findAllPostsByRoomId").setParameter("fkPostRoomId", room.getPkRoomId()).getResultList();
+            for (OzPost post : posts) {
+                CstPost cstPost = post.cstConverter();
+                List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId").setParameter("pkPostId", post.getPkPostId()).getResultList();
+                for (OzVote vote : votes) {
+                    if (vote.getFkVoteUserId().getPkUserId().equals(user.getPkUserId())) {
+                        cstPost.setVote(vote);
+                    }
+                }
+
+                cstPost.setVoteCount(votes.size());
+                cstPosts.add(cstPost);
+
+            }
+
+            res.setTitle("OK");
+            res.setMessage("Room Page Populated.");
+            res.setPosts(cstPosts);
+
+        } catch (Exception e) {
+
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    
 }

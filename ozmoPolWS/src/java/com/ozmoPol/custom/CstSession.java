@@ -15,7 +15,7 @@ public class CstSession {
     
     private String title;
     private String message;
-    private OzUser user;
+    private CstUser user;
 
     public void setTitle(String title) {
         this.title = title;
@@ -25,7 +25,7 @@ public class CstSession {
         this.message = message;
     }
 
-    public void setUser(OzUser user) {
+    public void setUser(CstUser user) {
         this.user = user;
     }
 
@@ -37,7 +37,7 @@ public class CstSession {
         return message;
     }
 
-    public OzUser getUser() {
+    public CstUser getUser() {
         return user;
     }
     

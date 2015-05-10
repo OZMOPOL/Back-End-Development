@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class CstPost extends com.ozmoPol.OzPost {
 
-    private List<com.ozmoPol.OzPost> comments;
+    private List<CstPost> comments;
     private OzVote vote;
     private int voteCount;
 
-    public void setComments(List<com.ozmoPol.OzPost> comments) {
+    public void setComments(List<CstPost> comments) {
         this.comments = comments;
     }
 
@@ -26,7 +26,7 @@ public class CstPost extends com.ozmoPol.OzPost {
         this.vote = vote;
     }
 
-    public List<com.ozmoPol.OzPost> getComments() {
+    public List<CstPost> getComments() {
         return comments;
     }
 
@@ -42,5 +42,6 @@ public class CstPost extends com.ozmoPol.OzPost {
         return voteCount;
     }
 
+   
     
 }

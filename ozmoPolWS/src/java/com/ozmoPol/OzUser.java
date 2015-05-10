@@ -5,6 +5,7 @@
  */
 package com.ozmoPol;
 
+import com.ozmoPol.custom.CstUser;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -225,6 +226,19 @@ public class OzUser implements Serializable {
     @Override
     public String toString() {
         return "com.ozmoPol.OzUser[ pkUserId=" + pkUserId + " ]";
+    }
+    
+    public CstUser cstConverter(){
+        CstUser tmp=new CstUser();
+        tmp.setUserBday(this.getUserBday());
+        tmp.setUserEmail(this.getUserEmail());
+        tmp.setUserName(this.getUserName());
+        tmp.setUserPass(this.getUserPass());
+        tmp.setUserStatus(this.getUserStatus());
+        tmp.setUseractHash(this.getUseractHash());
+        
+        return tmp;
+                
     }
     
 }
