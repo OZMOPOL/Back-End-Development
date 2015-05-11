@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OzVote.findAll", query = "SELECT o FROM OzVote o"),
+    @NamedQuery(name = "OzVote.FindVoteByUserId", query = "SELECT o FROM OzVote o WHERE o.fkVoteUserId.pkUserId = :fkVoteUserId"),
     @NamedQuery(name = "OzVote.findByPostId", query = "SELECT o FROM OzVote o WHERE o.fkVotePostId.pkPostId = :pkPostId"),
     @NamedQuery(name = "OzVote.findByPkVoteId", query = "SELECT o FROM OzVote o WHERE o.pkVoteId = :pkVoteId"),
     @NamedQuery(name = "OzVote.findByVoteValue", query = "SELECT o FROM OzVote o WHERE o.voteValue = :voteValue")})

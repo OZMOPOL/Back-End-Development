@@ -5,7 +5,10 @@
  */
 package com.ozmoPol.service;
 
+import com.ozmoPol.OzRoom;
+import com.ozmoPol.OzUser;
 import com.ozmoPol.Xuserflwroom;
+import com.ozmoPol.custom.CstResult;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +29,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.ozmopol.xuserflwroom")
 public class XuserflwroomFacadeREST extends AbstractFacade<Xuserflwroom> {
+
     @PersistenceContext(unitName = "ozmoPolWSPU")
     private EntityManager em;
 
@@ -38,6 +42,43 @@ public class XuserflwroomFacadeREST extends AbstractFacade<Xuserflwroom> {
     @Consumes({"application/json"})
     public void create(Xuserflwroom entity) {
         super.create(entity);
+    }
+
+    @POST
+    @Path("followRoom")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult followRoom(Xuserflwroom entity) {
+        CstResult res = new CstResult();
+        try {
+            this.create(entity);
+            res.setTitle("OK");
+            res.setMessage("Room followed!");
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    @POST
+    @Path("unfollowRoom")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult unfollowRoom(Xuserflwroom entity) {
+        CstResult res = new CstResult();
+        
+        try {
+            this.remove(entity);
+            res.setTitle("OK");
+            res.setMessage("Room Unfollowed!");
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
     }
 
     @PUT
@@ -85,5 +126,5 @@ public class XuserflwroomFacadeREST extends AbstractFacade<Xuserflwroom> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

@@ -28,9 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Xuserflwroom.findAll", query = "SELECT x FROM Xuserflwroom x"),
+    @NamedQuery(name = "Xuserflwroom.FindXRByUserId", query = "SELECT x FROM Xuserflwroom x WHERE x.fkuserXroomuserid.pkUserId = :fkuserXroomuserid"),
+//    @NamedQuery(name = "Xuserflwroom.findFlwdRoomsByUserId", query = "SELECT r FROM Xuserflwroom x INNER JOIN x.fkuserXroomroomid r WHERE x.fkuserXroomuserid.pkUserId :userId"),
     @NamedQuery(name = "Xuserflwroom.findAllByUserRoomIds", query = "SELECT x FROM Xuserflwroom x WHERE x.fkuserXroomuserid.pkUserId = :fkuserXroomuserid AND x.fkuserXroomroomid.pkRoomId = :fkuserXroomroomid"),
     @NamedQuery(name = "Xuserflwroom.findByPkuserXroomid", query = "SELECT x FROM Xuserflwroom x WHERE x.pkuserXroomid = :pkuserXroomid")})
 public class Xuserflwroom implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -100,5 +103,5 @@ public class Xuserflwroom implements Serializable {
     public String toString() {
         return "com.ozmoPol.Xuserflwroom[ pkuserXroomid=" + pkuserXroomid + " ]";
     }
-    
+
 }

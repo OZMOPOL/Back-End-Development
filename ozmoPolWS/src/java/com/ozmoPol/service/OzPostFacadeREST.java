@@ -6,6 +6,8 @@
 package com.ozmoPol.service;
 
 import com.ozmoPol.OzPost;
+import com.ozmoPol.OzRoom;
+import com.ozmoPol.custom.CstResult;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +28,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.ozmopol.ozpost")
 public class OzPostFacadeREST extends AbstractFacade<OzPost> {
+
     @PersistenceContext(unitName = "ozmoPolWSPU")
     private EntityManager em;
 
@@ -38,6 +41,25 @@ public class OzPostFacadeREST extends AbstractFacade<OzPost> {
     @Consumes({"application/json"})
     public void create(OzPost entity) {
         super.create(entity);
+    }
+
+    @POST
+    @Path("createPost")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public CstResult createPost(OzPost entity) {
+        CstResult res = new CstResult();
+        try {
+            this.create(entity);
+            res.setTitle("OK");
+            res.setMessage("Post created !");
+
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
     }
 
     @PUT
@@ -85,5 +107,5 @@ public class OzPostFacadeREST extends AbstractFacade<OzPost> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

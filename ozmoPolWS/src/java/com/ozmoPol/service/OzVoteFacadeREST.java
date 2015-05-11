@@ -6,6 +6,7 @@
 package com.ozmoPol.service;
 
 import com.ozmoPol.OzVote;
+import com.ozmoPol.custom.CstResult;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +27,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("com.ozmopol.ozvote")
 public class OzVoteFacadeREST extends AbstractFacade<OzVote> {
+
     @PersistenceContext(unitName = "ozmoPolWSPU")
     private EntityManager em;
 
@@ -40,6 +42,24 @@ public class OzVoteFacadeREST extends AbstractFacade<OzVote> {
         super.create(entity);
     }
 
+    @POST
+    @Path("createVote")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public CstResult createVote(OzVote entity) {
+        CstResult res = new CstResult();
+        try {
+            this.create(entity);
+            res.setTitle("OK");
+            res.setMessage("Vote Created !");
+            return res;
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+            return res;
+        }
+    }
+
     @PUT
     @Path("{id}")
     @Consumes({"application/json"})
@@ -47,10 +67,50 @@ public class OzVoteFacadeREST extends AbstractFacade<OzVote> {
         super.edit(entity);
     }
 
+    @POST
+    @Path("editVote")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public CstResult editVote(@PathParam("id") String id, OzVote entity) {
+        CstResult res = new CstResult();
+        try {
+            this.edit(entity);
+            res.setTitle("OK");
+            res.setMessage("Vote Updated");
+
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+
+    }
+
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") String id) {
         super.remove(super.find(id));
+    }
+
+    @POST
+    @Path("deleteVote")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public CstResult deleteVote(OzVote vote) {
+        CstResult res = new CstResult();
+        try {
+            this.remove(vote.getPkVoteId());
+            res.setTitle("OK");
+            res.setMessage("Vote Updated");
+
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+
     }
 
     @GET
@@ -85,5 +145,5 @@ public class OzVoteFacadeREST extends AbstractFacade<OzVote> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

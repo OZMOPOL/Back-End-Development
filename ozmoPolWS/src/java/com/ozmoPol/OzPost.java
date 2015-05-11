@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OzPost.findAll", query = "SELECT o FROM OzPost o"),
+    @NamedQuery(name = "OzPost.FindPostByUserId", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId IS NULL AND o.fkPostUserId.pkUserId = :fkPostUserId"),
+    @NamedQuery(name = "OzPost.FindCommentByUserId", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId IS NOT NULL AND o.fkPostUserId.pkUserId = :fkPostUserId"),
     @NamedQuery(name = "OzPost.findAllPosts", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId IS NULL"),
     @NamedQuery(name = "OzPost.findAllPostsByRoomId", query = "SELECT o FROM OzPost o WHERE (o.fkPostPrntId IS NULL) AND o.fkPostRoomId.pkRoomId = :fkPostRoomId"),
     @NamedQuery(name = "OzPost.findByPkPostId", query = "SELECT o FROM OzPost o WHERE o.pkPostId = :pkPostId"),
@@ -44,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OzPost.findByPostCDate", query = "SELECT o FROM OzPost o WHERE o.postCDate = :postCDate"),
     @NamedQuery(name = "OzPost.findByRoomId", query = "SELECT o FROM OzPost o WHERE o.fkPostRoomId.pkRoomId = :fkPostRoomId"),
     @NamedQuery(name = "OzPost.findByPostEDate", query = "SELECT o FROM OzPost o WHERE o.postEDate = :postEDate"),
+    @NamedQuery(name = "OzPost.findAllPostsByParentId", query = "SELECT o FROM OzPost o WHERE o.fkPostPrntId.pkPostId = :fkPostParentId"),
     @NamedQuery(name = "OzPost.findByPostStatus", query = "SELECT o FROM OzPost o WHERE o.postStatus = :postStatus")})
 public class OzPost implements Serializable {
 

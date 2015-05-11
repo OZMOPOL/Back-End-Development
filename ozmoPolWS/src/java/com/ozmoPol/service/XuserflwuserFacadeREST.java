@@ -5,7 +5,9 @@
  */
 package com.ozmoPol.service;
 
+import com.ozmoPol.Xuserflwroom;
 import com.ozmoPol.Xuserflwuser;
+import com.ozmoPol.custom.CstResult;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,6 +42,45 @@ public class XuserflwuserFacadeREST extends AbstractFacade<Xuserflwuser> {
         super.create(entity);
     }
 
+    
+    @POST
+    @Path("followUser")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult followUser(Xuserflwuser entity) {
+        CstResult res = new CstResult();
+        try {
+            this.create(entity);
+            res.setTitle("OK");
+            res.setMessage("User followed!");
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    @POST
+    @Path("unfollowUser")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult unfollowUser(Xuserflwuser entity) {
+        CstResult res = new CstResult();
+        
+        try {
+            this.remove(entity);
+            res.setTitle("OK");
+            res.setMessage("User Unfollowed!");
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+
+        return res;
+    }
+
+    
     @PUT
     @Path("{id}")
     @Consumes({"application/json"})

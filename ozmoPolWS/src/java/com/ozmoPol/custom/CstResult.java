@@ -5,9 +5,6 @@
  */
 package com.ozmoPol.custom;
 
-import com.ozmoPol.OzPost;
-import com.ozmoPol.OzRoom;
-import com.ozmoPol.OzUser;
 import java.util.List;
 
 /**

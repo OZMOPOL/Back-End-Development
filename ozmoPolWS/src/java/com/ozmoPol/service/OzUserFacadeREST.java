@@ -39,62 +39,62 @@ import javax.validation.ConstraintViolationException;
 @Stateless
 @Path("com.ozmopol.ozuser")
 public class OzUserFacadeREST extends AbstractFacade<OzUser> {
-
+    
     @PersistenceContext(unitName = "ozmoPolWSPU")
     private EntityManager em;
-
+    
     public OzUserFacadeREST() {
         super(OzUser.class);
     }
-
+    
     @POST
     @Override
     @Consumes({"application/json"})
     public void create(OzUser entity) {
         super.create(entity);
     }
-
+    
     @PUT
     @Path("{id}")
     @Consumes({"application/json"})
     public void edit(@PathParam("id") String id, OzUser entity) {
         super.edit(entity);
     }
-
+    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") String id) {
         super.remove(super.find(id));
     }
-
+    
     @GET
     @Path("{id}")
     @Produces({"application/json"})
     public OzUser find(@PathParam("id") String id) {
         return super.find(id);
     }
-
+    
     @GET
     @Override
     @Produces({"application/json"})
     public List<OzUser> findAll() {
         return super.findAll();
     }
-
+    
     @GET
     @Path("{from}/{to}")
     @Produces({"application/json"})
     public List<OzUser> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
-
+    
     @GET
     @Path("count")
     @Produces("text/plain")
     public String countREST() {
         return String.valueOf(super.count());
     }
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -113,17 +113,17 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @Produces({"application/json"})
     public CstResult evalUser(OzUser user) {
         CstResult res = new CstResult();
-
+        
         List<CstUser> authUser = new ArrayList<>();
         List<CstUser> exUser = new ArrayList<>();
         List<CstUser> exUname = new ArrayList<>();
         List<CstUser> exUmail = new ArrayList<>();
-
+        
         List<OzUser> authUserList = new ArrayList<>();
         List<OzUser> exUserList = new ArrayList<>();
         List<OzUser> exUnameList = new ArrayList<>();
         List<OzUser> exUmailList = new ArrayList<>();
-
+        
         if (user.getUserName() != null) {
             if (user.getUserName().equalsIgnoreCase("")) {
                 res.setTitle("NOK");
@@ -131,7 +131,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 return res;
             }
         }
-
+        
         if (user.getUserEmail() != null) {
             if (user.getUserEmail().equalsIgnoreCase("")) {
                 res.setTitle("NOK");
@@ -139,7 +139,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 return res;
             }
         }
-
+        
         if (user.getUserPass() != null) {
             if (user.getUserPass().equalsIgnoreCase("")) {
                 res.setTitle("NOK");
@@ -147,12 +147,12 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 return res;
             }
         }
-
+        
         try {
-
+            
             if ((user.getUserName() != null) && (user.getUserPass() != null)) {
                 authUserList = em.createNamedQuery("OzUser.findByUserName&userPass").setParameter("userName", user.getUserName()).setParameter("userPass", user.getUserPass()).getResultList();
-
+                
             }
             if ((user.getUserName() != null) && (user.getUserEmail() != null)) {
                 exUserList = em.createNamedQuery("OzUser.findByUserName&userEmail").setParameter("userName", user.getUserName()).setParameter("userEmail", user.getUserEmail()).getResultList();
@@ -163,7 +163,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
             if (user.getUserEmail() != null) {
                 exUmail = em.createNamedQuery("OzUser.findByUserEmail").setParameter("userEmail", user.getUserEmail()).getResultList();
             }
-
+            
             if (authUserList.size() == 1) {
                 authUser.add(authUserList.get(0).cstConverter());
                 if (authUser.get(0).getUserStatus() == true) {
@@ -174,7 +174,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                     res.setMessage("Authentic Inactive User Found!");
                 }
                 res.setUsers(authUser);
-
+                
             } else if (exUserList.size() == 1) {
                 exUser.add(exUserList.get(0).cstConverter());
                 if (exUser.get(0).getUserStatus() == true) {
@@ -185,29 +185,29 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                     res.setMessage("Existing Inactive User Found!");
                 }
                 res.setUsers(exUser);
-
+                
             } else if (exUmailList.size() == 1) {
                 exUmail.add(exUmailList.get(0).cstConverter());
                 res.setTitle("OK");
                 res.setMessage("Existing Email Found!");
                 res.setUsers(exUmail);
-
+                
             } else if (exUnameList.size() == 1) {
                 exUname.add(exUnameList.get(0).cstConverter());
                 res.setTitle("OK");
                 res.setMessage("Existing UserName Found!");
                 res.setUsers(exUname);
-
+                
             } else {
                 res.setTitle("OK");
                 res.setMessage("User Not Found!");
             }
-
+            
         } catch (Exception e) {
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
@@ -219,19 +219,19 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstSession logIn(OzUser user) {
         CstSession res = new CstSession();
         CstResult loginRes = new CstResult();
-
+        
         try {
             loginRes = evalUser(user);
             if (loginRes.getMessage().equalsIgnoreCase("Authentic Active User Found!")) {
                 res.setTitle("OK");
                 res.setMessage("User \'" + user.getUserName() + "\' Logged In Successfully!");
                 res.setUser(loginRes.getUsers().get(0));
-
+                
             } else {
                 res.setTitle("NOK");
                 res.setMessage("Login Unsuccessful! Reason: " + evalUser(user).getMessage());
             }
-
+            
         } catch (Exception e) {
             res.setTitle("NOK");
             res.setMessage(e.getMessage());
@@ -247,7 +247,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstResult sendActCode(OzUser user) {
         CstResult res = new CstResult();
         CstResult evalRes = new CstResult();
-
+        
         try {
             evalRes = evalUser(user);
             if (evalRes.getMessage().equals("Existing Inactive User Found!") || evalRes.getMessage().equals("Authentic Inactive User Found!")) {
@@ -258,30 +258,30 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 res.setTitle("NOK");
                 res.setMessage("User non-existent or already active!");
             }
-
+            
         } catch (Exception e) {
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
 //    // Send Activation Code For New Users
     private CstResult sendNewActCode(OzUser user) {
         CstResult res = new CstResult();
-
+        
         try {
             ActivationEmail.sendEmail(user.getUserEmail(), user.getUseractHash());
             res.setTitle("OK");
             res.setMessage("Verification Email Sent!");
         } catch (Exception e) {
-
+            
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
-
+            
         }
-
+        
         return res;
     }
 
@@ -292,7 +292,7 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @Produces({"application/json"})
     public CstResult signUp(OzUser user) {
         CstResult res = new CstResult();
-
+        
         if (evalUser(user).getMessage().equalsIgnoreCase("User Not Found!")) {
             RandomString randString = new RandomString(32);
             RandomString smallRandString = new RandomString(6);
@@ -301,8 +301,8 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
             user.setUserPass(user.getUserPass());
             user.setUseractHash(smallRandString.nextString());
             user.setPkUserId(randString.nextString());
-            user.setUserStatus(Boolean.FALSE);
-
+            user.setUserStatus(Boolean.FALSE); /* REMEMBER TO CHANGE THIS */
+            
             try {
                 if (sendNewActCode(user).getTitle().equals("OK")) {
                     super.create(user);
@@ -316,14 +316,14 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 res.setTitle("NOK");
                 res.setMessage(e.getMessage());
             }
-
+            
         } else {
             res.setTitle("NOK");
             res.setMessage("userName or userEmail already exists OR Required fields are not filled properly.");
         }
-
+        
         return res;
-
+        
     }
 
 // ACTIVATE EXISTING INACTIVE USERS
@@ -334,12 +334,13 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstResult activateUser(OzUser user) {
         CstResult res = new CstResult();
         CstResult evalRes = new CstResult();
-
+        
         try {
             evalRes = evalUser(user);
             if (evalRes.getMessage().equals("Existing Inactive User Found!") || evalRes.getMessage().equals("Authentic Inactive User Found!")) {
-                if (user.getUseractHash().equals(evalRes.getUsers().get(0).getUseractHash())) {
-                    evalRes.getUsers().get(0).setUserStatus(Boolean.TRUE);
+                if (user.getUseractHash().equalsIgnoreCase(evalRes.getUsers().get(0).getUseractHash())) {
+                    user.setUserStatus(Boolean.TRUE);
+                    this.edit(user.getPkUserId(), user);
                     res.setTitle("OK");
                     res.setMessage("User Account Activated!");
                     res.setUsers(evalRes.getUsers());
@@ -347,17 +348,17 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                     res.setTitle("NOK");
                     res.setMessage("Activation code incorrect!");
                 }
-
+                
             } else {
                 res.setTitle("NOK");
                 res.setMessage("User non-existent or already active!");
             }
-
+            
         } catch (Exception e) {
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
@@ -369,25 +370,26 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstResult deactivateUser(OzUser user) {
         CstResult res = new CstResult();
         CstResult evalRes = new CstResult();
-
+        
         try {
             evalRes = evalUser(user);
             if (evalRes.getMessage().equals("Existing Active User Found!") || evalRes.getMessage().equals("Authentic Active User Found!")) {
-                evalRes.getUsers().get(0).setUserStatus(Boolean.FALSE);
+                user.setUserStatus(Boolean.FALSE);
+                this.edit(user.getPkUserId(), user);
                 res.setTitle("OK");
                 res.setMessage("User Account Deactivated!");
                 res.setUsers(evalRes.getUsers());
-
+                
             } else {
                 res.setTitle("NOK");
                 res.setMessage("User non-existent or already deactive!");
             }
-
+            
         } catch (Exception e) {
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
@@ -399,34 +401,40 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstResult getFrontPage(OzUser user) {
         CstResult res = new CstResult();
         List<CstPost> cstPosts = new ArrayList<>();
-
+        
         try {
-
+            
             List<OzPost> posts = em.createNamedQuery("OzPost.findAllPosts").getResultList();
             for (OzPost post : posts) {
+                int voteCount = 0;
                 CstPost cstPost = post.cstConverter();
                 List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId").setParameter("pkPostId", post.getPkPostId()).getResultList();
                 for (OzVote vote : votes) {
                     if (vote.getFkVoteUserId().getPkUserId().equals(user.getPkUserId())) {
                         cstPost.setVote(vote);
                     }
+                    if (vote.getVoteValue()) {
+                        voteCount++;
+                    } else {
+                        voteCount--;
+                    }
+                    
                 }
-
-                cstPost.setVoteCount(votes.size());
+                cstPost.setVoteCount(voteCount);
                 cstPosts.add(cstPost);
-
+                
             }
-
+            
             res.setTitle("OK");
             res.setMessage("Front Page Populated.");
             res.setPosts(cstPosts);
-
+            
         } catch (Exception e) {
-
+            
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
 
 //        try {
@@ -453,14 +461,14 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     public CstResult getRoomList(OzUser user) {
         CstResult res = new CstResult();
         List<CstRoom> cstRooms = new ArrayList<>();
-
+        
         try {
-
+            
             List<OzRoom> rooms = em.createNamedQuery("OzRoom.findAll").getResultList();
-
+            
             for (OzRoom room : rooms) {
                 CstRoom cstRoom = room.cstConverter();
-
+                
                 if (!em.createNamedQuery("Xuserflwroom.findAllByUserRoomIds")
                         .setParameter("fkuserXroomuserid", user.getPkUserId())
                         .setParameter("fkuserXroomroomid", room.getPkRoomId())
@@ -469,21 +477,21 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                 } else {
                     cstRoom.setFollows(Boolean.FALSE);
                 }
-
+                
                 cstRooms.add(cstRoom);
-
+                
             }
-
+            
             res.setTitle("OK");
             res.setMessage("Rooms Populated.");
             res.setRooms(cstRooms);
-
+            
         } catch (Exception e) {
-
+            
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
@@ -497,9 +505,9 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
         CstRoom room = req.getRooms().get(0);
         CstUser user = req.getUsers().get(0);
         List<CstPost> cstPosts = new ArrayList<>();
-
+        
         try {
-
+            
             List<OzPost> posts = em.createNamedQuery("OzPost.findAllPostsByRoomId").setParameter("fkPostRoomId", room.getPkRoomId()).getResultList();
             for (OzPost post : posts) {
                 CstPost cstPost = post.cstConverter();
@@ -509,26 +517,25 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
                         cstPost.setVote(vote);
                     }
                 }
-
+                
                 cstPost.setVoteCount(votes.size());
                 cstPosts.add(cstPost);
-
+                
             }
-
+            
             res.setTitle("OK");
             res.setMessage("Room Page Populated.");
             res.setPosts(cstPosts);
-
+            
         } catch (Exception e) {
-
+            
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
-    
     // GET POST Detail FOR A USER
     @POST
     @Path("getPostDetails")
@@ -536,39 +543,102 @@ public class OzUserFacadeREST extends AbstractFacade<OzUser> {
     @Consumes({"application/json"})
     public CstResult getPostDetails(CstResult req) {
         CstResult res = new CstResult();
-        CstRoom room = req.getRooms().get(0);
+        CstPost parentPost = req.getPosts().get(0);
         CstUser user = req.getUsers().get(0);
-        List<CstPost> cstPosts = new ArrayList<>();
-
+        
+        parentPost = ((OzPost) em.createNamedQuery("OzPost.findByPkPostId")
+                .setParameter("pkPostId", parentPost.getPkPostId()).getSingleResult()).cstConverter();
+        
+        List<CstPost> cstComments = new ArrayList<>();
+        cstComments.add(parentPost);
         try {
-
-            List<OzPost> posts = em.createNamedQuery("OzPost.findAllPostsByRoomId").setParameter("fkPostRoomId", room.getPkRoomId()).getResultList();
-            for (OzPost post : posts) {
-                CstPost cstPost = post.cstConverter();
-                List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId").setParameter("pkPostId", post.getPkPostId()).getResultList();
+            
+            List<OzPost> comments = em.createNamedQuery("OzPost.findAllPostsByParentId")
+                    .setParameter("fkPostParentId", parentPost.getPkPostId()).getResultList();
+            for (OzPost comment : comments) {
+                CstPost cstComment = comment.cstConverter();
+                List<OzVote> votes = em.createNamedQuery("OzVote.findByPostId")
+                        .setParameter("pkPostId", comment.getPkPostId()).getResultList();
                 for (OzVote vote : votes) {
                     if (vote.getFkVoteUserId().getPkUserId().equals(user.getPkUserId())) {
-                        cstPost.setVote(vote);
+                        cstComment.setVote(vote);
                     }
                 }
-
-                cstPost.setVoteCount(votes.size());
-                cstPosts.add(cstPost);
-
+                
+                cstComment.setVoteCount(votes.size());
+                cstComments.add(cstComment);
             }
-
+            
             res.setTitle("OK");
-            res.setMessage("Room Page Populated.");
-            res.setPosts(cstPosts);
-
+            res.setMessage("Post details Populated.");
+            res.setPosts(cstComments);
+            
         } catch (Exception e) {
-
+            
             res.setTitle("NOK");
             res.setMessage(e.getLocalizedMessage());
         }
-
+        
         return res;
     }
 
+    // GET OTHER USER PROFILE
+    @POST
+    @Path("getUserProfile")
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    public CstResult getUserProfile(OzUser user) {
+        CstResult res = new CstResult();
+        CstUser cstUser = evalUser(user).getUsers().get(0);
+        List<CstUser> cstUsers = new ArrayList<>();
+        
+        List<OzPost> posts = new ArrayList<>();
+        List<OzPost> comments = new ArrayList<>();
+        List<OzVote> votes = new ArrayList<>();
+        List<OzUser> flwdUsers = new ArrayList<>();
+        List<OzRoom> flwdRooms = new ArrayList<>();
+        
+        List<CstPost> cstposts = new ArrayList<>();
+        List<CstPost> cstcomments = new ArrayList<>();
+        
+        try {
+            posts = em.createNamedQuery("OzPost.FindPostByUserId").setParameter("fkPostUserId", user.getPkUserId()).getResultList();
+            comments = em.createNamedQuery("OzPost.FindCommentByUserId").setParameter("fkPostUserId", user.getPkUserId()).getResultList();
+            votes = em.createNamedQuery("OzVote.FindVoteByUserId").setParameter("fkVoteUserId", user.getPkUserId()).getResultList();
+//            flwdUsers = em.createNamedQuery("Xuserflwuser.FindXUByUserId").setParameter("fkuserXuserflwruserid", user.getPkUserId()).getResultList();
+//            flwdRooms = em.createNamedQuery("Xuserflwroom.FindXRByUserId").setParameter("fkuserXroomuserid", user.getPkUserId()).getResultList();
+            
+//            flwdUsers = em.createNamedQuery("Xuserflwuser.findFlwdUsersByUserId").setParameter("userId", user.getPkUserId()).getResultList();
+//            flwdRooms = em.createNamedQuery("Xuserflwroom.findFlwdRoomsByUserId").setParameter("userId", user.getPkUserId()).getResultList();
+            
+            
+            for (OzPost post : posts) {
+                CstPost cstpost = post.cstConverter();
+                cstposts.add(cstpost);
+            }
+            
+            for (OzPost comment : comments) {
+                CstPost cstcomment = comment.cstConverter();
+                cstcomments.add(cstcomment);
+            }
+            cstUser.setPosts(posts);
+            cstUser.setComments(comments);
+            cstUser.setVotes(votes);
+            cstUser.setFlwdUsers(flwdUsers);
+            cstUser.setFlwdRooms(flwdRooms);
+            
+            res.setTitle("OK");
+            res.setMessage("User Page Populated.");
+            cstUsers.add(cstUser);
+            res.setUsers(cstUsers);
+            
+        } catch (Exception e) {
+            
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+        
+        return res;
+    }
     
 }

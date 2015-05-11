@@ -41,8 +41,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OzUser.findByUserPass", query = "SELECT o FROM OzUser o WHERE o.userPass = :userPass"),
     @NamedQuery(name = "OzUser.findByUserEmail", query = "SELECT o FROM OzUser o WHERE o.userEmail = :userEmail"),
     @NamedQuery(name = "OzUser.findByUserBday", query = "SELECT o FROM OzUser o WHERE o.userBday = :userBday"),
+    @NamedQuery(name = "OzUser.updateStatusByUserId", query = "UPDATE OzUser o SET o.userStatus = TRUE WHERE o.pkUserId= :userID"),
     @NamedQuery(name = "OzUser.findByUserStatus", query = "SELECT o FROM OzUser o WHERE o.userStatus = :userStatus"),
     @NamedQuery(name = "OzUser.findByUseractHash", query = "SELECT o FROM OzUser o WHERE o.useractHash = :useractHash")})
+
+
 public class OzUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -236,6 +239,7 @@ public class OzUser implements Serializable {
         tmp.setUserPass(this.getUserPass());
         tmp.setUserStatus(this.getUserStatus());
         tmp.setUseractHash(this.getUseractHash());
+        tmp.setPkUserId(this.getPkUserId());
         
         return tmp;
                 

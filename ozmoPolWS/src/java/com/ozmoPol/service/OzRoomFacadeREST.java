@@ -6,6 +6,7 @@
 package com.ozmoPol.service;
 
 import com.ozmoPol.OzRoom;
+import com.ozmoPol.custom.CstResult;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,6 +41,27 @@ public class OzRoomFacadeREST extends AbstractFacade<OzRoom> {
         super.create(entity);
     }
 
+    @POST
+    @Path("createRoom")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public CstResult createRoom(OzRoom entity) {
+        CstResult res=new CstResult();
+        try {
+            this.create(entity);
+            res.setTitle("OK");
+            res.setMessage("Room created !");
+            
+        } catch (Exception e) {
+            res.setTitle("NOK");
+            res.setMessage(e.getLocalizedMessage());
+        }
+        
+        return res;
+    }
+
+    
+    
     @PUT
     @Path("{id}")
     @Consumes({"application/json"})
